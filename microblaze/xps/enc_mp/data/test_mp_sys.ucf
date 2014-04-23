@@ -1,0 +1,97 @@
+#
+# pin constraints
+#
+#
+# additional constraints
+#
+
+NET "sys_clk" TNM_NET = sys_clk_pin;
+TIMESPEC TS_sys_clk_pin = PERIOD sys_clk_pin 50000 kHz;
+NET "sys_clk"     LOC =  "R8";
+
+NET "sys_rst_n" 	LOC =  "U3"  | IOSTANDARD = "LVCMOS33";
+NET "FTDI_Rx" 		LOC =  "G11" | IOSTANDARD = "LVCMOS33";
+NET "FTDI_Tx" 		LOC =  "G9"  | IOSTANDARD = "LVCMOS33";
+
+
+############################################################################
+# VCC AUX VOLTAGE 
+############################################################################
+CONFIG VCCAUX=3.3;
+
+############################################################################
+# Extended MCB performance mode requires a different Vccint specification to
+# achieve higher maximum frequencies for DDR2 and DDR3.Consult the Spartan-6
+#datasheet (DS162) table 2 and 24 for more information 
+############################################################################
+CONFIG MCB_PERFORMANCE=EXTENDED;
+
+##################################################################################
+# Timing Ignore constraints for paths crossing the clock domain 
+##################################################################################
+NET "*/mcb_raw_wrapper_inst/selfrefresh_mcb_mode"  TIG;
+     
+NET "*/mcb_raw_wrapper_inst/gen_term_calib.mcb_soft_calibration_top_inst/mcb_soft_calibration_inst/CKE_Train"  TIG; ##This path exists for DDR2 only
+
+############################################################################
+## I/O TERMINATION                                                          
+############################################################################
+NET "MCB_DDR2_dq[*]"            IN_TERM = NONE;
+NET "MCB_DDR2_dqs"              IN_TERM = NONE;
+NET "MCB_DDR2_dqs_n"            IN_TERM = NONE;
+NET "MCB_DDR2_udqs"             IN_TERM = NONE;
+NET "MCB_DDR2_udqs_n"           IN_TERM = NONE;
+
+############################################################################
+# DDR2
+############################################################################
+
+NET "MCB_DDR2_addr<0>" 		LOC = "H15" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_addr<11>" 	LOC = "G14" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_addr<10>" 	LOC = "E16" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_addr<1>" 		LOC = "H16" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_addr<12>" 	LOC = "D18" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_addr<2>" 		LOC = "F18" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_addr<3>" 		LOC = "J13" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_addr<4>" 		LOC = "E18" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_addr<5>" 		LOC = "L12" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_addr<6>" 		LOC = "L13" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_addr<7>" 		LOC = "F17" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_addr<8>" 		LOC = "H12" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_addr<9>" 		LOC = "G13" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_ba<0>" 		LOC = "H13" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_ba<1>" 		LOC = "H14" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_ba<2>" 		LOC = "K13" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_cas_n" 		LOC = "K16" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_cke" 		LOC = "D17" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_clk" 		LOC = "G16" | IOSTANDARD = "DIFF_SSTL18_I";
+NET "MCB_DDR2_clk_n" 		LOC = "G18" | IOSTANDARD = "DIFF_SSTL18_I";
+NET "MCB_DDR2_dq<0>" 		LOC = "M16" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_dq<10>" 		LOC = "P17" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_dq<11>" 		LOC = "P18" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_dq<12>" 		LOC = "T17" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_dq<13>" 		LOC = "T18" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_dq<14>" 		LOC = "U17" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_dq<15>" 		LOC = "U18" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_dq<1>" 		LOC = "M18" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_dq<2>" 		LOC = "L17" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_dq<3>" 		LOC = "L18" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_dq<4>" 		LOC = "H17" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_dq<5>" 		LOC = "H18" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_dq<6>" 		LOC = "J16" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_dq<7>" 		LOC = "J18" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_dq<8>" 		LOC = "N17" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_dq<9>" 		LOC = "N18" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_dqs" 		LOC = "K17" | IOSTANDARD = "DIFF_SSTL18_I";
+NET "MCB_DDR2_dqs_n" 		LOC = "K18" | IOSTANDARD = "DIFF_SSTL18_I";
+NET "MCB_DDR2_ldm" 		LOC = "L16" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_odt" 		LOC = "K14" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_ras_n" 		LOC = "K15" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_udm" 		LOC = "L15" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_udqs" 		LOC = "N15" | IOSTANDARD = "DIFF_SSTL18_I";
+NET "MCB_DDR2_udqs_n" 		LOC = "N16" | IOSTANDARD = "DIFF_SSTL18_I";
+NET "MCB_DDR2_we_n" 		LOC = "K12" | IOSTANDARD = "SSTL18_I";
+NET "MCB_DDR2_rzq" 		LOC = "M13" | IOSTANDARD = "SSTL18_II";
+#NET "MCB_DDR2_zio" 		LOC = "P16" | IOSTANDARD = "SSTL18_II";
+
+

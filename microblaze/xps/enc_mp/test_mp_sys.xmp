@@ -1,0 +1,44 @@
+#Please do not modify this file by hand
+XmpVersion: 14.7
+VerMgmt: 14.7
+IntStyle: default
+Flow: ise
+MHS File: test_mp_sys.mhs
+Architecture: spartan6
+Device: xc6slx45t
+Package: csg324
+SpeedGrade: -3
+UserCmd1: 
+UserCmd1Type: 0
+UserCmd2: 
+UserCmd2Type: 0
+GenSimTB: 1
+SdkExportBmmBit: 1
+SdkExportDir: SDK/SDK_Export
+InsertNoPads: 0
+WarnForEAArch: 1
+HdlLang: VHDL
+SimModel: BEHAVIORAL
+ExternalMemSim: 1
+UcfFile: data/test_mp_sys.ucf
+EnableParTimingError: 1
+ShowLicenseDialog: 1
+BInfo: 
+ICacheAddr: MCB_DDR2,C_S0_AXI_BASEADDR
+ICacheAddr: MCB_DDR2,C_S1_AXI_BASEADDR
+ICacheAddr: MCB_DDR2,C_S2_AXI_BASEADDR
+ICacheAddr: MCB_DDR2,C_S3_AXI_BASEADDR
+ICacheAddr: MCB_DDR2,C_S4_AXI_BASEADDR
+ICacheAddr: MCB_DDR2,C_S5_AXI_BASEADDR
+DCacheAddr: MCB_DDR2,C_S0_AXI_BASEADDR
+DCacheAddr: MCB_DDR2,C_S1_AXI_BASEADDR
+DCacheAddr: MCB_DDR2,C_S2_AXI_BASEADDR
+DCacheAddr: MCB_DDR2,C_S3_AXI_BASEADDR
+DCacheAddr: MCB_DDR2,C_S4_AXI_BASEADDR
+DCacheAddr: MCB_DDR2,C_S5_AXI_BASEADDR
+Processor: microblaze_1
+ElfImp: 
+ElfSim: 
+Processor: microblaze_0
+ElfImp: 
+ElfSim: 

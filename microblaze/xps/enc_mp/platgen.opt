@@ -1,0 +1,9 @@
+-p
+xc6slx45tcsg324-3
+-lang
+vhdl
+-intstyle
+default
+-msg
+__xps/ise/xmsgprops.lst
+test_mp_sys.mhs
