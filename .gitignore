@@ -1,0 +1,6 @@
+*.log
+microblaze/xps/enc_mp/implementation/
+microblaze/xps/enc_mp/synthesis/
+microblaze/xps/enc_mp/hdl/
+microblaze/xps/enc_mp/__xps/
+microblaze/xps/enc_mp/XpsGuiSessionLock
