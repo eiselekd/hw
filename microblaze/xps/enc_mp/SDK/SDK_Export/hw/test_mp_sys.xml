@@ -1,7 +1,7 @@
 
-<EDKSYSTEM EDKVERSION="14.7" EDWVERSION="1.2" TIMESTAMP="Fri Apr 18 22:25:58 2014">
+<EDKSYSTEM EDKVERSION="14.7" EDWVERSION="1.2" TIMESTAMP="Thu Apr 24 23:02:42 2014">
 
-  <SYSTEMINFO ARCH="spartan6" DEVICE="xc6slx45t" PACKAGE="csg324" PART="xc6slx45tcsg324-3" SOURCE="/mnt/eiselekd/src/enc_mp/test_mp_sys.xmp" SPEEDGRADE="-3"/>
+  <SYSTEMINFO ARCH="spartan6" DEVICE="xc6slx45t" PACKAGE="csg324" PART="xc6slx45tcsg324-3" SOURCE="/home/eisele/src/hw/microblaze/xps/enc_mp/test_mp_sys.xmp" SPEEDGRADE="-3"/>
 
   <EXTERNALPORTS>
     <PORT DIR="I" MHS_INDEX="0" NAME="sys_rst_n" RSTPOLARITY="0" SIGIS="RST" SIGNAME="sys_rst_n">
