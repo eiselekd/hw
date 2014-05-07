@@ -1,0 +1,3 @@
+PROCESSOR=microblaze_1
+REPOSITORIES=
+HWSPEC=../enc_mp/system.xml
