@@ -1,5 +1,5 @@
-Simple Jtag master connected to DDR memory.
-Use the Quartus system console and script set_memory_values.tcl
+Simple design for the BeMicro SDK. A Jtag master connected to DDR memory.
+Use the Quartus System Console and script set_memory_values.tcl
 to read/write memory.
 Before compiling, set the working path to this directory (so that
 QSys finds the ip/ subdir) and regenerate the QSys system bemicrocpu.qsys in QSys.
