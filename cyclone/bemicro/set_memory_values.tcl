@@ -18,7 +18,7 @@ puts stdout $x
 
 master_write_32 $master_service_path 0 0x12345678 
 master_write_32 $master_service_path 4 0xabcdefed 
-master_write_32 $master_service_path 4 0xba987654 
+master_write_32 $master_service_path 8 0xba987654 
 
 set x [master_read_32 $master_service_path 0 3]
 puts stdout $x
