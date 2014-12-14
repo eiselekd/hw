@@ -1,0 +1,34 @@
+--- grlib-gpl-1.3.7-b4144.ori/lib/gaisler/ddr/ddr1spax.vhd	2014-04-16 16:51:32.000000000 +0200
++++ grlib-gpl-1.3.7-b4144/lib/gaisler/ddr/ddr1spax.vhd	2014-12-14 11:31:30.910408561 +0100
+@@ -171,7 +171,7 @@
+                  confapi => confapi, conf0 => conf0, conf1 => conf1,
+                  hasdqvalid => ddrphy_has_datavalid(phytech),
+                  ddr_syncrst => ddr_syncrst, regoutput => regoutput,
+-                 readdly => ddrphy_latency(phytech)+regoutput, ddr400 => ddr400,
++                 readdly => 0 , ddr400 => ddr400, --ddrphy_latency(phytech)+regoutput
+                  rstdel => rstdel, phyptctrl => ddrphy_ptctrl(phytech), scantest => scantest)
+     port map (ddr_rst, clk_ddr, request, start_tog, response, sdi, sdox,
+               wbraddr, wbrdata, rbwaddr, rbwdata, rbwrite, 
+
+
+
+--- grlib-gpl-1.3.7-b4144.ori/designs/leon3-arrow-bemicro-sdk/config.vhd	2014-04-16 16:51:31.000000000 +0200
++++ grlib-gpl-1.3.7-b4144/designs/leon3-arrow-bemicro-sdk/config.vhd	2014-12-14 11:32:04.673984095 +0100
+@@ -1,7 +1,5 @@
+ 
+ 
+-
+-
+ -----------------------------------------------------------------------------
+ -- LEON3 Demonstration design test bench configuration
+ -- Copyright (C) 2011 Aeroflex Gaisler
+@@ -109,7 +107,7 @@
+   constant CFG_DDRSP_FREQ : integer := (100);
+   constant CFG_DDRSP_COL : integer := (10);
+   constant CFG_DDRSP_SIZE : integer := (64);
+-  constant CFG_DDRSP_RSKEW : integer := (0);
++  constant CFG_DDRSP_RSKEW : integer := (7500);
+ -- SPI memory controller
+   constant CFG_SPIMCTRL : integer := 1;
+   constant CFG_SPIMCTRL_SDCARD : integer := 0;
+
