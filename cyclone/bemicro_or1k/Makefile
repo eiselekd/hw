@@ -39,7 +39,7 @@ gcc-newlib:
 	cd tmp-gcc/bld-or1k-src; $P; ../or1k-src/configure --target=or1k-elf --prefix=$(PREFIX) --enable-shared --disable-itcl \
 	    --disable-tk --disable-tcl --disable-winsup --disable-libgui --disable-rda --disable-sid \
 	    --enable-sim --disable-or1ksim --enable-gdb --with-sysroot --enable-newlib --enable-libgloss --disable-werror
-	cd tmp-gcc/bld-or1k-src; $P; make make 2>&1 | tee compile.newlib.txt ; make install | tee install.newlib.txt
+	cd tmp-gcc/bld-or1k-src; $P; make 2>&1 | tee compile.newlib.txt ; make install | tee install.newlib.txt
 
 # build gcc again, this time with newlib
 gcc-all:
