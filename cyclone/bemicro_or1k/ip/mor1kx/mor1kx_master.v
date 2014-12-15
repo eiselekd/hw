@@ -24,9 +24,9 @@ module mor1kx_master
    
 );
    
-   mor1kx_bus_if_wb32
-     #(.BUS_IF_TYPE("AVALON"))
    mor1kx
+     #(.BUS_IF_TYPE("AVALON"))
+   mor1kx_inst
      (
       .clk			(clk),
       .rst			(rst),
