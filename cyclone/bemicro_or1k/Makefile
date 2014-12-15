@@ -15,7 +15,9 @@ quartus: qsys
 
 firmware:
 	or1k-elf-as -o firmware.o firmware.S
-	or1k-elf-objcopy --change-address 0x0 -O ihex firmware.o firmware.hex
+	or1k-elf-objcopy --reverse 4 --change-address 0x0 -O ihex firmware.o firmware.hex
+	cp firmware.hex bemicro_soc/synthesis/submodules/
+	cp firmware.hex bemicro_soc/simulation/submodules/
 
 qsys:
 	rm -rf bemicro_soc

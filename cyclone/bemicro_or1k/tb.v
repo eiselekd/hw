@@ -92,8 +92,8 @@ always
 	     #10 CLK_50M <= ~CLK_50M;
    
 initial begin
-	#100 rst_n <= 0;
-	#200 rst_n <= 1;
+	#100   rst_n <= 0;
+	#21000 rst_n <= 1;
 end
 
 endmodule // tb

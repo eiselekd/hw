@@ -6,6 +6,8 @@ add wave -noupdate -divider Instructions
 add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/avm_i_address_o
 add wave -noupdate /tb/bemicro_top/bemicro_soc/mor1kx_0/avm_i_read_o
 add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/avm_i_readdata_i
+add wave -noupdate /tb/bemicro_top/bemicro_soc/mor1kx_0/avm_d_waitrequest_i
+add wave -noupdate /tb/bemicro_top/bemicro_soc/mor1kx_0/avm_d_readdatavalid_i
 add wave -noupdate -divider CPU0
 add wave -noupdate /tb/bemicro_top/bemicro_soc/mor1kx_0/clk
 add wave -noupdate /tb/bemicro_top/bemicro_soc/mor1kx_0/rst
@@ -32,6 +34,20 @@ add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mddr_ctrl_0_md
 add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mddr_ctrl_0_mddr_dq_i
 add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mddr_ctrl_0_mddr_ldqs_i
 add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mddr_ctrl_0_mddr_udqs_i
+add wave -noupdate -divider mem
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mddr_ctrl_0/clk
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mddr_ctrl_0/rst
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mddr_ctrl_0/main_state
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mddr_ctrl_0/delay_counter
+add wave -noupdate /tb/bemicro_top/bemicro_soc/mddr_ctrl_0/init_delay_elapsed
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mddr_ctrl_0/address
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mddr_ctrl_0/read
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mddr_ctrl_0/readdata
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mddr_ctrl_0/write
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mddr_ctrl_0/writedata
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mddr_ctrl_0/byteenable
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mddr_ctrl_0/begintransfer
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mddr_ctrl_0/waitrequest
 add wave -noupdate -divider ibus
 add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/mor1kx_cpu0/genblk1/ibus_bridge/clk
 add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/mor1kx_cpu0/genblk1/ibus_bridge/rst
@@ -45,7 +61,6 @@ add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/mor1k
 add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/mor1kx_cpu0/genblk1/ibus_bridge/cpu_we_i
 add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/mor1kx_cpu0/genblk1/ibus_bridge/cpu_burst_i
 add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/mor1kx_cpu0/genblk1/ibus_bridge/avm_address_o
-add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/mor1kx_cpu0/genblk1/ibus_bridge/avm_byteenable_o
 add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/mor1kx_cpu0/genblk1/ibus_bridge/avm_read_o
 add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/mor1kx_cpu0/genblk1/ibus_bridge/avm_readdata_i
 add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/mor1kx_cpu0/genblk1/ibus_bridge/avm_burstcount_o
@@ -53,8 +68,26 @@ add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/mor1k
 add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/mor1kx_cpu0/genblk1/ibus_bridge/avm_writedata_o
 add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/mor1kx_cpu0/genblk1/ibus_bridge/avm_waitrequest_i
 add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/mor1kx_cpu0/genblk1/ibus_bridge/avm_readdatavalid_i
+add wave -noupdate -divider dbus
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/avm_d_address_o
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/avm_d_byteenable_o
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/avm_d_read_o
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/avm_d_readdata_i
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/avm_d_burstcount_o
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/avm_d_write_o
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/avm_d_writedata_o
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/avm_d_waitrequest_i
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/avm_d_readdatavalid_i
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/avm_i_address_o
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/avm_i_byteenable_o
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/avm_i_read_o
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/avm_i_readdata_i
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/avm_i_burstcount_o
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/avm_i_waitrequest_i
+add wave -noupdate -radix hexadecimal /tb/bemicro_top/bemicro_soc/mor1kx_0/avm_i_readdatavalid_i
+add wave -noupdate -divider rom
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {243418 ps} 0}
+WaveRestoreCursors {{Cursor 1} {444138505 ps} 0}
 configure wave -namecolwidth 289
 configure wave -valuecolwidth 100
 configure wave -justifyvalue left
@@ -69,4 +102,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {0 ps} {847839 ps}
+WaveRestoreZoom {444053288 ps} {444758022 ps}

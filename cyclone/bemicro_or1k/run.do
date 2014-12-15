@@ -2,4 +2,5 @@ vsim -novopt -t ps -L work -L work_lib -L rsp_xbar_demux -L cmd_xbar_mux -L cmd_
 
 source wave.do
 
-run 1000ns
+run 210000ns
+
