@@ -1,5 +1,6 @@
 PREFIX=$(CURDIR)/bin/or1k-toolchain
-P=export PATH=$$PATH:$(PREFIX)
+P=export PATH=$$PATH:$(CURDIR)/bin/bin:$(PREFIX); export PYTHONPATH=$(CURDIR)/bin/lib/python2.7/site-packages:$$PYTHONPATH
+
 
 toolchain: gcc-prepare gcc-binutils gcc-gcc gcc-newlib gcc
 
@@ -43,4 +44,21 @@ gcc-all:
 	cd tmp-gcc/bld-or1k-gcc; $P; ../or1k-gcc/configure --target=or1k-elf --prefix=$(PREFIX) --enable-languages=c,c++ \
 	    --disable-shared --disable-libssp --with-newlib
 	cd tmp-gcc/bld-or1k-gcc; $P;  make 2>&1 | tee compile.gcc.txt; make install 2>&1 | tee install.gcc.txt
+
+#################
+fusesoc-prepare:
+	rm -rf tmp-fdir fdir orpsoc-cores fusesoc
+	mkdir -p tmp-fdir;
+	cd tmp-fdir; git clone https://github.com/olofk/fusesoc.git; 
+	cd tmp-fdir/fusesoc; autoreconf -i; ./configure --prefix=$(CURDIR)/bin; make ; make install
+	git clone https://github.com/openrisc/orpsoc-cores.git
+	mkdir -p fusesoc;
+	echo '[main]'                                 >  fusesoc/fusesoc.conf
+	echo 'cores_root   = ../orpsoc-cores/cores'   >> fusesoc/fusesoc.conf
+	echo 'systems_root = ../orpsoc-cores/systems' >> fusesoc/fusesoc.conf
+	echo "use de1 design to retrive sources"
+	cd fusesoc; $P; fusesoc build de1
+
+
+
 
