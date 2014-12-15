@@ -10,8 +10,13 @@ QUARTUS_SH  = quartus_sh
 
 ALTCABLE ?= USB-BlasterII
 
-quartus:
+quartus: qsys
 	make quartus-map quartus-route
+
+qsys:
+	if [ ! -d bemicro_soc ]; then \
+		ip-generate bemicro_soc.qsys; \
+	fi
 
 quartus-map: $(TOP)_quartus.qsf
 	$(QUARTUS_MAP) --import_settings_files=on  --export_settings_files=off $(TOP)_quartus -c $(TOP)_quartus
