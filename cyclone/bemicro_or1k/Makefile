@@ -37,15 +37,17 @@ quartus-clean:
 	incremental_db PLLJ_PLLSPE_INFO.txt *.jdi
 
 vsim:
-	vlib modelsim
-	vlib modelsim/work
-	vmap work $(CURDIR)/modelsim/work
+	(echo "set QSYS_SIMDIR \"$(CURDIR)/bemicro_soc/simulation\""; echo "source bemicro_soc/simulation/mentor/msim_setup.tcl"; echo "dev_com"; echo "com"; ) | vsim || exit 1
 	vlog -quiet  -work work mobile/mobile_ddr.v
 	vlog -quiet  -work work bemicro_top.v
 	vlog -quiet  -work work tb.v
 
+	vlib libraries
+	vlib libraries/work
+	vmap work $(CURDIR)/libraries/work
+
 vsim-run:
-	vsim tb
+	vsim -do "source run.do"
 
 ####################################
 
