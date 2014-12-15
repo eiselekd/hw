@@ -36,6 +36,8 @@ module tb;
    
    bemicro_top bemicro_top
    (
+    .rst_n     ( rst_n  ),
+    
     .RAM_A0    ( a[0]   ),
     .RAM_A1    ( a[1]   ),
     .RAM_A2    ( a[2]   ),
@@ -82,13 +84,16 @@ module tb;
     .RAM_UDM   ( dm[1]  ),
     .RAM_LDQS  ( dqs[0] ),
     .RAM_UDQS  ( dqs[1] ),
-    
     .CLK_FPGA_50M 
-               ( clk ) 
+               ( CLK_50M ) 
     );
 
 always
 	     #10 CLK_50M <= ~CLK_50M;
    
+initial begin
+	#100 rst_n <= 0;
+	#200 rst_n <= 1;
+end
 
 endmodule // tb

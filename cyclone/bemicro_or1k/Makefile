@@ -13,6 +13,10 @@ ALTCABLE ?= USB-BlasterII
 quartus: qsys
 	make quartus-map quartus-route
 
+firmware:
+	or1k-elf-as -o firmware.o firmware.S
+	or1k-elf-objcopy --change-address 0x0 -O ihex firmware.o firmware.hex
+
 qsys:
 	rm -rf bemicro_soc
 	ip-generate --file-set=QUARTUS_SYNTH \

@@ -1,6 +1,8 @@
 
 module bemicro_top
     (
+    input wire rst_n,
+     
     output wire RAM_A0,
     output wire RAM_A1,
     output wire RAM_A2,
@@ -67,6 +69,7 @@ wire            ram_oe;
 bemicro_soc bemicro_soc
     (
     .clk_clk(CLK_FPGA_50M),
+    .reset_reset_n(rst_n),
     .mddr_ctrl_0_mddr_a(ram_addr),
     .mddr_ctrl_0_mddr_ba(ram_baddr),
     .mddr_ctrl_0_mddr_ck(RAM_CK_P),

@@ -49,33 +49,37 @@ module mor1kx_bus_if_avalon
    reg [3:0] 	 state;
 
    always @(posedge clk) begin
-      case (state)
-	IDLE: begin
-	   if (cpu_req_i & !avm_waitrequest_i) begin
-	      if (cpu_we_i)
-		state <= WRITE;
-	      else if (cpu_burst_i) begin
-		state <= BURST;
-	      end else
-		state <= READ;
-	   end
-	end
+      if (rst)
+	state <= IDLE;
+      else
+	case (state)
+	  IDLE: begin
+	     if (cpu_req_i & !avm_waitrequest_i) begin
+		if (cpu_we_i)
+		  state <= WRITE;
+		else if (cpu_burst_i) begin
+		   state <= BURST;
+		end else
+		  state <= READ;
+	     end
+	  end
 
-	READ: begin
-	   if (avm_readdatavalid_i)
-	     state <= IDLE;
-	end
+	  READ: begin
+	     if (avm_readdatavalid_i)
+	       state <= IDLE;
+	  end
 
-	BURST: begin
-	   /* cpu_burst_i deasserts when the last burst access starts */
-	   if (!cpu_burst_i & avm_readdatavalid_i)
-	     state <= IDLE;
-	end
+	  BURST: begin
+	     /* cpu_burst_i deasserts when the last burst access starts */
+	     if (!cpu_burst_i & avm_readdatavalid_i)
+	       state <= IDLE;
+	  end
 
-	WRITE: begin
+	  WRITE: begin
 	     state <= IDLE;
-	end
-      endcase
+	  end
+	endcase // case (state)
+      
    end
 
    assign avm_address_o = cpu_adr_i;
