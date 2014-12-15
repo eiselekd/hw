@@ -36,12 +36,16 @@ quartus-clean:
 	*.csf *.psf *.quartus *.smsg .undefinedlib .jaguarc .unorderedFilePath \
 	incremental_db PLLJ_PLLSPE_INFO.txt *.jdi
 
-
-
-
 vsim:
+	vlib modelsim
+	vlib modelsim/work
+	vmap work $(CURDIR)/modelsim/work
 	vlog -quiet  -work work mobile/mobile_ddr.v
+	vlog -quiet  -work work bemicro_top.v
 	vlog -quiet  -work work tb.v
+
+vsim-run:
+	vsim tb
 
 ####################################
 
