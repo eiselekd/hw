@@ -10,7 +10,7 @@ QUARTUS_SH  = quartus_sh
 
 ALTCABLE ?= USB-BlasterII
 
-quartus:
+quartus: qsys
 	make quartus-map quartus-route
 
 quartus-map: $(TOP)_quartus.qsf
@@ -40,3 +40,10 @@ quartus-clean:
 	incremental_db PLLJ_PLLSPE_INFO.txt *.jdi
 
 
+qsys:
+	rm -rf bemicrocpu
+	ip-generate --file-set=QUARTUS_SYNTH \
+		--report-file=csv:bemicrocpu/synthesis/bemicrocpu.csv \
+		--report-file=qip:bemicrocpu/synthesis/bemicrocpu.qip \
+		--report-file=spd:bemicrocpu/synthesis/bemicrocpu.spd \
+		--output-directory=bemicrocpu/synthesis  --output-name=bemicrocpu_soc bemicrocpu.qsys;
