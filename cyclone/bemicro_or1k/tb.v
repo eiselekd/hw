@@ -1,3 +1,5 @@
+`timescale 1ns/1ps
+
 module tb;
 
     reg          CLK_50M = 0;
@@ -18,18 +20,18 @@ module tb;
 
     mobile_ddr mobile_ddr 
     (
-     .Clk      ( ck    ) ,           
-     .Clk_n    ( ck_n  ) ,           
-     .Cke      ( cke   ) ,           
-     .Cs_n     ( cs_n  ) ,           
-     .Ras_n    ( ras_n ) ,           
-     .Cas_n    ( cas_n ) ,           
-     .We_n     ( we_n  ) ,           
-     .Addr     ( a     ) ,           
-     .Ba       ( ba    ) ,           
-     .Dq       ( dq    ) ,           
-     .Dqs      ( dqs   ) ,           
-     .Dm       ( dm    )  
+     .Clk      ( ck      ) ,           
+     .Clk_n    ( ck_n    ) ,           
+     .Cke      ( cke     ) ,           
+     .Cs_n     ( cs_n    ) ,           
+     .Ras_n    ( ras_n   ) ,           
+     .Cas_n    ( cas_n   ) ,           
+     .We_n     ( we_n    ) ,           
+     .Addr     ( a[12:0] ) ,           
+     .Ba       ( ba      ) ,           
+     .Dq       ( dq      ) ,           
+     .Dqs      ( dqs     ) ,           
+     .Dm       ( dm      )  
      );
    
    bemicro_top bemicro_top

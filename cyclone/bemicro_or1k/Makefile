@@ -14,9 +14,23 @@ quartus: qsys
 	make quartus-map quartus-route
 
 qsys:
-	if [ ! -d bemicro_soc ]; then \
-		ip-generate bemicro_soc.qsys; \
-	fi
+	rm -rf bemicro_soc
+	ip-generate --file-set=QUARTUS_SYNTH \
+		--report-file=csv:bemicro_soc/synthesis/bemicro_soc.csv \
+		--report-file=qip:bemicro_soc/synthesis/bemicro_soc.qip \
+		--report-file=spd:bemicro_soc/synthesis/bemicro_soc.spd \
+		--output-directory=bemicro_soc/synthesis  --output-name=bemicro_soc bemicro_soc.qsys;
+	ip-generate --file-set=SIM_VERILOG   \
+		--report-file=csv:bemicro_soc/simulation/bemicro_soc.csv \
+		--report-file=spd:bemicro_soc/simulation/bemicro_soc.spd \
+		--output-directory=bemicro_soc/simulation --output-name=bemicro_soc bemicro_soc.qsys;
+	ip-make-simscript --spd=bemicro_soc/simulation/bemicro_soc.spd --compile-to-work --output-directory=bemicro_soc/simulation
+	# add include path to vlog compile
+	cp bemicro_soc/simulation/mentor/msim_setup.tcl bemicro_soc/simulation/mentor/msim_setup.tcl.bck
+	cat bemicro_soc/simulation/mentor/msim_setup.tcl.bck | \
+		perl -e ' while(<>) { my $$l = $$_ ; if ($$l =~ /submodules\/mor1kx/) {$$l =~ s/[\n\s]*$$//; $$l .= " +incdir+$(CURDIR)/bemicro_soc/simulation/submodules\n"; }; print ($$l); } ' > tmp2.tcl
+	cp tmp2.tcl bemicro_soc/simulation/mentor/msim_setup.tcl
+	echo "" > bemicro_soc/generated
 
 quartus-map: $(TOP)_quartus.qsf
 	$(QUARTUS_MAP) --import_settings_files=on  --export_settings_files=off $(TOP)_quartus -c $(TOP)_quartus
@@ -41,7 +55,7 @@ quartus-clean:
 	*.csf *.psf *.quartus *.smsg .undefinedlib .jaguarc .unorderedFilePath \
 	incremental_db PLLJ_PLLSPE_INFO.txt *.jdi
 
-vsim:
+vsim: 
 	(echo "set QSYS_SIMDIR \"$(CURDIR)/bemicro_soc/simulation\""; echo "source bemicro_soc/simulation/mentor/msim_setup.tcl"; echo "dev_com"; echo "com"; ) | vsim || exit 1
 	vlog -quiet  -work work mobile/mobile_ddr.v
 	vlog -quiet  -work work bemicro_top.v

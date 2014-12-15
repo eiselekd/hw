@@ -181,7 +181,7 @@ module mor1kx
    /*AUTOWIRE*/
    // Beginning of automatic wires (for undeclared instantiated-module outputs)
    wire			avm_i_write_o;		// From ibus_bridge of mor1kx_bus_if_avalon.v
-   wire			avm_i_writedata_o;	// From ibus_bridge of mor1kx_bus_if_avalon.v
+   wire	[31:0]		avm_i_writedata_o;	// From ibus_bridge of mor1kx_bus_if_avalon.v
    wire [OPTION_OPERAND_WIDTH-1:0] dbus_adr_o;	// From mor1kx_cpu of mor1kx_cpu.v
    wire [3:0]		dbus_bsel_o;		// From mor1kx_cpu of mor1kx_cpu.v
    wire			dbus_burst_o;		// From mor1kx_cpu of mor1kx_cpu.v

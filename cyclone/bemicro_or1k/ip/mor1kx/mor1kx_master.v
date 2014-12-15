@@ -26,7 +26,7 @@ module mor1kx_master
    
    mor1kx
      #(.BUS_IF_TYPE("AVALON"))
-   mor1kx_inst
+   mor1kx_cpu0
      (
       .clk			(clk),
       .rst			(rst),
@@ -50,5 +50,4 @@ module mor1kx_master
       .avm_i_readdatavalid_i    (avm_i_readdatavalid_i)
       
       );
-   
 endmodule
