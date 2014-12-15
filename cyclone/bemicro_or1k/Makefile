@@ -1,3 +1,50 @@
+TOP=bemicro
+
+QUARTUS_CDB = quartus_cdb
+QUARTUS_MAP = quartus_map --64bit
+QUARTUS_FIT = quartus_fit --64bit
+QUARTUS_ASM = quartus_asm
+QUARTUS_STA = quartus_sta
+QUARTUS_PGM = quartus_pgm
+QUARTUS_SH  = quartus_sh
+
+ALTCABLE ?= USB-BlasterII
+
+quartus:
+	make quartus-map quartus-route
+
+quartus-map: $(TOP)_quartus.qsf
+	$(QUARTUS_MAP) --import_settings_files=on  --export_settings_files=off $(TOP)_quartus -c $(TOP)_quartus
+	$(QUARTUS_SH) -t pin_assign_wrap.tcl quartus_map     $(TOP)_quartus $(TOP)_quartus
+
+quartus-route: $(TOP)_quartus.qsf
+	$(QUARTUS_CDB) --merge $(TOP)_quartus
+	$(QUARTUS_FIT) --import_settings_files=off --export_settings_files=off $(TOP)_quartus -c $(TOP)_quartus
+	$(QUARTUS_ASM) --import_settings_files=off --export_settings_files=off $(TOP)_quartus -c $(TOP)_quartus
+	$(QUARTUS_STA) $(TOP)_quartus
+
+quartus-prog-fpga:
+	$(QUARTUS_PGM) -c $(ALTCABLE) -m JTAG -o p\;output/$(TOP)_quartus.sof
+
+quartus-srec:
+	$(QUARTUS_PGM)
+
+quartus-clean:
+	-rm -rf db *.syr *.qws automake.log dumpdata.txt \
+        *.rpt *.done *.eqn *.pof *.summary *.ttf *.pin *.sof \
+	*.jam *.jbc cmp_state.ini simulation undo_redo.txt *.vqm *.qdf \
+	*.csf *.psf *.quartus *.smsg .undefinedlib .jaguarc .unorderedFilePath \
+	incremental_db PLLJ_PLLSPE_INFO.txt *.jdi
+
+
+
+
+vsim:
+	vlog -quiet  -work work mobile/mobile_ddr.v
+	vlog -quiet  -work work tb.v
+
+####################################
+
 PREFIX=$(CURDIR)/bin/or1k-toolchain
 P=export PATH=$$PATH:$(CURDIR)/bin/bin:$(PREFIX)/bin; export PYTHONPATH=$(CURDIR)/bin/lib/python2.7/site-packages:$$PYTHONPATH
 

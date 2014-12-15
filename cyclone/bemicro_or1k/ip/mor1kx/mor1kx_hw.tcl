@@ -65,51 +65,51 @@ add_file mor1kx_master.v  {SYNTHESIS SIMULATION}
 add_interface clock_reset clock end
 set_interface_property clock_reset ptfSchematicName ""
 add_interface_port clock_reset clk clk Input 1
-add_interface_port clock_reset reset reset Input 1
+add_interface_port clock_reset rst reset Input 1
 
 # -----------------------------------
-# connection point avalon_master
-add_interface avalon_master avalon start
-set_interface_property avalon_master linewrapBursts false
-set_interface_property avalon_master adaptsTo ""
-set_interface_property avalon_master doStreamReads false
-set_interface_property avalon_master doStreamWrites false
-set_interface_property avalon_master burstOnBurstBoundariesOnly false
+# connection point avm_d
+add_interface avm_d avalon start
+set_interface_property avm_d linewrapBursts false
+set_interface_property avm_d adaptsTo ""
+set_interface_property avm_d doStreamReads false
+set_interface_property avm_d doStreamWrites false
+set_interface_property avm_d burstOnBurstBoundariesOnly false
 
-set_interface_property avalon_master ASSOCIATED_CLOCK clock_reset
+set_interface_property avm_d ASSOCIATED_CLOCK clock_reset
 
-add_interface_port avalon_master master_address address Output -1
-add_interface_port avalon_master master_read read Output 1
-add_interface_port avalon_master master_write write Output 1
-add_interface_port avalon_master master_byteenable byteenable Output -1
-add_interface_port avalon_master master_readdata readdata Input -1
-add_interface_port avalon_master master_readdatavalid readdatavalid Input 1
-add_interface_port avalon_master master_writedata writedata Output -1
-add_interface_port avalon_master master_burstcount burstcount Output -1
-add_interface_port avalon_master master_waitrequest waitrequest Input 1
+add_interface_port avm_d avm_d_address_o address Output 32
+add_interface_port avm_d avm_d_byteenable_o byteenable Output 4
+add_interface_port avm_d avm_d_read_o read Output 1
+add_interface_port avm_d avm_d_readdata_i readdata Input 32
+add_interface_port avm_d avm_d_burstcount_o burstcount Output 4
+add_interface_port avm_d avm_d_write_o write Output 1
+add_interface_port avm_d avm_d_writedata_o writedata Output 32
+add_interface_port avm_d avm_d_waitrequest_i waitrequest Input 1
+add_interface_port avm_d avm_d_readdatavalid_i readdatavalid Input 1
+
+# -----------------------------------
+# connection point avm_i
+add_interface avm_i avalon start
+set_interface_property avm_i linewrapBursts false
+set_interface_property avm_i adaptsTo ""
+set_interface_property avm_i doStreamReads false
+set_interface_property avm_i doStreamWrites false
+set_interface_property avm_i burstOnBurstBoundariesOnly false
+
+set_interface_property avm_i ASSOCIATED_CLOCK clock_reset
+
+add_interface_port avm_i avm_i_address_o address Output 32
+add_interface_port avm_i avm_i_byteenable_o byteenable Output 4
+add_interface_port avm_i avm_i_read_o read Output 1
+add_interface_port avm_i avm_i_readdata_i readdata Input 32
+add_interface_port avm_i avm_i_burstcount_o burstcount Output 4
+add_interface_port avm_i avm_i_waitrequest_i waitrequest Input 1
+add_interface_port avm_i avm_i_readdatavalid_i readdatavalid Input 1
 
 proc elaborate_me {}  {
 
-  set the_data_width 32
-  set the_byteenable_width 4
-  set the_address_width 32
-  set the_burst_count_width 8
-
-  set_port_property control_read_base WIDTH $the_address_width
-  set_port_property control_read_length WIDTH $the_address_width
-  set_port_property control_write_base WIDTH $the_address_width
-  set_port_property control_write_length WIDTH $the_address_width
-  set_port_property user_buffer_input_data WIDTH $the_data_width
-  set_port_property user_buffer_output_data WIDTH $the_data_width
-  set_port_property master_address WIDTH $the_address_width
-  set_port_property master_byteenable WIDTH $the_byteenable_width
-  set_port_property master_readdata WIDTH $the_data_width
-  set_port_property master_writedata WIDTH $the_data_width
-  #set_port_property master_burstcount WIDTH $the_burst_count_width
-  #set_port_property master_burstcount TERMINATION false
-  
 }
-
 
 proc validate_me {}  {
 

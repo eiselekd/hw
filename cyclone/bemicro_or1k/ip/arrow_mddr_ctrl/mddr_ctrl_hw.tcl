@@ -18,6 +18,7 @@ package require -exact sopc 10.1
 # | 
 set_module_property DESCRIPTION "simple mobile DDR SDRAM controller for BeMicro SDK"
 set_module_property NAME mddr_ctrl
+set_module_property GROUP "Memory"
 set_module_property VERSION 1.0
 set_module_property INTERNAL false
 set_module_property OPAQUE_ADDRESS_MAP true

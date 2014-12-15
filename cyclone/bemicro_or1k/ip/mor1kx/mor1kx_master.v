@@ -1,41 +1,77 @@
-module mor1kx_master (
-	clk,
-	reset,
 
-	// master inputs and outputs
-	master_address,
-	master_read,
-	master_write,
-	master_byteenable,
-	master_readdata,
-	master_readdatavalid,
-	master_writedata,
-	master_burstcount,
-	master_waitrequest
+module mor1kx_master 
+  (
+   clk,
+   rst,
+   
+   avm_d_address_o,
+   avm_d_byteenable_o,
+   avm_d_read_o,
+   avm_d_readdata_i,
+   avm_d_burstcount_o,
+   avm_d_write_o,
+   avm_d_writedata_o,
+   avm_d_waitrequest_i,
+   avm_d_readdatavalid_i,
+   
+   avm_i_address_o,
+   avm_i_byteenable_o,
+   avm_i_read_o,
+   avm_i_readdata_i,
+   avm_i_burstcount_o,
+   avm_i_waitrequest_i,
+   avm_i_readdatavalid_i
+   
 );
-
-	parameter DATA_WIDTH = 32;
-	parameter FIFO_DEPTH = 32;
-	parameter FIFO_DEPTH_LOG2 = 5;
-	parameter ADDRESS_WIDTH = 32;
-	parameter BURST_CAPABLE = 0;                              // 1 to enable burst, 0 to disable it
-	parameter MAXIMUM_BURST_COUNT = 2;
-	parameter BURST_COUNT_WIDTH = 2;
-
-	input clk;
-	input reset;
-	
-	// master inputs and outputs
-	output wire [ADDRESS_WIDTH-1:0] master_address;
-	output wire master_read;                                  // for read master
-	output wire master_write;                                 // for write master
-	output wire [(DATA_WIDTH/8)-1:0] master_byteenable;
-	input [DATA_WIDTH-1:0] master_readdata;                   // for read master
-	input master_readdatavalid;                               // for read master
-	output wire [DATA_WIDTH-1:0] master_writedata;            // for write master
-	output wire [BURST_COUNT_WIDTH-1:0] master_burstcount;    // for bursting read and write masters
-	input master_waitrequest;
-
+   
+   input 			      clk;
+   input 			      reset;
+   
+   output [31:0] 		      avm_d_address_o;
+   output [3:0] 		      avm_d_byteenable_o;
+   output 			      avm_d_read_o;
+   input [31:0] 		      avm_d_readdata_i;
+   output [3:0] 		      avm_d_burstcount_o;
+   output 			      avm_d_write_o;
+   output [31:0] 		      avm_d_writedata_o;
+   input 			      avm_d_waitrequest_i;
+   input 			      avm_d_readdatavalid_i;
+   
+   output [31:0] 		      avm_i_address_o;
+   output [3:0] 		      avm_i_byteenable_o;
+   output 			      avm_i_read_o;
+   input [31:0] 		      avm_i_readdata_i;
+   output [3:0] 		      avm_i_burstcount_o;
+   input 			      avm_i_waitrequest_i;
+   input 			      avm_i_readdatavalid_i;
 
 
+   
+   mor1kx_bus_if_wb32
+     #(.BUS_IF_TYPE(AVALON))
+   mor1kx
+     (
+      .clk			(clk),
+      .rst			(reset),
+      
+      .avm_d_address_o          (avm_d_address_o),
+      .avm_d_byteenable_o       (avm_d_byteenable_o),
+      .avm_d_read_o             (avm_d_read_o),
+      .avm_d_readdata_i         (avm_d_readdata_i),
+      .avm_d_burstcount_o       (avm_d_burstcount_o),
+      .avm_d_write_o            (avm_d_write_o),
+      .avm_d_writedata_o        (avm_d_writedata_o),
+      .avm_d_waitrequest_i      (avm_d_waitrequest_i),
+      .avm_d_readdatavalid_i    (avm_d_readdatavalid_i),
+      
+      .avm_i_address_o          (avm_i_address_o),
+      .avm_i_byteenable_o       (avm_i_byteenable_o),
+      .avm_i_read_o             (avm_i_read_o),
+      .avm_i_readdata_i         (avm_i_readdata_i),
+      .avm_i_burstcount_o       (avm_i_burstcount_o),
+      .avm_i_waitrequest_i      (avm_i_waitrequest_i),
+      .avm_i_readdatavalid_i    (avm_i_readdatavalid_i)
+      
+      );
+   
 endmodule
