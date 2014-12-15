@@ -2,7 +2,7 @@
 module mor1kx_master 
 (
    input wire 			 clk,
-   input wire			 reset,
+   input wire			 rst,
    
    output wire [31:0] 		 avm_d_address_o,
    output wire [3:0] 		 avm_d_byteenable_o,
@@ -29,7 +29,7 @@ module mor1kx_master
    mor1kx
      (
       .clk			(clk),
-      .rst			(reset),
+      .rst			(rst),
       
       .avm_d_address_o          (avm_d_address_o),
       .avm_d_byteenable_o       (avm_d_byteenable_o),

@@ -28,6 +28,14 @@
          type = "int";
       }
    }
+   element mor1kx_0
+   {
+      datum _sortIndex
+      {
+         value = "2";
+         type = "int";
+      }
+   }
 }
 ]]></parameter>
  <parameter name="clockCrossingAdapter" value="HANDSHAKE" />
@@ -43,7 +51,7 @@
  <parameter name="projectName" value="bemicro_quartus.qpf" />
  <parameter name="sopcBorderPoints" value="false" />
  <parameter name="systemHash" value="1" />
- <parameter name="timeStamp" value="1418656697298" />
+ <parameter name="timeStamp" value="1418658401945" />
  <parameter name="useTestBenchNamingPattern" value="false" />
  <instanceScript></instanceScript>
  <interface name="clk" internal="clk_0.clk_in" type="clock" dir="end" />
@@ -63,12 +71,44 @@
   <parameter name="pRefreshCount" value="780" />
   <parameter name="AUTO_CLOCK_CLOCK_RATE" value="50000000" />
  </module>
+ <module kind="mor1kx" version="1.0" enabled="1" name="mor1kx_0">
+  <parameter name="AUTO_CLOCK_RESET_CLOCK_RATE" value="50000000" />
+  <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone IV E" />
+ </module>
  <connection
    kind="reset"
    version="13.0"
    start="clk_0.clk_reset"
    end="mddr_ctrl_0.clock_reset" />
  <connection kind="clock" version="13.0" start="clk_0.clk" end="mddr_ctrl_0.clock" />
+ <connection
+   kind="avalon"
+   version="13.0"
+   start="mor1kx_0.avm_d"
+   end="mddr_ctrl_0.avalon_slave">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="13.0"
+   start="mor1kx_0.avm_i"
+   end="mddr_ctrl_0.avalon_slave">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="clock"
+   version="13.0"
+   start="clk_0.clk"
+   end="mor1kx_0.clock_reset" />
+ <connection
+   kind="reset"
+   version="13.0"
+   start="clk_0.clk_reset"
+   end="mor1kx_0.clock_reset_reset" />
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.maxAdditionalLatency" value="1" />
 </system>
