@@ -42,6 +42,7 @@ vsim:
 	vlog -quiet  -work work bemicro_top.v
 	vlog -quiet  -work work tb.v
 
+vsim-libs:
 	vlib libraries
 	vlib libraries/work
 	vmap work $(CURDIR)/libraries/work
