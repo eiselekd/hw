@@ -64,7 +64,7 @@ wire            ram_oe;
 //------------------------------------------------------------------------------
 // QSys
 
-bemicro bemicro_soc
+bemicro_soc bemicro_soc
     (
     .clk_clk(CLK_FPGA_50M),
     .mddr_ctrl_0_mddr_a(ram_addr),
