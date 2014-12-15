@@ -1,5 +1,5 @@
 PREFIX=$(CURDIR)/bin/or1k-toolchain
-P=export PATH=$$PATH:$(CURDIR)/bin/bin:$(PREFIX); export PYTHONPATH=$(CURDIR)/bin/lib/python2.7/site-packages:$$PYTHONPATH
+P=export PATH=$$PATH:$(CURDIR)/bin/bin:$(PREFIX)/bin; export PYTHONPATH=$(CURDIR)/bin/lib/python2.7/site-packages:$$PYTHONPATH
 
 
 toolchain: gcc-prepare gcc-binutils gcc-gcc gcc-newlib gcc
@@ -8,10 +8,13 @@ gcc: gcc-clean gcc-binutils gcc-gcc gcc-newlib gcc
 
 # from: https://github.com/embecosm/chiphack/wiki/OpenRISC-tools-install
 gcc-prepare:
-	mkdir tmp-gcc
+	mkdir -p tmp-gcc
 	cd tmp-gcc; git clone git://github.com/openrisc/or1k-src.git
 	cd tmp-gcc; git clone git://github.com/openrisc/or1k-gcc.git
 	cd tmp-gcc; mkdir -p bld-or1k-src bld-or1k-gcc
+
+gcc-ubuntu:
+	sudo apt-get install libgmp-dev libmpc-dev libmpfr-dev g++ build-essential
 
 gcc-clean:
 	cd tmp-gcc; rm -rf bld-or1k-src bld-or1k-gcc
@@ -58,6 +61,8 @@ fusesoc-prepare:
 	echo 'systems_root = ../orpsoc-cores/systems' >> fusesoc/fusesoc.conf
 	echo "use de1 design to retrive sources"
 	cd fusesoc; $P; fusesoc build de1
+	mkdir -p orpsoc-cores-src
+	cp -r fusesoc/build/de1/src/* orpsoc-cores-src/
 
 
 

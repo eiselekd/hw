@@ -58,6 +58,7 @@ add_file rtl/verilog/mor1kx_wb_mux_espresso.v  {SYNTHESIS SIMULATION}
 add_file rtl/verilog/mor1kx_ctrl_cappuccino.v  {SYNTHESIS SIMULATION}
 add_file rtl/verilog/mor1kx_fetch_cappuccino.v  {SYNTHESIS SIMULATION}
 add_file rtl/verilog/mor1kx_rf_espresso.v  {SYNTHESIS SIMULATION}
+add_file mor1kx_master.v  {SYNTHESIS SIMULATION}
 
 # -----------------------------------
 # connection point clock_reset
