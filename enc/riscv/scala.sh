@@ -1,5 +1,6 @@
 #!/bin/sh
- 
+sudo apt-get install openjdk-6-jre
+
 #2nd way
 sudo apt-get remove scala-library scala
 wget http://www.scala-lang.org/files/archive/scala-2.11.4.deb
