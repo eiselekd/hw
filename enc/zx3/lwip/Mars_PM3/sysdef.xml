@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<Project Version="1" Minor="0">
+	<BUILD_NUMBER Name="928826"/>
+	<FULL_BUILD Name="SW Build 928826 on Thu Jun  5 18:17:50 MDT 2014"/>
+	<MODE Name="Post-Bitstream"/>
+	<SYSTEMINFO BOARD="" ARCH="zynq" PACKAGE="clg484" DEVICE="7z020" SPEED="-1"/>
+	<HIERARCHY Name="i_system"/>
+	<File Type="HW_HANDOFF" Name="MarsZX3.hwh" ModTime="1406035828"/>
+	<File Type="PS_FSBL_INIT" Name="ps7_init.c" ModTime="1406035828"/>
+	<File Type="PS_FSBL_INIT" Name="ps7_init.h" ModTime="1406035828"/>
+	<File Type="PS_XMD_INIT" Name="ps7_init.tcl" ModTime="1406035828"/>
+	<File Type="PS_INIT_HELP" Name="ps7_init.html" ModTime="1406035828"/>
+	<File Type="BIT" Name="system_top.bit" ModTime="1406036178"/>
+</Project>
+

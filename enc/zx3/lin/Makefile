@@ -13,8 +13,8 @@ build:
 	git clone git://git.yoctoproject.org/meta-xilinx ; \
 		cd meta-xilinx; \
 		git checkout –b daisy remotes/origin/daisy; \
-		cd..; \
-		 git clone git://git.yoctoproject.org/meta-xilinx-community
+		cd ..; \
+		git clone git://git.yoctoproject.org/meta-xilinx-community
 	git clone https://github.com/enclustra/meta-enclustra.git
 
 
