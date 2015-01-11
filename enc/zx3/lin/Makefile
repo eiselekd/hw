@@ -16,3 +16,18 @@ build:
 		cd..; \
 		 git clone git://git.yoctoproject.org/meta-xilinx-community
 	git clone https://github.com/enclustra/meta-enclustra.git
+
+
+#sudo apt-get install xinetd tftpd tftp
+# /etc/xinetd.d/tftp
+#service tftp
+#{
+#protocol = udp
+#port = 69
+#socket_type = dgram
+#wait = yes
+#user = nobody
+#server = /usr/sbin/in.tftpd
+#server_args = /tftpboot
+#disable = no
+#}
