@@ -1,7 +1,8 @@
 
 
-- 1. Add ARM init ps7_nit.tcl to firmware
-- 2. Modify emacps driver to process pingpong buffers,
+1. Add ARM init ps7_nit.tcl to firmware
+
+2. Modify emacps driver to process pingpong buffers,
      assuming no backpresure, received packets are 
      directly processed by pl when received. The payload
      is processed in memory. Overwrite may occure.

@@ -1,0 +1,4 @@
+1. Port Slave fifo
+2. Implement fx3-to-axi-m bridge
+3. Implement cmd processor
+   [read addr] and [write addr value]
