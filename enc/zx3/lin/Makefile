@@ -16,6 +16,8 @@ build:
 		cd ..; \
 		git clone git://git.yoctoproject.org/meta-xilinx-community
 	git clone https://github.com/enclustra/meta-enclustra.git
+	git clone git://github.com/netmodule/uboot-ze7000.git;protocol=https
+
 
 
 #sudo apt-get install xinetd tftpd tftp
