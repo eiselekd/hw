@@ -11,98 +11,69 @@ package fx3_pkg is
     cnt                   : std_logic_vector(31 downto 0);
    end record;
 
-  component fx3bridge is
-    generic (
-      CONST_PATTERN         : integer := 0
-      );   
-    port (
-      av_clk			: in	std_logic;
-      av_reset			: in	std_logic; 
-      fx3_clk100mhz_in            : in	std_logic; 
-      fx3_clk100mhz_270deg_in     : in	std_logic;
-      
-      -- sys clock domain:
-      sink_data                   : in    std_logic_vector(31 downto 0);
-      sink_ready                  : out   std_logic;
-      sink_valid                  : in    std_logic;
-      sink_endofpacket            : in    std_logic;
-      sink_startofpacket          : in    std_logic;
-      
-      -- fx3 clock domain: EZ-USB FX3 slave FIFO interface
-      FX3_Clk			: out	std_logic;
-      FX3_SLCS_N			: out	std_logic;  -- chip sel
-      FX3_SlRd_N			: out	std_logic;
-      FX3_SlWr_N			: out	std_logic;
-      FX3_SlOe_N                  : out	std_logic;  -- tristate FX3 
-      FX3_Pktend_N		: out	std_logic;
-      FX3_A			: out	std_logic_vector(1 downto 0);
-      FX3_SlTri_N                 : out	std_logic;  -- tristate for DataIn/Out Pad
-      FX3_DQ_o			: out	std_logic_vector(31 downto 0);
-      FX3_DQ_i			: in	std_logic_vector(31 downto 0);
-      FX3_FlagA			: in	std_logic;
-      FX3_FlagB			: in	std_logic;
-      
-      -- dbg output
-      FX3DBG_clk                   : out std_logic;
-      FX3DBG_state                 : out std_logic_vector(3 downto 0);
-      FX3DBG_tohost_fifo_haspacket : out std_logic;
-      FX3DBG_tohost_fifo_isfull    : out std_logic;
-      FX3DBG_cnt                   : out std_logic_vector(31 downto 0)
-  );
-  end component;
+    component fx3bridge is
+	generic (
+		-- Parameters of Axi Master Bus Interface M00_AXIS
+		C_M00_AXIS_TDATA_WIDTH	: integer	:= 32;
+		C_M00_AXIS_START_COUNT	: integer	:= 32;
 
-  component fx3fifo is
-    port (    -- clock / reset interface
-      Clk_w	  : in std_logic;
-      Clk_r       : in std_logic;
-      RESET_N	  : in std_logic;
-      
-      -- read domain:
-      fifo_read      : in std_logic;
-      fifo_dataout   : out std_logic_vector(31 downto 0);
-      fifo_haspacket : out std_logic;
-      fifo_empty     : out std_logic;
-      
-      -- write domain:
-      fifo_write     : in std_logic;
-      fifo_datain    : in std_logic_vector(31 downto 0);
-      fifo_isfull    : out std_logic
-    );
-  end component;
-   
-  component dpram0 IS
-    PORT
-      (
-        data            : IN STD_LOGIC_VECTOR (31 DOWNTO 0);
-        rdaddress       : IN STD_LOGIC_VECTOR (11 DOWNTO 0);
-        rdclock         : IN STD_LOGIC ;
-        wraddress       : IN STD_LOGIC_VECTOR (11 DOWNTO 0);
-        wrclock         : IN STD_LOGIC  := '1';
-        wren            : IN STD_LOGIC  := '0';
-        q               : OUT STD_LOGIC_VECTOR (31 DOWNTO 0)
-      );
-  END component;
-  
-  component fx3clk0 IS
-    PORT
-      (
-        areset          : IN STD_LOGIC  := '0';
-        inclk0          : IN STD_LOGIC  := '0';
-        c0              : OUT STD_LOGIC ;
-        c1              : OUT STD_LOGIC ;
-        locked          : OUT STD_LOGIC 
-      );
-  end component;
-
-  component fx3clk1_0002 is
-	port (
-		refclk   : in  std_logic := '0'; --  refclk.clk
-		rst      : in  std_logic := '0'; --   reset.reset
-		outclk_0 : out std_logic;        -- outclk0.clk
-		outclk_1 : out std_logic;        -- outclk1.clk
-		locked   : out std_logic         --  locked.export
+		-- Parameters of Axi Slave Bus Interface S00_AXIS
+		C_S00_AXIS_TDATA_WIDTH	: integer	:= 32
 	);
-   end component;
+	port (
+        FX3_100mhz          : in std_logic;
+
+        FX3_Clk             : out std_logic;
+        FX3_A               : out std_logic_vector(1 downto 0);
+        FX3_DQ_o            : out std_logic_vector(16-1 downto 0);
+        FX3_DQ_i            : in  std_logic_vector(16-1 downto 0);
+        FX3_FlagA           : in  std_logic;
+        FX3_FlagB           : in  std_logic;
+        FX3_SLCS_N          : out std_logic;  -- chip sel
+        FX3_SlRd_N          : out std_logic;
+        FX3_SlWr_N          : out std_logic;
+        FX3_SlOe_N          : out std_logic;  -- tristate FX3 
+        FX3_Pktend_N        : out std_logic;
+        FX3_SlTri           : out std_logic;  -- tristate for DataIn/Out Pad, High word
+
+        -- Do not modify the ports beyond this line
+        axis_aclk	    : in std_logic;
+        axis_aresetn	: in std_logic;
+
+        -- Ports of Axi Master Bus Interface M00_AXIS
+        m00_axis_tvalid	: out std_logic;
+        m00_axis_tdata	: out std_logic_vector(31 downto 0);
+        m00_axis_tlast	: out std_logic;
+        m00_axis_tready	: in std_logic;
+
+        -- Ports of Axi Slave Bus Interface S00_AXIS
+        s00_axis_tready	: out std_logic;
+        s00_axis_tdata	: in std_logic_vector(31 downto 0);
+        s00_axis_tlast	: in std_logic;
+        s00_axis_tvalid	: in std_logic
+	);
+    end component fx3bridge;
+
+    component fifo_generator_0 IS
+    PORT (
+      m_aclk : IN STD_LOGIC;
+      s_aclk : IN STD_LOGIC;
+      s_aresetn : IN STD_LOGIC;
+      
+      s_axis_tvalid : IN STD_LOGIC;
+      s_axis_tready : OUT STD_LOGIC;
+      s_axis_tdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
+      s_axis_tlast : IN STD_LOGIC;
+      
+      m_axis_tvalid : OUT STD_LOGIC;
+      m_axis_tready : IN STD_LOGIC;
+      m_axis_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+      m_axis_tlast : OUT STD_LOGIC
+      
+      );
+    END component fifo_generator_0;     
+
+  
 
   
 function "+" (d : std_logic_vector; i : integer) return std_logic_vector;

@@ -14,7 +14,7 @@ entity fx3bridge is
 	);
 	port (
         
-        FX3_100mhz    : in std_logic;
+        FX3_100mhz         : in std_logic;
 
         FX3_Clk             : out std_logic;
         FX3_A               : out std_logic_vector(1 downto 0);
@@ -36,13 +36,13 @@ entity fx3bridge is
 
         -- Ports of Axi Master Bus Interface M00_AXIS
         m00_axis_tvalid	: out std_logic;
-        m00_axis_tdata	: out std_logic_vector(C_M00_AXIS_TDATA_WIDTH-1 downto 0);
+        m00_axis_tdata	: out std_logic_vector(31 downto 0);
         m00_axis_tlast	: out std_logic;
         m00_axis_tready	: in std_logic;
 
         -- Ports of Axi Slave Bus Interface S00_AXIS
         s00_axis_tready	: out std_logic;
-        s00_axis_tdata	: in std_logic_vector(C_S00_AXIS_TDATA_WIDTH-1 downto 0);
+        s00_axis_tdata	: in std_logic_vector(31 downto 0);
         s00_axis_tlast	: in std_logic;
         s00_axis_tvalid	: in std_logic
 	);
@@ -57,24 +57,16 @@ architecture arch_imp of fx3bridge is
       );
   END component clk_wiz_0; 
         
-  component fifo_generator_0 IS
-    PORT (
-      m_aclk : IN STD_LOGIC;
-      s_aclk : IN STD_LOGIC;
-      s_aresetn : IN STD_LOGIC;
-      
-      s_axis_tvalid : IN STD_LOGIC;
-      s_axis_tready : OUT STD_LOGIC;
-      s_axis_tdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-      s_axis_tlast : IN STD_LOGIC;
-      
-      m_axis_tvalid : OUT STD_LOGIC;
-      m_axis_tready : IN STD_LOGIC;
-      m_axis_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-      m_axis_tlast : OUT STD_LOGIC
-      
-      );
-  END component fifo_generator_0;     
+      signal readfx3_s_axis_tvalid : STD_LOGIC;
+      signal readfx3_s_axis_tready : STD_LOGIC;
+      signal readfx3_s_axis_tdata : STD_LOGIC_VECTOR(31 DOWNTO 0);
+      signal readfx3_s_axis_tlast : STD_LOGIC;
+
+      signal writefx3_m_axis_tvalid : STD_LOGIC;
+      signal writefx3_m_axis_tready : STD_LOGIC;
+      signal writefx3_m_axis_tdata : STD_LOGIC_VECTOR(31 DOWNTO 0);
+      signal writefx3_m_axis_tlast : STD_LOGIC;
+  
     
   signal din : STD_LOGIC_VECTOR(31 DOWNTO 0);
   signal wr_en : STD_LOGIC;
@@ -247,6 +239,40 @@ begin
     tohost_fifo_read <= vfx3.tohost_fifo_read;
     
   end process;
+
+  readfx3_mwritefpga :  fifo_generator_0 
+    port map (
+      m_aclk => axis_aclk,
+      s_aclk => FX3_100mhz,
+      s_aresetn => axis_aresetn,
+      
+      s_axis_tvalid => readfx3_s_axis_tvalid,
+      s_axis_tready => readfx3_s_axis_tready,
+      s_axis_tdata => readfx3_s_axis_tdata,
+      s_axis_tlast => readfx3_s_axis_tlast,
+      
+      m_axis_tvalid => m00_axis_tvalid,
+      m_axis_tready => m00_axis_tready,
+      m_axis_tdata => m00_axis_tdata,
+      m_axis_tlast => m00_axis_tlast
+      );
+
+  writefx3_sreadfpga : fifo_generator_0 
+    port map (
+      m_aclk => FX3_100mhz,
+      s_aclk  => axis_aclk,
+      s_aresetn => axis_aresetn,
+      
+      s_axis_tvalid => s00_axis_tvalid,
+      s_axis_tready => s00_axis_tready,
+      s_axis_tdata => s00_axis_tdata,
+      s_axis_tlast => s00_axis_tlast,
+      
+      m_axis_tvalid => writefx3_m_axis_tvalid,
+      m_axis_tready => writefx3_m_axis_tready,
+      m_axis_tdata => writefx3_m_axis_tdata,
+      m_axis_tlast => writefx3_m_axis_tlast
+      );
   
 end arch_imp;
 

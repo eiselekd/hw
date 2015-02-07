@@ -31,8 +31,56 @@ architecture behavioral of fx3bridge_tb is
   signal FX3_DQ              : std_logic_vector(16-1 downto 0);
   
   constant DATA_WORD         : std_logic_vector(15 downto 0) := (others => '1');
+
+
+  signal FX3_100mhz          : std_logic;
+  signal axis_aclk	    : std_logic;
+  signal axis_aresetn	: std_logic;
+
+  signal m00_axis_tvalid	: std_logic;
+  signal m00_axis_tdata	: std_logic_vector(31 downto 0);
+  signal m00_axis_tlast	: std_logic;
+  signal m00_axis_tready	: std_logic;
+
+  signal s00_axis_tready	: std_logic;
+  signal s00_axis_tdata	: std_logic_vector(31 downto 0);
+  signal s00_axis_tlast	: std_logic;
+  signal s00_axis_tvalid	: std_logic;
   
 begin
+
+   dut: fx3bridge 
+	port map (
+        FX3_100mhz => FX3_100mhz,
+        
+        FX3_Clk    => FX3_Clk,
+        FX3_A      => FX3_A,
+        FX3_DQ_o   => FX3_DQ_o,
+        FX3_DQ_i   => FX3_DQ_i,
+        FX3_FlagA  => FX3_FlagA,
+        FX3_FlagB  => FX3_FlagB,
+        FX3_SLCS_N => FX3_SLCS_N,
+        FX3_SlRd_N => FX3_SlRd_N,
+        FX3_SlWr_N => FX3_SlWr_N,
+        FX3_SlOe_N => FX3_SlOe_N,
+        FX3_Pktend_N => FX3_Pktend_N,
+        FX3_SlTri  => FX3_SlTri,
+        
+        axis_aclk    => axis_aclk,
+        axis_aresetn => axis_aresetn,
+	
+        m00_axis_tvalid => m00_axis_tvalid,
+	m00_axis_tdata  => m00_axis_tdata,
+	m00_axis_tlast  => m00_axis_tlast,
+	m00_axis_tready => m00_axis_tready,
+
+        s00_axis_tready => s00_axis_tready,
+	s00_axis_tdata  => s00_axis_tdata,
+	s00_axis_tlast  => s00_axis_tlast,
+	s00_axis_tvalid => s00_axis_tvalid
+	);
+
+
 
   fx3 : process
     variable r: integer;

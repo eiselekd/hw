@@ -51,10 +51,17 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+      <File Path="$PSRCDIR/sources_1/imports/hdl/fx3bridge_v1_0.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
         <Option Name="TopModule" Val="fx3bridge_tb"/>
         <Option Name="TopLib" Val="xil_defaultlib"/>
+        <Option Name="SimMode" Val="post-implementation"/>
         <Option Name="SrcSet" Val="sources_1"/>
       </Config>
     </FileSet>
@@ -65,6 +72,103 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="blk_mem_gen_v8_2/hdl/blk_mem_gen_getinit_pkg.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="blk_mem_gen_v8_2/hdl/blk_mem_min_area_pkg.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="blk_mem_gen_v8_2/hdl/blk_mem_gen_mux.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="blk_mem_gen_v8_2/hdl/blk_mem_gen_top.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="blk_mem_gen_v8_2/hdl/blk_mem_gen_prim_wrapper.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="blk_mem_gen_v8_2/hdl/blk_mem_gen_prim_wrapper_init.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="blk_mem_gen_v8_2/hdl/blk_mem_gen_prim_width.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="blk_mem_gen_v8_2/hdl/blk_mem_gen_generic_cstr.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="blk_mem_gen_v8_2/hdl/blk_mem_gen_ecc_encoder.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="blk_mem_gen_v8_2/hdl/blk_mem_gen_ecc_decoder.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="blk_mem_gen_v8_2/hdl/blk_mem_input_block.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="blk_mem_gen_v8_2/hdl/blk_mem_output_block.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="blk_mem_gen_v8_2/hdl/blk_mem_axi_read_fsm.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="blk_mem_gen_v8_2/hdl/blk_mem_axi_read_wrapper.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="blk_mem_gen_v8_2/hdl/blk_mem_axi_write_fsm.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="blk_mem_gen_v8_2/hdl/blk_mem_axi_write_wrapper.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="blk_mem_gen_v8_2/hdl/blk_mem_axi_regs_fwd.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="blk_mem_gen_v8_2/hdl/blk_mem_gen_v8_2.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="blk_mem_gen_v8_2/hdl/blk_mem_gen_v8_2_synth.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_0/fifo_generator_0.xdc"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_0/fifo_generator_0_clocks.xdc"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_0_ooc.xdc"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/builtin/logic_builtin.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/builtin/builtin_prim.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/builtin/builtin_extdepth.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/builtin/builtin_top.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/builtin/reset_builtin.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/builtin/builtin_prim_v6.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/builtin/builtin_extdepth_v6.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/builtin/fifo_generator_v12_0_builtin.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/builtin/builtin_top_v6.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="sim/fifo_generator_0.v"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/bram_sync_reg.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/bram_fifo_rstlogic.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/reset_blk_ramfifo.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/axi_reg_slice.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/fifo_generator_top_bi_sim.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/fifo_generator_v12_0_synth.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/fifo_generator_v12_0_top.v"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="blk_mem_gen_v8_2/hdl/blk_mem_gen_bindec.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="blk_mem_gen_v8_2/hdl/blk_mem_gen_v8_2_synth_comp.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="blk_mem_gen_v8_2/hdl/blk_mem_gen_v8_2_defaults.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="blk_mem_gen_v8_2/hdl/blk_mem_gen_v8_2_pkg.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="doc/fifo_generator_v12_0_changelog.txt"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_0.veo"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/builtin/delay.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/simulation/fifo_generator_vlog_beh.v"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/fifo_generator_v12_0_pkg.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/common/input_blk.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/common/output_blk.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/common/shft_wrapper.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/common/shft_ram.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/common/wr_pf_as.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/common/wr_pf_ss.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/common/rd_pe_as.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/common/rd_pe_ss.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/builtin/builtin_extdepth_low_latency.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/builtin/bin_cntr.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/builtin/clk_x_pntrs_builtin.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_0.xml"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/fifo_generator_v12_0.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/fifo_generator_top.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="synth/fifo_generator_0.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/fifo_generator_ramfifo.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/rd_logic.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/async_fifo.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/logic_sshft.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/rd_pe_sshft.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/wr_pf_sshft.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/rd_status_flags_sshft.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/wr_status_flags_sshft.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/wr_logic_pkt_fifo.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/wr_logic.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/builtin/fifo_generator_v12_0_comps_builtin.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/wr_dc_fwft_ext_as.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/wr_dc_as.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/wr_handshaking_flags.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/wr_status_flags_ss.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/wr_status_flags_as.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/dc_ss.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/rd_logic_pkt_fifo.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/rd_fwft.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/dc_ss_fwft.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/rd_dc_fwft_ext_as.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/rd_dc_as.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/rd_handshaking_flags.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/rd_status_flags_ss.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/rd_status_flags_as.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/updn_cntr.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/rd_bin_cntr.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/wr_bin_cntr.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/compare.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/clk_x_pntrs.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/memory.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/common/synchronizer_ff.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/ramfifo/dmem.vhd"/>
+        <CompFileExtendedInfo CompFileName="fifo_generator_0.xci" FileRelPathName="fifo_generator_v12_0/hdl/fifo_generator_v12_0_defaults.vhd"/>
       </File>
       <Config>
         <Option Name="TopModule" Val="fifo_generator_0"/>
@@ -102,7 +206,7 @@
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
     </Run>
-    <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xa7z020clg484-1I" ConstrsSet="constrs_1" Description="Vivado Implementation Defaults" State="current" Dir="$PRUNDIR/impl_1" SynthRun="synth_1">
+    <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xa7z020clg484-1I" ConstrsSet="constrs_1" Description="Vivado Implementation Defaults" State="current" SynthRun="synth_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2014"/>
         <Step Id="init_design"/>
@@ -115,7 +219,6 @@
         <Step Id="post_route_phys_opt_design"/>
         <Step Id="write_bitstream"/>
       </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
     </Run>
     <Run Id="fifo_generator_0_impl_1" Type="Ft2:EntireDesign" Part="xa7z020clg484-1I" ConstrsSet="fifo_generator_0" Description="Vivado Implementation Defaults" SynthRun="fifo_generator_0_synth_1">
       <Strategy Version="1" Minor="2">
