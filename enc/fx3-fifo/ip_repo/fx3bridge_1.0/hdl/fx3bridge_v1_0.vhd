@@ -24,7 +24,6 @@ entity fx3bridge is
 		-- Users to add ports here
         FX3_100mhz    : in std_logic;
 
-
         FX3_Clk             : out std_logic;
         FX3_A               : out std_logic_vector(1 downto 0);
         FX3_DQ_o            : out std_logic_vector(16-1 downto 0);
