@@ -20,6 +20,7 @@ toradex-oe-core-switch-v25: toradex-prepare-v-repo
         repo init -u http://git.toradex.com/toradex-bsp-platform.git -b LinuxImageV2.5; \
 	repo sync
 
+# sudo apt-get install libusb-1.0-0-dev:i386
 toradex-oe-core-compile-v:
 	cd oe-core; source export; \
 	sed -i '' 's/colibri-t20/apalis-imx6/g' build/conf/local.conf; \
