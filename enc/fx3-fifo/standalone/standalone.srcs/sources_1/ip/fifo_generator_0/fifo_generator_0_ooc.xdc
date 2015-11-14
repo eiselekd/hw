@@ -1,5 +1,4 @@
-################################################################################
-# (c) Copyright 2009 - 2013 Xilinx, Inc. All rights reserved.
+# (c) Copyright 2012-2015 Xilinx, Inc. All rights reserved.
 # 
 # This file contains confidential and proprietary information
 # of Xilinx, Inc. and is protected under U.S. and
@@ -44,11 +43,19 @@
 # 
 # THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS
 # PART OF THIS FILE AT ALL TIMES.
+# 
+# DO NOT MODIFY THIS FILE.
+# #########################################################
 #
-################################################################################
+# This XDC is used only in OOC mode for synthesis, implementation
+#
+# #########################################################
 
-# Core Period Constraint. This constraint can be modified, and is
-# valid as long as it is met after place and route.
-create_clock -name "TS_S_ACLK" -period 10 [ get_ports s_aclk ]
-create_clock -name "TS_M_ACLK" -period 10 [ get_ports m_aclk ]
-################################################################################
+
+create_clock -period 10 -name s_aclk [get_ports s_aclk]
+set_property HD.CLK_SRC BUFGCTRL_X0Y0 [get_ports s_aclk]
+
+create_clock -period 10 -name m_aclk [get_ports m_aclk]
+set_property HD.CLK_SRC BUFGCTRL_X0Y1 [get_ports m_aclk]
+
+

@@ -35,7 +35,7 @@ toradex-uboot:
 	export ARCH=arm; \
 	export CROSS_COMPILE=arm-linux-gnueabihf- \
 	export PATH=$(CURDIR)/gcc-linaro/bin:$$PATH; cd u-boot-toradex; make apalis_imx6_defconfig; \
-	make -j3 2>&1 | tee build.log
+	make -j3 V=1  2>&1 | tee build.log
 
 toradex-uboot-clone:
 	git clone -b 2015.04-toradex git://git.toradex.com/u-boot-toradex.git
