@@ -72,3 +72,16 @@ toradex-compile:
 toradex-clean:
 	rm -rf apalis-imx6
 
+###### usb loader
+
+loader:
+	git clone https://github.com/boundarydevices/imx_usb_loader.git
+
+##### openocd:
+ocd:
+	git clone git://git.code.sf.net/p/openocd/code openocd-code
+	cd openocd-code; ./bootstrap;
+
+ocd-build:
+	cd openocd-code; \
+	./configure --enable-ftdi --enable-legacy-ft2232_libftdi --prefix=$(CURDIR)/bin; make clean; make; make install
