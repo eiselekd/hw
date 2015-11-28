@@ -1,6 +1,8 @@
 SHELL=bash
 all: toradex-prepare-v-repo toradex-oe-core-switch-v25 toradex-oe-core-compile-v uboot
 
+#sudo apt-get install diffstat chrpath sdl-config
+
 toradex-prepare-v-repo:
 	mkdir -p $(CURDIR)/bin; \
 	export PATH=$(CURDIR)/bin:$$PATH; \
@@ -21,12 +23,18 @@ toradex-oe-core-switch-v25: toradex-prepare-v-repo
 	repo sync
 
 # sudo apt-get install libusb-1.0-0-dev:i386
+#cd oe-core;
+# cross compiler at $(CURDIR)/hw/arm/toradex/build/out-glibc/sysroots/x86_64-linux/usr/bin/arm-angstrom-linux-gnueabi/*
 toradex-oe-core-compile-v:
-	cd oe-core; source export; \
-	sed -i '' 's/colibri-t20/apalis-imx6/g' build/conf/local.conf; \
-	echo "ACCEPT_FSL_EULA = \"1\"" >> build/conf/local.conf; \
-	MACHINE=apalis-imx6 \
-	bitbake -k angstrom-lxde-image
+	# export from stuff/meta-toradex/buildconf/export
+	source export; \
+	if  cat build/conf/local.conf | grep ACCEPT_FSL_EULA; then \
+		echo "Already present"; \
+	else \
+		sed -i  's/colibri-t20/apalis-imx6/g' build/conf/local.conf; \
+		echo "ACCEPT_FSL_EULA = \"1\"" >> build/conf/local.conf; \
+	fi; \
+	MACHINE=apalis-imx6 bitbake -k angstrom-lxde-image
 
 #angstrom-qt-x11-image
 
