@@ -1,7 +1,8 @@
 SHELL=bash
 all: toradex-prepare-v-repo toradex-oe-core-switch-v25 toradex-oe-core-compile-v uboot
 
-#sudo apt-get install diffstat chrpath sdl-config
+# ubuntu 15.10:
+# sudo apt-get install diffstat chrpath sdl-config libc6-dev:i386 libusb-1.0.0-dev:i386 lib32gcc-4.8-de lib32gcc-5-de u-boot-tools
 
 toradex-prepare-v-repo:
 	mkdir -p $(CURDIR)/bin; \
@@ -93,3 +94,34 @@ ocd:
 ocd-build:
 	cd openocd-code; \
 	./configure --enable-ftdi --enable-legacy-ft2232_libftdi --prefix=$(CURDIR)/bin; make clean; make; make install
+
+
+##### buildroot
+
+buildroot-get:
+	wget http://buildroot.org/downloads/buildroot-2015.08.1.tar.gz
+	tar xvf buildroot-2015.08.1.tar.gz
+
+buildroot-config:
+	cp buildroot.config buildroot-2015.08.1/.config
+	cd buildroot-2015.08.1; make menuconfig
+
+buildroot-compile:
+	 make; \
+	ls -l ./output/images/
+
+buildroot-mkimage: buildroot-compile
+	cd buildroot-2015.08.1; \
+	mkimage -A arm -O linux -T ramdisk -n "Initial Ram Disk" \
+          -d output/images/rootfs.cpio.gz uramdisk.img
+
+
+###### alinux
+
+alinux-get:
+	wget http://landley.net/aboriginal/downloads/aboriginal-1.4.3.tar.gz
+	tar xvf aboriginal-1.4.3.tar.gz
+	cat alinux/binutils-texinfo.patch | patch -p1 -d aboriginal-1.4.3
+	cp alinux/gcc-core-top.patch    aboriginal-1.4.3/sources/patches/
+	cp alinux/gcc-core-top-h.patch  aboriginal-1.4.3/sources/patches/
+	cp alinux/gen.sh aboriginal-1.4.3/

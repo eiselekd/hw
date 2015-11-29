@@ -1,0 +1,41 @@
+diff -ru binutils.oro/bfd/doc/bfd.texinfo binutils/bfd/doc/bfd.texinfo
+--- binutils.oro/bfd/doc/bfd.texinfo	2015-11-28 21:42:12.820608767 +0100
++++ binutils/bfd/doc/bfd.texinfo	2015-11-28 21:42:26.712897528 +0100
+@@ -323,7 +323,7 @@
+ @printindex cp
+ 
+ @tex
+-% I think something like @colophon should be in texinfo.  In the
++% I think something like @@colophon should be in texinfo.  In the
+ % meantime:
+ \long\def\colophon{\hbox to0pt{}\vfill
+ \centerline{The body of this manual is set in}
+@@ -334,7 +334,7 @@
+ \centerline{{\sl\fontname\tensl\/}}
+ \centerline{are used for emphasis.}\vfill}
+ \page\colophon
+-% Blame: doc@cygnus.com, 28mar91.
++% Blame: doc@@cygnus.com, 28mar91.
+ @end tex
+ 
+ @bye
+diff -ru binutils.oro/bfd/doc/elf.texi binutils/bfd/doc/elf.texi
+--- binutils.oro/bfd/doc/elf.texi	2015-11-28 21:42:12.820608767 +0100
++++ binutils/bfd/doc/elf.texi	2015-11-28 21:44:56.915809008 +0100
+@@ -7,16 +7,3 @@
+ to be written.  The code is changing quickly enough that we
+ haven't bothered yet.
+ 
+-@findex bfd_elf_find_section
+-@subsubsection @code{bfd_elf_find_section}
+-@strong{Synopsis}
+-@example
+-struct elf_internal_shdr *bfd_elf_find_section (bfd *abfd, char *name);
+-@end example
+-@strong{Description}@*
+-Helper functions for GDB to locate the string tables.
+-Since BFD hides string tables from callers, GDB needs to use an
+-internal hook to find them.  Sun's .stabstr, in particular,
+-isn't even pointed to by the .stab section, so ordinary
+-mechanisms wouldn't work to find it, even if we had some.
+-
