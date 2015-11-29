@@ -4,3 +4,11 @@ microblaze/xps/enc_mp/synthesis/
 microblaze/xps/enc_mp/hdl/
 microblaze/xps/enc_mp/__xps/
 microblaze/xps/enc_mp/XpsGuiSessionLock
+arm/toradex/gcc-linaro*
+arm/toradex/stuff*
+arm/toradex/buildroot-2015.08.1*
+arm/toradex/build
+arm/toradex/bin
+arm/toradex/.repo
+arm/toradex/export
+arm/toradex/busybox.nosuid
