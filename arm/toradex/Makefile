@@ -107,7 +107,8 @@ buildroot-config:
 	cd buildroot-2015.08.1; make menuconfig
 
 buildroot-compile:
-	 make; \
+	cd buildroot-2015.08.1; \
+	make; \
 	ls -l ./output/images/
 
 buildroot-mkimage: buildroot-compile

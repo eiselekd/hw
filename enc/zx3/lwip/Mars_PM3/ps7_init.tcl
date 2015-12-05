@@ -772,21 +772,21 @@ proc ps7_init {} {
             ps7_clock_init_data_1_0
             ps7_ddr_init_data_1_0
             ps7_peripherals_init_data_1_0
-            #puts "PCW Silicon Version : 1.0"
+            puts "PCW Silicon Version : 1.0"
     } elseif { $sil_ver == $PCW_SILICON_VER_2_0 } {
             ps7_mio_init_data_2_0
             ps7_pll_init_data_2_0
             ps7_clock_init_data_2_0
             ps7_ddr_init_data_2_0
             ps7_peripherals_init_data_2_0
-            #puts "PCW Silicon Version : 2.0"
+            puts "PCW Silicon Version : 2.0"
     } else {
             ps7_mio_init_data_3_0
             ps7_pll_init_data_3_0
             ps7_clock_init_data_3_0
             ps7_ddr_init_data_3_0
             ps7_peripherals_init_data_3_0
-            #puts "PCW Silicon Version : 3.0"
+            puts "PCW Silicon Version : 3.0"
     }
 }
 
