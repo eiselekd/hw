@@ -129,7 +129,19 @@ alinux-get:
 
 
 multistrap:
+	sudo apt-get install multistrap qemu qemu-user-static binfmt-support dpkg-cross
 	cp multistrap.freescale.conf multistrap.freescale.work.conf
 	sed -i 's/--mydir--/$(subst /,\/,$(CURDIR))/'  multistrap.freescale.work.conf
 	multistrap -f multistrap.freescale.work.conf
 
+
+# http://www.acmesystems.it/debian_jessie
+multistrap-post:
+	bash multistrap.post.sh
+	# qemu-system needs to be installed:
+	cp /usr/bin/qemu-arm-static deb/freescale-debian/usr/bin
+	sudo LC_ALL=C LANGUAGE=C LANG=C chroot deb/freescale-debian/ dpkg --configure -a
+	sudo chroot deb/freescale-debian passwd root -d
+	for p in emacs24-nox openssh-server ; do \
+		sudo LC_ALL=C LANGUAGE=C LANG=C chroot deb/freescale-debian apt-get install $p; \
+	done
