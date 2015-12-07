@@ -120,9 +120,16 @@ buildroot-mkimage: buildroot-compile
 ###### alinux
 
 alinux-get:
-	wget http://landley.net/aboriginal/downloads/aboriginal-1.4.3.tar.gz
-	tar xvf aboriginal-1.4.3.tar.gz
-	cat alinux/binutils-texinfo.patch | patch -p1 -d aboriginal-1.4.3
+	#wget http://landley.net/aboriginal/downloads/aboriginal-1.4.3.tar.gz
+	#tar xvf aboriginal-1.4.3.tar.gz
+	#cat alinux/binutils-texinfo.patch | patch -p1 -d aboriginal-1.4.3
 	cp alinux/gcc-core-top.patch    aboriginal-1.4.3/sources/patches/
 	cp alinux/gcc-core-top-h.patch  aboriginal-1.4.3/sources/patches/
 	cp alinux/gen.sh aboriginal-1.4.3/
+
+
+multistrap:
+	cp multistrap.freescale.conf multistrap.freescale.work.conf
+	sed -i 's/--mydir--/$(subst /,\/,$(CURDIR))/'  multistrap.freescale.work.conf
+	multistrap -f multistrap.freescale.work.conf
+
