@@ -1,6 +1,6 @@
 the_ROM_image:
 {
-	[bootloader]/home/eiselekd/workspace-enclustra-0/fsbl/Debug/fsbl.elf
-	/home/eiselekd/Downloads/MarsZX3_VivadoRefDesign_2014_2/Vivado/MarsZX3.runs/MarsPM3/system_top.bit
-	/home/eiselekd/git/hw/enc/zx3/lin/bsp-xilinx/out_20151206002808_Mars_ZX3_Mars_PM3_QSPI_RAMDISK/u-boot.elf
+	[bootloader]fsbl.elf
+	system_top.bit
+	u-boot.elf
 }
