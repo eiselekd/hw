@@ -1,0 +1,371 @@
+# -------------------------------------------------------------------------------------------------
+# --  Project             : Cypress FX3 / Mars PM3 performance demonstrator
+# --  File description    : UCF Constraint File
+# --  File name           : enc_tqs_pm3_usb3_mx2.ucf
+# --  Author              : Christoph Glattfelder
+# -------------------------------------------------------------------------------------------------
+# --  Copyright (c) 2011 by Enclustra GmbH, Switzerland
+# --  All rights reserved.
+# -------------------------------------------------------------------------------------------------
+# --  File history:
+# --
+# --  Version | Date     | Author                 | Remarks
+# --  ---------------------------------------------------------------------------------------------
+# --  1.0     | 17.02.11 | Ch. Glattfelder        | First released version
+# --  1.1     | 15.02.12 | S. Ziegler             | Adjusted for PM3
+# -------------------------------------------------------------------------------------------------
+# Note: For best I/O timing, it is necessary to set the following options: 
+# - map option "Pack I/O registers into IOBs" to "Inputs and Outputs"
+
+# Bank 0 - PM3 specific
+
+
+# Bank 2 - PM3 specific
+NET "FX3_DQ[0]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[0]" SLEW = FAST;
+NET "FX3_DQ[0]" LOC = U10;
+NET "FX3_DQ[1]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[1]" SLEW = FAST;
+NET "FX3_DQ[1]" LOC = V9;
+NET "FX3_DQ[2]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[2]" SLEW = FAST;
+NET "FX3_DQ[2]" LOC = V10;
+NET "FX3_DQ[3]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[3]" SLEW = FAST;
+NET "FX3_DQ[3]" LOC = T9;
+NET "FX3_DQ[4]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[4]" SLEW = FAST;
+NET "FX3_DQ[4]" LOC = V6;
+NET "FX3_DQ[5]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[5]" SLEW = FAST;
+NET "FX3_DQ[5]" LOC = T7;
+NET "FX3_DQ[6]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[6]" SLEW = FAST;
+NET "FX3_DQ[6]" LOC = R7;
+NET "FX3_DQ[7]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[7]" SLEW = FAST;
+NET "FX3_DQ[7]" LOC = T6;
+NET "FX3_DQ[8]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[8]" SLEW = FAST;
+NET "FX3_DQ[8]" LOC = T5;
+NET "FX3_DQ[9]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[9]" SLEW = FAST;
+NET "FX3_DQ[9]" LOC = V4;
+NET "FX3_DQ[10]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[10]" SLEW = FAST;
+NET "FX3_DQ[10]" LOC = R5;
+NET "FX3_DQ[11]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[11]" SLEW = FAST;
+NET "FX3_DQ[11]" LOC = R3;
+NET "FX3_DQ[14]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[14]" SLEW = FAST;
+NET "FX3_DQ[14]" LOC = T3;
+NET "FX3_DQ[15]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[15]" SLEW = FAST;
+NET "FX3_DQ[15]" LOC = T4;
+NET "FX3_FlagA" IOSTANDARD = LVCMOS25;
+NET "FX3_FlagA" SLEW = FAST;
+NET "FX3_FlagA" LOC = P7;
+NET "FX3_FlagB" IOSTANDARD = LVCMOS25;
+NET "FX3_FlagB" SLEW = FAST;
+NET "FX3_FlagB" LOC = N5;
+#NET "FX3_A0"  		LOC = ""    |IOSTANDARD = "LVCMOS25" | SLEW = FAST;
+NET "FX3_A1" IOSTANDARD = LVCMOS25;
+NET "FX3_A1" SLEW = FAST;
+NET "FX3_A1" LOC = P6;
+NET "FX3_Clk" IOSTANDARD = LVCMOS25;
+NET "FX3_Clk" SLEW = FAST;
+NET "FX3_Clk" LOC = N6;
+NET "FX3_SlRd_N" IOSTANDARD = LVCMOS25;
+NET "FX3_SlRd_N" SLEW = FAST;
+NET "FX3_SlRd_N" LOC = U5;
+NET "FX3_SlWr_N" IOSTANDARD = LVCMOS25;
+NET "FX3_SlWr_N" SLEW = FAST;
+NET "FX3_SlWr_N" LOC = V5;
+NET "FX3_SlOe_N" IOSTANDARD = LVCMOS25;
+NET "FX3_SlOe_N" SLEW = FAST;
+NET "FX3_SlOe_N" LOC = U7;
+NET "FX3_Pktend_N" IOSTANDARD = LVCMOS25;
+NET "FX3_Pktend_N" SLEW = FAST;
+NET "FX3_Pktend_N" LOC = V7;
+# FPGA_INIT_N
+NET "RESET_N" IOSTANDARD = LVCMOS25;
+NET "RESET_N" LOC = U3;
+
+
+
+#Bank 3 - PM3 specific
+NET "FX3_DQ[12]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[12]" SLEW = FAST;
+NET "FX3_DQ[12]" LOC = K3;
+NET "FX3_DQ[13]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[13]" SLEW = FAST;
+NET "FX3_DQ[13]" LOC = K4;
+
+NET "FX3_DQ[16]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[16]" SLEW = FAST;
+NET "FX3_DQ[16]" LOC = L1;
+NET "FX3_DQ[17]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[17]" SLEW = FAST;
+NET "FX3_DQ[17]" LOC = M1;
+NET "FX3_DQ[18]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[18]" SLEW = FAST;
+NET "FX3_DQ[18]" LOC = L2;
+NET "FX3_DQ[19]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[19]" SLEW = FAST;
+NET "FX3_DQ[19]" LOC = K2;
+NET "FX3_DQ[20]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[20]" SLEW = FAST;
+NET "FX3_DQ[20]" LOC = M3;
+NET "FX3_DQ[21]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[21]" SLEW = FAST;
+NET "FX3_DQ[21]" LOC = J3;
+NET "FX3_DQ[22]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[22]" SLEW = FAST;
+NET "FX3_DQ[22]" LOC = J1;
+NET "FX3_DQ[23]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[23]" SLEW = FAST;
+NET "FX3_DQ[23]" LOC = K1;
+NET "FX3_DQ[24]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[24]" SLEW = FAST;
+NET "FX3_DQ[24]" LOC = N4;
+NET "FX3_DQ[25]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[25]" SLEW = FAST;
+NET "FX3_DQ[25]" LOC = N2;
+NET "FX3_DQ[26]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[26]" SLEW = FAST;
+NET "FX3_DQ[26]" LOC = N1;
+NET "FX3_DQ[27]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[27]" SLEW = FAST;
+NET "FX3_DQ[27]" LOC = N3;
+NET "FX3_DQ[28]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[28]" SLEW = FAST;
+NET "FX3_DQ[28]" LOC = L6;
+NET "FX3_DQ[29]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[29]" SLEW = FAST;
+NET "FX3_DQ[29]" LOC = M5;
+NET "FX3_DQ[30]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[30]" SLEW = FAST;
+NET "FX3_DQ[30]" LOC = H1;
+NET "FX3_DQ[31]" IOSTANDARD = LVCMOS25;
+NET "FX3_DQ[31]" SLEW = FAST;
+NET "FX3_DQ[31]" LOC = H2;
+
+#Bank 1 - VCC_1V8
+NET "Led_N<0>" 		LOC = "F15" | IOSTANDARD = "LVCMOS18";
+##NET "Ddr2_A<13>" 	LOC = "C17" | IOSTANDARD = "SSTL18_I";
+NET "Led_N<1>" 		LOC = "C18" | IOSTANDARD = "LVCMOS18";
+NET "Led_N<2>" 		LOC = "F14" | IOSTANDARD = "LVCMOS18";
+# NET "Ddr2_A<11>" 	LOC = "G14" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Cke" 		LOC = "D17" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_A<12>" 	LOC = "D18" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_A<8>" 	LOC = "H12" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_A<9>" 	LOC = "G13" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_A<10>" 	LOC = "E16" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_A<4>" 	LOC = "E18" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_We_N" 	LOC = "K12" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Ba<2>" 	LOC = "K13" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_A<7>" 	LOC = "F17" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_A<2>" 	LOC = "F18" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Ba<0>" 	LOC = "H13" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Ba<1>" 	LOC = "H14" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_A<0>" 	LOC = "H15" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_A<1>" 	LOC = "H16" | IOSTANDARD = "SSTL18_I";
+# #NET "Ddr2_Clk_P" 	LOC = "G16" | IOSTANDARD = "DIFF_SSTL18_I";
+# #NET "Ddr2_Clk_N" 	LOC = "G18" | IOSTANDARD = "DIFF_SSTL18_I";
+# NET "Ddr2_Clk_P" 	LOC = "G16" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Clk_N" 	LOC = "G18" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_A<3>" 	LOC = "J13" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Odt" 		LOC = "K14" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_A<5>" 	LOC = "L12" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_A<6>" 	LOC = "L13" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Ras_N" 	LOC = "K15" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Cas_N" 	LOC = "K16" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Dm<1>" 	LOC = "L15" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Dm<0>" 	LOC = "L16" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Dq<4>" 	LOC = "H17" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Dq<5>" 	LOC = "H18" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Dq<6>" 	LOC = "J16" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Dq<7>" 	LOC = "J18" | IOSTANDARD = "SSTL18_I";
+# #NET "Ddr2_Dqs_P<0>" 	LOC = "K17" | IOSTANDARD = "DIFF_SSTL18_I";
+# #NET "Ddr2_Dqs_N<0>" 	LOC = "K18" | IOSTANDARD = "DIFF_SSTL18_I";
+# NET "Ddr2_Dqs_P<0>" 	LOC = "K17" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Dqs_N<0>" 	LOC = "K18" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Dq<2>" 	LOC = "L17" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Dq<3>" 	LOC = "L18" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Dq<0>" 	LOC = "M16" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Dq<1>" 	LOC = "M18" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Dq<8>" 	LOC = "N17" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Dq<9>" 	LOC = "N18" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Dq<10>" 	LOC = "P17" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Dq<11>" 	LOC = "P18" | IOSTANDARD = "SSTL18_I";
+# #NET "Ddr2_Dqs_P<1>" 	LOC = "N15" | IOSTANDARD = "DIFF_SSTL18_I";
+# #NET "Ddr2_Dqs_N<1>" 	LOC = "N16" | IOSTANDARD = "DIFF_SSTL18_I";
+# NET "Ddr2_Dqs_P<1>" 	LOC = "N15" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Dqs_N<1>" 	LOC = "N16" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Dq<12>" 	LOC = "T17" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Dq<13>" 	LOC = "T18" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Dq<14>" 	LOC = "U17" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Dq<15>" 	LOC = "U18" | IOSTANDARD = "SSTL18_I";
+# #NET "Pwr_En2" 		LOC = "M14" | IOSTANDARD = "SSTL18_I";
+# NET "Ddr2_Rzq" 		LOC = "M13" | IOSTANDARD = "SSTL18_I";
+NET "Led_N<3>" 		LOC = "L14" | IOSTANDARD = "LVCMOS18";
+#NET "Fpga_Awake" 	LOC = "P15" | IOSTANDARD = "SSTL18_I";
+#NET "Ddr2_Zio" 		LOC = "P16" | IOSTANDARD = "SSTL18_I";
+
+##NET "Ddr2_Clk_P" 	LOC = "G16" | IOSTANDARD = "DIFF_SSTL18_I";
+##NET "Ddr2_Clk_N" 	LOC = "G18" | IOSTANDARD = "DIFF_SSTL18_I";
+##NET "Ddr2_Dqs_P<0>" 	LOC = "K17" | IOSTANDARD = "DIFF_SSTL18_I";
+##NET "Ddr2_Dqs_N<0>" 	LOC = "K18" | IOSTANDARD = "DIFF_SSTL18_I";
+##NET "Ddr2_Dqs_P<1>" 	LOC = "N15" | IOSTANDARD = "DIFF_SSTL18_I";
+##NET "Ddr2_Dqs_N<1>" 	LOC = "N16" | IOSTANDARD = "DIFF_SSTL18_I";
+
+
+# Bank 2 - VCCO_2
+#NET "Fpga_Done" 	LOC = "V17" | IOSTANDARD = "LVCMOS33";
+#NET "Fpga_Init_N" 	LOC = "U3" | IOSTANDARD = "LVCMOS33";
+#NET "Fpga_M1" 		LOC = "N12" | IOSTANDARD = "LVCMOS33";
+#NET "Clk_125" IOSTANDARD = LVCMOS33;
+#NET "Clk_125" LOC = T8;
+NET "Clk_50" IOSTANDARD = LVCMOS25;
+NET "Clk_50" LOC = R8;
+#NET "Eth_Int_N" IOSTANDARD = LVCMOS33;
+#NET "Eth_Int_N" LOC = U15;
+#NET "Eth_Link_N" IOSTANDARD = LVCMOS33;
+#NET "Eth_Link_N" LOC = V15;
+#NET "Eth_Mdc" IOSTANDARD = LVCMOS33;
+#NET "Eth_Mdc" LOC = M10;
+#NET "Eth_Mdio" IOSTANDARD = LVCMOS33;
+#NET "Eth_Mdio" LOC = N9;
+NET "Eth_Rst_N" IOSTANDARD = LVCMOS25;
+NET "Eth_Rst_N" LOC = V11;
+#NET "Eth_RxCtl" IOSTANDARD = LVCMOS33;
+#NET "Eth_RxCtl" SLEW = FAST;
+#NET "Eth_RxCtl" LOC = N11;
+#NET "Eth_Rxc" IOSTANDARD = LVCMOS33;
+#NET "Eth_Rxc" SLEW = FAST;
+#NET "Eth_Rxc" LOC = R10;
+#NET "Eth_Rxd[0]" IOSTANDARD = LVCMOS33;
+#NET "Eth_Rxd[0]" SLEW = FAST;
+#NET "Eth_Rxd[0]" LOC = T12;
+#NET "Eth_Rxd[1]" IOSTANDARD = LVCMOS33;
+#NET "Eth_Rxd[1]" SLEW = FAST;
+#NET "Eth_Rxd[1]" LOC = V12;
+#NET "Eth_Rxd[2]" IOSTANDARD = LVCMOS33;
+#NET "Eth_Rxd[2]" SLEW = FAST;
+#NET "Eth_Rxd[2]" LOC = N10;
+#NET "Eth_Rxd[3]" IOSTANDARD = LVCMOS33;
+#NET "Eth_Rxd[3]" SLEW = FAST;
+#NET "Eth_Rxd[3]" LOC = P11;
+#NET "Eth_TxCtl" IOSTANDARD = LVCMOS33;
+#NET "Eth_TxCtl" SLEW = FAST;
+#NET "Eth_TxCtl" LOC = M11;
+#NET "Eth_Txc" IOSTANDARD = LVCMOS33;
+#NET "Eth_Txc" SLEW = FAST;
+#NET "Eth_Txc" LOC = T10;
+#NET "Eth_Txd[0]" IOSTANDARD = LVCMOS33;
+#NET "Eth_Txd[0]" SLEW = FAST;
+#NET "Eth_Txd[0]" LOC = U13;
+#NET "Eth_Txd[1]" IOSTANDARD = LVCMOS33;
+#NET "Eth_Txd[1]" SLEW = FAST;
+#NET "Eth_Txd[1]" LOC = V13;
+#NET "Eth_Txd[2]" IOSTANDARD = LVCMOS33;
+#NET "Eth_Txd[2]" SLEW = FAST;
+#NET "Eth_Txd[2]" LOC = R11;
+#NET "Eth_Txd[3]" IOSTANDARD = LVCMOS33;
+#NET "Eth_Txd[3]" SLEW = FAST;
+#NET "Eth_Txd[3]" LOC = T11;
+NET "Flash_Clk" IOSTANDARD = LVCMOS25;
+NET "Flash_Clk" SLEW = FAST;
+NET "Flash_Clk" LOC = R15;
+NET "Flash_Cs_N" IOSTANDARD = LVCMOS25;
+NET "Flash_Cs_N" SLEW = FAST;
+NET "Flash_Cs_N" LOC = V3;
+NET "Flash_Di" IOSTANDARD = LVCMOS25;
+NET "Flash_Di" SLEW = FAST;
+NET "Flash_Di" LOC = T13;
+NET "Flash_Do" IOSTANDARD = LVCMOS25;
+NET "Flash_Do" SLEW = FAST;
+NET "Flash_Do" LOC = R13;
+#NET "Flash_Hold_N" 	LOC = "V14" | IOSTANDARD = "LVCMOS33" | FAST;
+#NET "Flash_Wp_N" 	LOC = "T14" | IOSTANDARD = "LVCMOS33" | FAST;
+NET "I2c_Int_N" IOSTANDARD = LVCMOS25;
+NET "I2c_Int_N" LOC = P12;
+NET "I2c_Scl" IOSTANDARD = LVCMOS25;
+NET "I2c_Scl" LOC = U16;
+NET "I2c_Sda" IOSTANDARD = LVCMOS25;
+NET "I2c_Sda" LOC = V16;
+#NET "Pwr_Good" 		LOC = "U11" | IOSTANDARD = "LVCMOS33";
+
+
+# Timing constraints
+INST "FX3_DQ[0]" TNM = "DATA";
+INST "FX3_DQ[1]" TNM = "DATA";
+INST "FX3_DQ[2]" TNM = "DATA";
+INST "FX3_DQ[3]" TNM = "DATA";
+INST "FX3_DQ[4]" TNM = "DATA";
+INST "FX3_DQ[5]" TNM = "DATA";
+INST "FX3_DQ[6]" TNM = "DATA";
+INST "FX3_DQ[7]" TNM = "DATA";
+INST "FX3_DQ[8]" TNM = "DATA";
+INST "FX3_DQ[9]" TNM = "DATA";
+INST "FX3_DQ[10]" TNM = "DATA";
+INST "FX3_DQ[11]" TNM = "DATA";
+INST "FX3_DQ[12]" TNM = "DATA";
+INST "FX3_DQ[13]" TNM = "DATA";
+INST "FX3_DQ[14]" TNM = "DATA";
+INST "FX3_DQ[15]" TNM = "DATA";
+INST "FX3_DQ[16]" TNM = "DATA";
+INST "FX3_DQ[17]" TNM = "DATA";
+INST "FX3_DQ[18]" TNM = "DATA";
+INST "FX3_DQ[19]" TNM = "DATA";
+INST "FX3_DQ[20]" TNM = "DATA";
+INST "FX3_DQ[21]" TNM = "DATA";
+INST "FX3_DQ[22]" TNM = "DATA";
+INST "FX3_DQ[23]" TNM = "DATA";
+INST "FX3_DQ[24]" TNM = "DATA";
+INST "FX3_DQ[25]" TNM = "DATA";
+INST "FX3_DQ[26]" TNM = "DATA";
+INST "FX3_DQ[27]" TNM = "DATA";
+INST "FX3_DQ[28]" TNM = "DATA";
+INST "FX3_DQ[29]" TNM = "DATA";
+INST "FX3_DQ[30]" TNM = "DATA";
+INST "FX3_DQ[31]" TNM = "DATA";
+
+INST "FX3_FLAGA" TNM = "FLAGS";
+INST "FX3_FLAGB" TNM = "FLAGS";
+
+NET "Clk_50" TNM_NET = "Clk_50";
+TIMESPEC TS_Clk_50 = PERIOD "Clk_50" 20 ns HIGH 50 %;
+
+INST "FX3_SLRD_N" TNM = "CTRL";
+INST "FX3_SLWR_N" TNM = "CTRL";
+INST "FX3_SLOE_N" TNM = "CTRL";
+INST "FX3_PKTEND_N" TNM = "CTRL";
+#INST "FX3_CS_N" TNM = CTRL;
+
+INST "FX3_CLK" TNM = "FX3_Clk";
+
+INST "FX3_A1" TNM = "ADDR";
+#INST "FX3_A0" TNM = ADDR;
+
+# The maximum PLL phase shift is given by FX3 output data hold time, which is 2.0 ns. The minimum phase shift is constrained by the required
+# input data hold time of the FX3, which is 0.5 ns. A PLL phase shift of 2.0 ns (288°) therefore.
+# This means the offset out respective to the internal main clock will be between 8.0 ns + output delay. Maximum output delay is 
+# constrained by the minimum FPGA setup time. Here we use 2.7 ns for the output delay, so that FPGA setup time can be fulfilled.
+NET "FX3_Clk" OFFSET = OUT 10.6 ns AFTER "Clk_50" RISING;
+
+# Output signal contraints:
+# FX3 required setup time is 2.0 ns maximum, so offset out has to be 10.0 (clock period) - 2.0 (PLL phase shift) - 2.0 (Fx3 setup time) = 6.0 ns
+# 5.0 ns is used to add additional margin.
+TIMEGRP "ADDR" OFFSET = OUT 5.0 ns AFTER "Clk_50" RISING;	
+TIMEGRP "CTRL" OFFSET = OUT 5.0 ns AFTER "Clk_50" RISING;  
+TIMEGRP "DATA" OFFSET = OUT 5.0 ns AFTER "Clk_50" RISING;	
+
+# Input signal constraints:
+# FX3 output propagation delay for data and flags is 8.0 ns maximum. Hold time for data is 2.0 ns, while for the flags it is not defined 
+# but assumed to be the same. In worst case, the main clock is leading the Fx3_Clk by 0.7 ns (see Fx3_Clk contraint)
+# so we get for the in offset: 10.0 (clock period) - 8.0 (data and flag propagation delay) - 0.6 (maximum Fx3_Clk phase lag) = 1.4 ns 
+# The minimum hold time is: 2.0 (Fx3 data hold) - 2.0 (PLL phase shift) = 0.0 ns.
+TIMEGRP "FLAGS" OFFSET = IN 1.4 ns VALID 1.4 ns BEFORE "Clk_50" RISING;
+TIMEGRP "DATA" OFFSET = IN 1.4 ns VALID 1.4 ns BEFORE "Clk_50" RISING; 
