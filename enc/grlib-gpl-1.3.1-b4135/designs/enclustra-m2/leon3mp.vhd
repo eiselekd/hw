@@ -309,6 +309,11 @@ signal reset2pll                : std_logic;
 signal clklocks                : std_logic;
 signal FX3_Clk_gen : std_logic;
 
+type regs_sys is record
+  cnt_led : std_logic_vector(32 downto 0);
+end record;
+signal rsys, rsysin     : regs_sys;
+  
 attribute keep : boolean;
 attribute syn_keep : boolean;
 attribute syn_preserve : boolean;
@@ -325,10 +330,16 @@ begin
   -- Led_N(0) <=         '0'; -- dsuact
   -- Led_N(1) <= '1'; -- errno
   
-  led_n(0) <= FX3_SlWr_N_sig;
-  led_n(1) <= FX3_A1_sig;
-  led_n(2) <= FX3_FlagA;
-  led_n(3) <= FX3_FlagB;
+  --led_n(0) <= FX3_SlWr_N_sig;
+  --led_n(1) <= FX3_A1_sig;
+  --led_n(2) <= FX3_FlagA;
+  --led_n(3) <= FX3_FlagB;
+
+  led_n(0) <= rsys.cnt(10);
+  led_n(1) <= rsys.cnt(10);
+  led_n(2) <= rsys.cnt(10);
+  led_n(3) <= rsys.cnt(10);
+
   
 ----------------------------------------------------------------------
 ---  Reset and Clock generation  -------------------------------------
@@ -579,6 +590,24 @@ begin
   FX3_A1 <= FX3_A1_sig;
     
   -- FX3_DQ_o  <= "1000100010001000";
+
+  sys : process(rsys )
+  variable vsys : regs_sys;
+  begin
+    
+    vsys := rsys;
+
+    vsys.cnt := vsys.cnt + 1;
+    
+    rsysin <= vsys;
+  end process;
+
+  regssys : process(Clk_50)
+  begin
+    if rising_edge(Clk_50) then
+      rsys <= rsysin;
+    end if;
+  end process;
 
   
   --FX3_DQ <= (others =>'Z');
