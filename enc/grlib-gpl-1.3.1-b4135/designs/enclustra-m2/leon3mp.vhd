@@ -335,11 +335,20 @@ begin
   --led_n(2) <= FX3_FlagA;
   --led_n(3) <= FX3_FlagB;
 
-  led_n(0) <= rsys.cnt(10);
-  led_n(1) <= rsys.cnt(10);
-  led_n(2) <= rsys.cnt(10);
-  led_n(3) <= rsys.cnt(10);
+  leds(0) <= rsys.cnt_led(24);
+  leds(1) <= rsys.cnt_led(25);
+  leds(2) <= rsys.cnt_led(26);
+  leds(3) <= rsys.cnt_led(27);
 
+--  leds(0) <= '0';
+--  leds(1) <= '0';
+--  leds(2) <= '0';
+--  leds(3) <= '0';
+
+  led0_pad : odpad generic map (tech => padtech) port map (led_n(0), leds(0));
+  led1_pad : odpad generic map (tech => padtech) port map (led_n(1), leds(1));
+  led2_pad : odpad generic map (tech => padtech) port map (led_n(2), leds(2));
+  led3_pad : odpad generic map (tech => padtech) port map (led_n(3), leds(3));
   
 ----------------------------------------------------------------------
 ---  Reset and Clock generation  -------------------------------------
@@ -597,14 +606,14 @@ begin
     
     vsys := rsys;
 
-    vsys.cnt := vsys.cnt + 1;
+    vsys.cnt_led := vsys.cnt_led + 1;
     
     rsysin <= vsys;
   end process;
 
-  regssys : process(Clk_50)
+  regssys : process(clkm)
   begin
-    if rising_edge(Clk_50) then
+    if rising_edge(clkm) then
       rsys <= rsysin;
     end if;
   end process;
