@@ -99,7 +99,7 @@ begin
 	port map
 	(
 		clk => clk,
-		enable => '1',
+		enable => '0',
 		nand_cle => nand_cle,
 		nand_ale => nand_ale,
 		nand_nwe => nand_nwe,
