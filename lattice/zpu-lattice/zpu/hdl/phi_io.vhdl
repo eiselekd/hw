@@ -148,11 +148,11 @@ begin
    -----------
    -- Timer --
    -----------
-   timerinst: Timer
-      port map(
-         clk_i => clk_i, reset_i => reset_i, we_i => timer_we,
-         data_i => data_i, addr_i => addr_i(1 downto 1),
-         data_o => timer_read);
+   --timerinst: Timer
+   --   port map(
+   --      clk_i => clk_i, reset_i => reset_i, we_i => timer_we,
+   --      data_i => data_i, addr_i => addr_i(1 downto 1),
+   --      data_o => timer_read);
    
    busy_o   <= we_i or re_i;
    is_timer <= '1' when to_01(addr_i)=CNT_1 or to_01(addr_i)=CNT_2 else '0'; -- 0x80A0014/8
@@ -192,20 +192,20 @@ begin
    ----------
    -- GPIO --
    ----------
-   gpio_i0: gpio
-      port map(
-          clk_i    => clk_i,              -- : in  std_logic;
-          reset_i  => reset_i,            -- : in  std_logic;
-          --                              
-          we_i     => gpio_we,            -- : in  std_logic;
-          data_i   => data_i,             -- : in  unsigned(31 downto 0);
-          addr_i   => addr_i(1 downto 1), -- : in  unsigned( 0 downto 0);
-          data_o   => gpio_read,          -- : out unsigned(31 downto 0);
-          --                              
-          port_in  => gpio_in,            -- : std_logic_vector(31 downto 0);
-          port_out => gpio_out,           -- : std_logic_vector(31 downto 0);
-          port_dir => gpio_dir            -- : std_logic_vector(31 downto 0);
-          );
+   --gpio_i0: gpio
+   --   port map(
+   --       clk_i    => clk_i,              -- : in  std_logic;
+   --       reset_i  => reset_i,            -- : in  std_logic;
+   --       --                              
+   --       we_i     => gpio_we,            -- : in  std_logic;
+   --       data_i   => data_i,             -- : in  unsigned(31 downto 0);
+   --       addr_i   => addr_i(1 downto 1), -- : in  unsigned( 0 downto 0);
+   --       data_o   => gpio_read,          -- : out unsigned(31 downto 0);
+   --       --                              
+   --       port_in  => gpio_in,            -- : std_logic_vector(31 downto 0);
+   --       port_out => gpio_out,           -- : std_logic_vector(31 downto 0);
+   --       port_dir => gpio_dir            -- : std_logic_vector(31 downto 0);
+   --       );
    is_gpio <= '1' when to_01(addr_i) = IO_DATA or to_01(addr_i) = IO_DIR else '0'; -- 0x80A0004/8
    gpio_we <= we_i and is_gpio;
 

@@ -58,7 +58,7 @@ entity SinglePortRAM is
       busy_o  : out std_logic);
 end entity SinglePortRAM;
 
---library synplify;
+library synplify;
 architecture rtl of SinglePortRAM is
    type ram_type is array(natural range 0 to ((2**BRAM_W)/4)-1) of unsigned(WORD_SIZE-1 downto 0);
    signal addr_r  : unsigned(BRAM_W-1 downto BYTE_BITS);
