@@ -1,6 +1,6 @@
 # wget https://github.com/zylin/zpugcc/raw/master/releases/old/zpugcclinux.tar.bz2
 
-all:
+all: hello
 
 tool:
 	wget https://github.com/zylin/zpugcc/raw/master/releases/old/zpugcclinux.tar.bz2
@@ -12,6 +12,7 @@ hello: hello.c crt_io.c
 	install/bin/zpu-elf-objcopy -O binary hello.elf hello.bin
 	install/bin/zpu-elf-objdump --disassemble-all >hello.dis hello.elf
 	./zpuromgen hello.bin > hello.bram
+	cat bram.vhdl.temp hello.bram bram.vhdl.temp.post  > ../zpu/hdl/bram.vhdl
 
 clean:
 	rm -f *.elf *.bin *.dis *.bram *.o zpuromgen
