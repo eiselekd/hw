@@ -1,3 +1,5 @@
+# wget https://github.com/zylin/zpugcc/raw/master/releases/old/zpugcclinux.tar.bz2
+
 hello: hello.c crt_io.c
 	gcc zpuromgen.c -o zpuromgen
 	zpu-elf-gcc -Os -phi `pwd`/hello.c `pwd`/crt_io.c -o hello.elf -Wl,--relax -Wl,--gc-sections -g

@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 entity onfitop is
 	port
 	(
-		clk					: in	std_logic := '0';
+		clk				: in	std_logic := '0';
 		resetn				: in	std_logic := '0';
 
                 -- uart
@@ -27,6 +27,10 @@ entity onfitop is
 end onfitop;
 
 architecture action of onfitop is
+  
+   constant CLK_FREQ   : positive:=12; -- 50 MHz clock
+   constant BRATE      : positive:=9600; -- RS232 baudrate
+   constant BRDIVISOR  : positive:=CLK_FREQ*1e6/BRATE/4;
 
    -- UART
    -- Rx
@@ -110,7 +114,6 @@ begin
 	-- 0x08:		Status output
 	
 									
-						
    ----------
    -- UART --
    ----------
