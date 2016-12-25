@@ -66,3 +66,4 @@ project -result_format "edif"
 project -result_file ./zpu_Implmnt/zpu.edf
 project -log_file "./zpu_Implmnt/zpu.srr"
 impl -active zpu_Implmnt
+project -run synthesis -clean

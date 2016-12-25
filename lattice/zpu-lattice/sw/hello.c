@@ -1,6 +1,9 @@
 // To compile: zpu-elf-gcc test.c -o test.elf -phi
-// To run:  
+// To run:
 int main(int argc, char **argv)
 {
-	printf("Hello world!\n");
+  int c = 0;
+  while ( (c = getc()))  {
+    printf("Hello world!: %c\n", c);
+  }
 }

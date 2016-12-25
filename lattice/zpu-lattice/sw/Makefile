@@ -1,5 +1,7 @@
 # wget https://github.com/zylin/zpugcc/raw/master/releases/old/zpugcclinux.tar.bz2
 
+all:
+
 tool:
 	wget https://github.com/zylin/zpugcc/raw/master/releases/old/zpugcclinux.tar.bz2
 	tar xvf zpugcclinux.tar.bz2
