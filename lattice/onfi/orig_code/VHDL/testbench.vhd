@@ -27,6 +27,7 @@ architecture test of tb is
 		(
 			-- System clock
 			clk					: in	std_logic;
+			enable					: in	std_logic;
 			-- NAND chip control hardware interface. These signals should be bound to physical pins.
 			nand_cle				: out	std_logic := '0';
 			nand_ale				: out	std_logic := '0';
@@ -68,6 +69,7 @@ begin
 	port map
 	(
 		clk => clk,
+		enable => '1',
 		nand_cle => nand_cle,
 		nand_ale => nand_ale,
 		nand_nwe => nand_nwe,

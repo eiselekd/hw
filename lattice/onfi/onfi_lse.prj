@@ -1,5 +1,5 @@
 #-- Lattice, Inc.
-#-- Project file /home/eiselekd/lscc/Projects/onfi/onfi_lse.prj
+#-- Project file /home/eiselekd/shared/hw/lattice/onfi/onfi_lse.prj
 
 #device
 -a SBTiCE40
@@ -32,10 +32,10 @@
 -lib work -vhd "nand_master.vhd" 
 -lib work -vhd "onfi_package.vhd" 
 -lib work -vhd "onfi.vhd" 
--p "/home/eiselekd/lscc/Projects/onfi"
+-p "/home/eiselekd/shared/hw/lattice/onfi"
 
 #set result format/file last
 -output_edif onfi_Implmnt/onfi.edf
 
 #set log file
--logfile "onfi_Implmnt/onfi_lse.log"
+-logfile "/home/eiselekd/shared/hw/lattice/onfi/onfi_Implmnt/onfi_lse.log"
