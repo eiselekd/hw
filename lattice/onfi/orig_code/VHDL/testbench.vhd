@@ -48,7 +48,21 @@ architecture test of tb is
 			cmd_in				: in	std_logic_vector(7 downto 0)
 		);
 	end component;
-	-- Internal interface
+
+
+	component up_counter
+		port
+		(
+			cnt  : out	std_logic_vector(7 downto 0);
+                        enable : in	std_logic;
+			clk : in	std_logic;
+			reset : in	std_logic
+			
+		);
+	end component;
+
+
+        -- Internal interface
 	signal nand_cle : std_logic;
 	signal nand_ale : std_logic;
 	signal nand_nwe : std_logic;
@@ -64,7 +78,23 @@ architecture test of tb is
 	signal activate : std_logic;
 	signal cmd_in   : std_logic_vector(7 downto 0);
 	signal clk	: std_logic := '1';
+
+        
+        signal cnt  : std_logic_vector(7 downto 0) := (others => '0');
 begin
+
+	up:up_counter
+          port map
+          (
+            cnt  =>  cnt,
+            enable => '1',
+            clk => clk,
+            reset => '0'
+          
+            );
+
+
+  
 	NM:nand_master
 	port map
 	(
