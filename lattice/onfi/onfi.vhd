@@ -7,6 +7,10 @@ entity onfitop is
 	(
 		clk					: in	std_logic := '0';
 		resetn				: in	std_logic := '0';
+
+                -- uart
+                rs232_tx_o : out std_logic;  -- UART Tx
+                rs232_rx_i : in  std_logic;  -- UART Rx
 		
 		-- NAND chip control hardware interface. These signals should be bound to physical pins.
 		nand_cle				: out	std_logic := '0';
@@ -23,6 +27,55 @@ entity onfitop is
 end onfitop;
 
 architecture action of onfitop is
+
+   -- UART
+   -- Rx
+   signal rx_br      : std_logic; -- Rx timing
+   signal uart_read  : std_logic; -- ZPU read the value
+   signal rx_avail   : std_logic; -- Rx data available
+   signal rx_data    : std_logic_vector(7 downto 0); -- Rx data
+   -- Tx
+   signal tx_br      : std_logic; -- Tx timing
+   signal uart_write : std_logic; -- ZPU is writing
+   signal tx_busy    : std_logic; -- Tx can't get a new value
+
+   ----------------------
+   -- Very simple UART --
+   ----------------------
+   component RxUnit is
+      port(
+         clk_i    : in  std_logic;  -- System clock signal
+         reset_i  : in  std_logic;  -- Reset input (sync)
+         enable_i : in  std_logic;  -- Enable input (rate*4)
+         read_i   : in  std_logic;  -- Received Byte Read
+         rxd_i    : in  std_logic;  -- RS-232 data input
+         rxav_o   : out std_logic;  -- Byte available
+         datao_o  : out std_logic_vector(7 downto 0)); -- Byte received
+   end component RxUnit;
+
+   component TxUnit is
+     port (
+        clk_i    : in  std_logic;  -- Clock signal
+        reset_i  : in  std_logic;  -- Reset input
+        enable_i : in  std_logic;  -- Enable input
+        load_i   : in  std_logic;  -- Load input
+        txd_o    : out std_logic;  -- RS-232 data output
+        busy_o   : out std_logic;  -- Tx Busy
+        datai_i  : in  std_logic_vector(7 downto 0)); -- Byte to transmit
+   end component TxUnit;
+
+   component BRGen is
+     generic(
+        COUNT : integer range 0 to 65535);-- Count revolution
+     port (
+        clk_i   : in  std_logic;  -- Clock
+        reset_i : in  std_logic;  -- Reset input
+        ce_i    : in  std_logic;  -- Chip Enable
+        o_o     : out std_logic); -- Output
+   end component BRGen;
+
+   
+  
 	component nand_master
 		port
 		(
@@ -58,6 +111,36 @@ begin
 	
 									
 						
-	
+   ----------
+   -- UART --
+   ----------
+   -- Rx section
+   rx_core : RxUnit
+      port map(
+         clk_i => clk_i, reset_i => reset_i, enable_i => rx_br,
+         read_i => uart_read, rxd_i => rs232_rx_i, rxav_o => rx_avail,
+         datao_o => rx_data);
+   uart_read <= '1' when re_i='1' and addr_i=UART_RX else '0';
+
+   -- Tx section
+   tx_core : TxUnit
+      port map(
+         clk_i => clk_i, reset_i => reset_i, enable_i => tx_br,
+         load_i => uart_write, txd_o => rs232_tx_o, busy_o => tx_busy,
+         datai_i => std_logic_vector(data_i(7 downto 0)));
+   uart_write <= '1' when we_i='1' and addr_i=UART_TX else '0';
+
+   -- Rx timing
+   rx_timer : BRGen
+      generic map(COUNT => BRDIVISOR)
+      port map(
+         clk_i => clk_i, reset_i => reset_i, ce_i => br_clk_i, o_o => rx_br);
+
+   -- Tx timing
+   tx_timer : BRGen -- 4 Divider for Tx
+      generic map(COUNT => 4)  
+      port map(
+         clk_i => clk_i, reset_i => reset_i, ce_i => rx_br, o_o => tx_br);
+   
 
 end action;
