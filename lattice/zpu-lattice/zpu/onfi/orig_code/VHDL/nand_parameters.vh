@@ -1,0 +1,1 @@
+../../nand/nand_parameters.vh

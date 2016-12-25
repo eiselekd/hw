@@ -7,6 +7,7 @@ tool:
 	tar xvf zpugcclinux.tar.bz2
 
 hello: hello.c crt_io.c
+	-rm hello.bram
 	gcc zpuromgen.c -o zpuromgen
 	install/bin/zpu-elf-gcc -Os -phi `pwd`/hello.c `pwd`/crt_io.c -o hello.elf -Wl,--relax -Wl,--gc-sections -g
 	install/bin/zpu-elf-objcopy -O binary hello.elf hello.bin

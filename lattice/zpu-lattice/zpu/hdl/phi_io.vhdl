@@ -58,8 +58,9 @@ use std.textio.all;
 library work;
 use work.zpupkg.timer;
 use work.zpupkg.gpio;
+use work.zpupkg.nand_master;
 use work.UART.all;
-use work.txt_util.all;
+--use work.txt_util.all;
  
 entity ZPUPhiIO is
    generic(
@@ -82,7 +83,19 @@ entity ZPUPhiIO is
       --
       gpio_in    : in  std_logic_vector(31 downto 0);
       gpio_out   : out std_logic_vector(31 downto 0);
-      gpio_dir   : out std_logic_vector(31 downto 0)  -- 1 = in, 0 = out
+      gpio_dir   : out std_logic_vector(31 downto 0);  -- 1 = in, 0 = out
+      
+      -- nand
+      -- NAND chip control hardware interface. These signals should be bound to physical pins.
+      nand_cle				: out	std_logic ;
+      nand_ale				: out	std_logic ;
+      nand_nwe				: out	std_logic ;
+      nand_nwp				: out	std_logic ;
+      nand_nce				: out	std_logic ;
+      nand_nre				: out   std_logic ;
+      nand_rnb				: in	std_logic;
+      -- NAND chip data hardware interface. These signals should be boiund to physical pins.
+      nand_data			: inout	std_logic_vector(15 downto 0)
       );
 end entity ZPUPhiIO;
    
@@ -121,6 +134,14 @@ architecture Behave of ZPUPhiIO is
    signal gpio_we    : std_logic;
    signal is_gpio    : std_logic;
    signal gpio_read  : unsigned(31 downto 0);
+
+   -- NAND
+   signal nreset 			: std_logic;
+   signal n_data_out 	: std_logic_vector(7 downto 0);
+   signal n_data_in		: std_logic_vector(7 downto 0);
+   signal n_busy			: std_logic;
+   signal n_activate		: std_logic;
+   signal n_cmd_in		: std_logic_vector(7 downto 0);
    
    file l_file       : text open write_mode is LOG_FILE;
 begin
@@ -188,69 +209,84 @@ begin
    is_gpio <= '1' when to_01(addr_i) = IO_DATA or to_01(addr_i) = IO_DIR else '0'; -- 0x80A0004/8
    gpio_we <= we_i and is_gpio;
 
+   ----------
+   -- NAND --
+   ----------
 
-   do_io:
-   process(clk_i)
-        --synopsys translate off
-        variable line_out : line := new string'("");
-        variable char     : character;
-        --synopsys translate on
-   begin
-      if rising_edge(clk_i) then
-         if reset_i/='1' then
-            --synopsys translate off
-            if we_i='1' then
-               if addr_i=UART_TX and ENA_LOG then -- 0x80a000c
-                  -- Write to UART
-                  print("- Write to UART Tx: 0x" &hstr(data_i)&" ("&
-                        character'val(to_integer(data_i) mod 256)&")");
-                    char := character'val(to_integer(data_i));
-                    if char = lf then
-                        std.textio.writeline(l_file, line_out);
-                    else
-                        std.textio.write(line_out, char);
-                    end if;
-               elsif is_gpio = '1' and ENA_LOG then
-                  print("- Write GPIO: 0x" & hstr(data_i));
-               elsif is_timer='1' and ENA_LOG then
-                  print("- Write to TIMER: 0x" & hstr(data_i));
-               else
-                  --print(l_file,character'val(to_integer(data_i)));
-                  report "Illegal IO data_i=0x"&hstr(data_i)&" @0x"&
-                     hstr(x"80a00"&"000"&addr_i&"00") severity warning;
-               end if;
-            end if;
-            --synopsys translate on
-            data_o <= (others => '0');
-            if re_i='1' then
-               if is_gpio = '1' then
-                  if ENA_LOG then
-                     print("- Read  GPIO: 0x" & hstr(gpio_read));
-                  end if;
-                  data_o <= gpio_read;
-               elsif addr_i=UART_TX then
-                  if ENA_LOG then
-                     print("- Read UART Tx");
-                  end if;
-                  data_o(8) <= not(tx_busy); -- output fifo not full
-               elsif addr_i=UART_RX then
-                  if ENA_LOG then
-                     print("- Read UART Rx");
-                  end if;
-                  data_o(8) <= rx_avail; -- receiver not empty
-                  data_o(7 downto 0) <= unsigned(rx_data);
-               elsif is_timer='1' then
-                  if ENA_LOG then
-                     print("- Read TIMER: 0x" & hstr(timer_read));
-                  end if;
-                  data_o <= timer_read;
-               else
-                  report "Illegal IO data_o @0x"&
-                     hstr(x"80a00"&"000"&addr_i&"00") severity warning;
-               end if;
-            end if; -- re_i='1'
-         end if; -- reset_i/='1'
-      end if; -- rising_edge(clk_i)
-   end process do_io;
+   NANDA: nand_master
+     port map
+     (
+       clk => clk_i, enable => '0',
+       nand_cle => nand_cle, nand_ale => nand_ale, nand_nwe => nand_nwe, nand_nwp => nand_nwp, nand_nce => nand_nce, nand_nre => nand_nre,
+       nand_rnb => nand_rnb, nand_data => nand_data,
+       nreset => nreset,
+       data_out => n_data_out, data_in => n_data_in, busy => n_busy, activate => n_activate, cmd_in => n_cmd_in
+       );
+   nreset <= not reset_i;
+
+   
+   --do_io:
+   --process(clk_i)
+   --     --synopsys translate off
+   --     variable line_out : line := new string'("");
+   --     variable char     : character;
+   --     --synopsys translate on
+   --begin
+   --   if rising_edge(clk_i) then
+   --      if reset_i/='1' then
+   --         --synopsys translate off
+   --         if we_i='1' then
+   --            if addr_i=UART_TX and ENA_LOG then -- 0x80a000c
+   --               -- Write to UART
+   --               print("- Write to UART Tx: 0x" &hstr(data_i)&" ("&
+   --                     character'val(to_integer(data_i) mod 256)&")");
+   --                 char := character'val(to_integer(data_i));
+   --                 if char = lf then
+   --                     std.textio.writeline(l_file, line_out);
+   --                 else
+   --                     std.textio.write(line_out, char);
+   --                 end if;
+   --            elsif is_gpio = '1' and ENA_LOG then
+   --               print("- Write GPIO: 0x" & hstr(data_i));
+   --            elsif is_timer='1' and ENA_LOG then
+   --               print("- Write to TIMER: 0x" & hstr(data_i));
+   --            else
+   --               --print(l_file,character'val(to_integer(data_i)));
+   --               report "Illegal IO data_i=0x"&hstr(data_i)&" @0x"&
+   --                  hstr(x"80a00"&"000"&addr_i&"00") severity warning;
+   --            end if;
+   --         end if;
+   --         --synopsys translate on
+   --         data_o <= (others => '0');
+   --         if re_i='1' then
+   --            if is_gpio = '1' then
+   --               if ENA_LOG then
+   --                  print("- Read  GPIO: 0x" & hstr(gpio_read));
+   --               end if;
+   --               data_o <= gpio_read;
+   --            elsif addr_i=UART_TX then
+   --               if ENA_LOG then
+   --                  print("- Read UART Tx");
+   --               end if;
+   --               data_o(8) <= not(tx_busy); -- output fifo not full
+   --            elsif addr_i=UART_RX then
+   --               if ENA_LOG then
+   --                  print("- Read UART Rx");
+   --               end if;
+   --               data_o(8) <= rx_avail; -- receiver not empty
+   --               data_o(7 downto 0) <= unsigned(rx_data);
+   --            elsif is_timer='1' then
+   --               if ENA_LOG then
+   --                  print("- Read TIMER: 0x" & hstr(timer_read));
+   --               end if;
+   --               data_o <= timer_read;
+   --            else
+   --               report "Illegal IO data_o @0x"&
+   --                  hstr(x"80a00"&"000"&addr_i&"00") severity warning;
+   --            end if;
+   --         end if; -- re_i='1'
+   --      end if; -- reset_i/='1'
+   --   end if; -- rising_edge(clk_i)
+   --end process do_io;
 end Behave;
  

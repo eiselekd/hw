@@ -165,6 +165,16 @@ package zpupkg is
          );
    end component gpio;
 
+   component nand_master
+     port
+       (
+         nand_cle, nand_ale, nand_nwe, nand_nwp, nand_nce, nand_nre, busy : out std_logic;
+         clk, enable, nand_rnb, nreset, activate : in std_logic;
+         data_out : out std_logic_vector(7 downto 0);
+         data_in, cmd_in : in std_logic_vector(7 downto 0);
+         nand_data : inout std_logic_vector(15 downto 0)
+       );
+   end component nand_master;
 
    component ZPUPhiIO is
       generic(
@@ -187,7 +197,18 @@ package zpupkg is
          --
          gpio_in    : in  std_logic_vector(31 downto 0);
          gpio_out   : out std_logic_vector(31 downto 0);
-         gpio_dir   : out std_logic_vector(31 downto 0)
+         gpio_dir   : out std_logic_vector(31 downto 0);
+         -- nand
+         -- NAND chip control hardware interface. These signals should be bound to physical pins.
+         nand_cle				: out	std_logic ;
+         nand_ale				: out	std_logic ;
+         nand_nwe				: out	std_logic ;
+         nand_nwp				: out	std_logic ;
+         nand_nce				: out	std_logic ;
+         nand_nre				: out std_logic ;
+         nand_rnb				: in	std_logic;
+         -- NAND chip data hardware interface. These signals should be boiund to physical pins.
+         nand_data			: inout	std_logic_vector(15 downto 0)
          );
    end component ZPUPhiIO;
 

@@ -1,39 +1,24 @@
 # ##############################################################################
-
 # iCEcube PCF
-
-# Version:            2013.12.25022
-
-# File Generated:     Apr 25 2014 01:51:34
-
 # Family & Device:    iCE40HX8K
-
 # Package:            CT256
-
 # ##############################################################################
 
 ###IOSet List 12
-set_io LED2 B4
-set_io LED3 A2
-set_io LED4 A1
-set_io LED6 C4
-set_io LED7 B3
-set_io LED8 C3
-set_io LED9 B5
+set_io clk J3
+set_io resetn H16 -pullup yes
+
 set_io break_o C5 -pullup no
-set_io clk_i J3
 set_io rs232_rx_i B10
 set_io rs232_tx_o B12
-set_io rst_i H16 -pullup yes
 
-
-set_io nand_cle  B1
+set_io nand_cle  B1 
 set_io nand_ale  B2
 set_io nand_nwe  C1
 set_io nand_nwp  C2
 set_io nand_nce  D1
 set_io nand_nre  D2
-set_io nand_rnb  E2
+set_io nand_rnb  E2			
 
 set_io nand_data(0) E3
 set_io nand_data(1) E4
@@ -51,8 +36,9 @@ set_io nand_data(12) H2
 set_io nand_data(13) H3
 set_io nand_data(14) H4
 set_io nand_data(15) H5
-
+		
 
 ###ProDemote List 2
-demote_signal_unbuffered io_map.timerinst.un1_sample_0_g
-demote_signal_unbuffered zpu.insn_1_sqmuxa_g
+#demote_signal_unbuffered io_map.timerinst.un1_sample_0_g
+#demote_signal_unbuffered zpu.insn_1_sqmuxa_g
+

@@ -68,6 +68,18 @@ entity zpu_top is
       rs232_tx_o : out std_logic;  -- UART Tx
       rs232_rx_i : in  std_logic;  -- UART Rx
 
+      -- NAND chip control hardware interface. These signals should be bound to physical pins.
+      nand_cle				: out	std_logic := '0';
+      nand_ale				: out	std_logic := '0';
+      nand_nwe				: out	std_logic := '1';
+      nand_nwp				: out	std_logic := '0';
+      nand_nce				: out	std_logic := '1';
+      nand_nre				: out   std_logic := '1';
+      nand_rnb				: in	std_logic;
+      -- NAND chip data hardware interface. These signals should be boiund to physical pins.
+      nand_data			: inout	std_logic_vector(15 downto 0);
+
+      -- led interface
       LED2  : out std_logic;
       LED3  : out std_logic;
       LED4  : out std_logic;
@@ -75,6 +87,7 @@ entity zpu_top is
       LED7  : out std_logic;
       LED8  : out std_logic;
       LED9  : out std_logic
+      
       );
 end entity zpu_top;
 
@@ -112,7 +125,7 @@ architecture rtl of zpu_top is
    signal gpio_out     : std_logic_vector(31 downto 0);
    signal gpio_dir     : std_logic_vector(31 downto 0);
    signal dbg_o        : zpu_dbgo_t;  -- Debug info
-   signal reset  	   : std_logic;
+   signal reset, button  	   : std_logic;
 begin
    -- Reset debounce
    rst_debounce: debounce
@@ -121,9 +134,10 @@ begin
          )
       port map(
          clk        => clk_i, 
-         button     => not rst_i,  --make reset active low
+         button     => button,  --make reset active low
          result     => reset
          );
+   button <= not rst_i; 
 
    memory: SinglePortRAM
       generic map(
@@ -156,7 +170,17 @@ begin
          br_clk_i   => '1',
          gpio_in    => gpio_in,
          gpio_out   => gpio_out,
-         gpio_dir   => gpio_dir
+         gpio_dir   => gpio_dir,
+
+         nand_cle => nand_cle,
+         nand_ale => nand_ale,
+         nand_nwe => nand_nwe,
+         nand_nwp => nand_nwp,
+         nand_nce => nand_nce,
+         nand_nre => nand_nre,
+         nand_rnb => nand_rnb,
+         nand_data => nand_data
+         
          );
 
    io_addr  <= mem_addr(4 downto 2);
