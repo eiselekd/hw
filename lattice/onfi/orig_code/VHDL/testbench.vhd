@@ -49,7 +49,21 @@ architecture test of tb is
 		);
 	end component;
 
-
+	component nand_model
+          port
+            (
+              Lock  : in std_logic;
+              Dq_Io : inout std_logic_vector(7 downto 0);
+              Cle   : in std_logic;
+              Ale   : in  std_logic;
+              Clk_We_n  : in  std_logic;
+              Wr_Re_n   : in  std_logic;
+              Ce_n      : in  std_logic;
+              Wp_n      : in  std_logic;
+              Rb_n      : out std_logic
+              );
+	end component;
+      
 	component up_counter
 		port
 		(
@@ -93,7 +107,19 @@ begin
           
             );
 
-
+	m:nand_model
+	port map
+          (
+              Lock => '0',
+              Dq_Io => nand_data(7 downto 0),
+              Cle   => nand_cle,
+              Ale   => nand_ale,
+              Clk_We_n  => nand_nwe,
+              Wr_Re_n   => nand_nre,
+              Ce_n      => nand_nce,
+              Wp_n      => nand_nwp,
+              Rb_n      => nand_rnb
+              );
   
 	NM:nand_master
 	port map
@@ -119,48 +145,44 @@ begin
 	CLOCK:process
 	begin
 		clk <= '1';
-		wait for 1.25ns;
+		wait for 83ns;  --1.25ns;
 		clk <= '0';
-		wait for 1.25ns;
+		wait for 83ns; -- 1.25ns;
 	end process;
 
 	TP: process
 	begin
 		activate <= '0';
 		nreset <= '1';
-		nand_data <= "ZZZZZZZZZZZZZZZZ";
+		--nand_data <= "ZZZZZZZZZZZZZZZZ";
 		
 		-- Enable the chip
-		wait for 5ns;
+		wait for 2000ns;
 		cmd_in <= x"09";
 		activate <= '1';
-		wait for 2.5ns;
+		wait for 1000ns;
 		activate <= '0';
 		
 		
 		-- Read JEDEC ID
 		data_in <= x"00";
 		cmd_in <= x"03";
-		wait for 5ns;
+		wait for 1000ns;
 		activate <= '1';
-		wait for 2.5ns;
+		wait for 1000ns;
 		activate <= '0';
-		
+
+
 		-- Provide ID
 		wait for 155ns;
-		nand_data <= x"002c";
 		wait for 32.5ns;
-		nand_data <= x"00e5";
 		wait for 32.5ns;
-		nand_data <= x"00ff";
 		wait for 32.5ns;
-		nand_data <= x"0003";
 		wait for 32.5ns;
-		nand_data <= x"0086";
 		wait for 32.5ns;
-		nand_data <= "ZZZZZZZZZZZZZZZZ";
-		wait for 5ns;
-		
+		wait for 5000ns;
+
+                
 		-- Read the bytes of the ID
 		cmd_in <= x"0e";
 		-- 1

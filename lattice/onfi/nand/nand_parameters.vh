@@ -229,7 +229,7 @@ parameter PAGE_BITS         =      6;  // 2^6=64
 parameter NUM_PAGE          =     64;
 parameter PAGE_SIZE         =    NUM_COL*BPC_MAX*DQ_BITS;
 
-//Read ID values
+//Read ID values [ 0x2c, 0xac, 0x90, 0x15, 0x56, 0x00, 0x00, 0x00 ]
 parameter NUM_ID_BYTES      =      5;
 parameter READ_ID_BYTE0     =  8'h2c;   // Micron Manufacturer ID
 
