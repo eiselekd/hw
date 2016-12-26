@@ -36,6 +36,11 @@ package nandio is
 
 end package nandio;
 
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+
 package UART is
    ----------------------
    -- Very simple UART --
@@ -71,4 +76,22 @@ package UART is
         ce_i    : in  std_logic;  -- Chip Enable
         o_o     : out std_logic); -- Output
    end component BRGen;
+
+   component uartio is
+     port(
+      clk_i      : in  std_logic;  -- CPU clock                                                                                 
+      rst_i      : in  std_logic;  -- Reset                                                                                     
+      rs232_tx_o : out std_logic;  -- UART Tx                                                                                   
+      rs232_rx_i : in  std_logic;  -- UART Rx                                                                                   
+      -- rx:
+      rx_read  : in  std_logic;
+      rx_avail : out std_logic;
+      rx_data  : out std_logic_vector(7 downto 0);
+      -- tx:
+      tx_write : in std_logic;
+      tx_busy  : out std_logic;
+      tx_data  : in std_logic_vector(7 downto 0)
+      );
+   end component uartio;
+   
 end package UART;

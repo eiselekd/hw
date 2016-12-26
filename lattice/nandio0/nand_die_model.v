@@ -1,0 +1,1 @@
+aldec/sim0/nand/nand_die_model.v

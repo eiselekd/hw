@@ -43,21 +43,15 @@ architecture rtl of nandio_top is
    constant BRDIVISOR  : positive:=CLK_FREQ*1e6/BRATE/4;
 
    -- UART
-   -- Rx
-   signal rx_br      : std_logic; -- Rx timing
-   signal uart_read  : std_logic; -- ZPU read the value
-   signal rx_avail   : std_logic; -- Rx data available
-   signal rx_data    : std_logic_vector(7 downto 0); -- Rx data
-   -- Tx
-   signal tx_br      : std_logic; -- Tx timing
-   signal uart_write : std_logic; -- ZPU is writing
-   signal tx_busy    : std_logic; -- Tx can't get a new value
-
-   signal br_clk_i   : std_logic;
-
-   signal data_i : std_logic_vector(31 downto 0);
+   signal rx_read  : std_logic;
+   signal rx_avail : std_logic;
+   signal rx_data  : std_logic_vector(7 downto 0);
+   signal tx_write : std_logic;
+   signal tx_busy  : std_logic;
+   signal tx_data  : std_logic_vector(7 downto 0);
    
-   type nandio_states is (nandio_idle, nandio_write);
+   -- ftdi like commands   
+   type nandio_states is (nandio_idle, waitcmd, getmode, writecycles, readcycles);
    type regs_nandio is record
       state         : nandio_states;
       cnt           : std_logic_vector(31 downto 0);
@@ -101,36 +95,20 @@ begin
     end if;
   end process;
 
-   ----------
-   -- UART --
-   ----------
-   -- Rx section
-   rx_core : RxUnit
-      port map(
-         clk_i => clk, reset_i => reset_i, enable_i => rx_br,
-         read_i => uart_read, rxd_i => rs232_rx_i, rxav_o => rx_avail,
-         datao_o => rx_data);
-   --uart_read <= '1' when re_i='1' and addr_i=UART_RX else '0';
-
-   -- Tx section
-   tx_core : TxUnit
-      port map(
-         clk_i => clk_i, reset_i => reset_i, enable_i => tx_br,
-         load_i => uart_write, txd_o => rs232_tx_o, busy_o => tx_busy,
-         datai_i => std_logic_vector(data_i(7 downto 0)));
-   --uart_write <= '1' when we_i='1' and addr_i=UART_TX else '0';
-
-   -- Rx timing
-   rx_timer : BRGen
-      generic map(COUNT => BRDIVISOR)
-      port map(
-         clk_i => clk_i, reset_i => reset_i, ce_i => br_clk_i, o_o => rx_br);
-  br_clk_i <= '1';
-  
-   -- Tx timing
-   tx_timer : BRGen -- 4 Divider for Tx
-      generic map(COUNT => 4)  
-      port map(
-         clk_i => clk_i, reset_i => reset_i, ce_i => rx_br, o_o => tx_br);
+  u0: uartio 
+    port map(
+      clk_i => clk,
+      rst_i => rst_i,         
+      rs232_tx_o => rs232_tx_o,
+      rs232_rx_i => rs232_rx_i,             
+      -- rx:
+      rx_read => rx_read,
+      rx_avail => rx_avail,
+      rx_data => rx_data,
+      -- tx:
+      tx_write => tx_write,
+      tx_busy => tx_busy,
+      tx_data => tx_data
+      );            
 
 end architecture rtl;
