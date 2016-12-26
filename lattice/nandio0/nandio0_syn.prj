@@ -7,6 +7,7 @@ add_file -vhdl -lib work "br_gen.vhdl"
 add_file -vhdl -lib work "rx_unit.vhdl" 
 add_file -vhdl -lib work "tx_unit.vhdl" 
 add_file -vhdl -lib work "nandio_pkg.vhdl" 
+add_file -vhdl -lib work "uartio.vhd" 
 #implementation: "nandio0_Implmnt"
 impl -add nandio0_Implmnt -type fpga
 

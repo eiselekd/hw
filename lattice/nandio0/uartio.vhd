@@ -78,7 +78,7 @@ begin
          clk_i => clk, reset_i => reset_i, enable_i => rx_br,
          read_i => uart_read, rxd_i => rs232_rx_i, rxav_o => rx_avail,
          datao_o => rx_data);
-   --uart_read <= '1' when re_i='1' and addr_i=UART_RX else '0';
+   uart_read <= rx_read; -- '1' when re_i='1' and addr_i=UART_RX else '0';
 
    -- Tx section
    tx_core : TxUnit
@@ -86,7 +86,7 @@ begin
          clk_i => clk_i, reset_i => reset_i, enable_i => tx_br,
          load_i => uart_write, txd_o => rs232_tx_o, busy_o => tx_busy,
          datai_i => std_logic_vector(tx_data(7 downto 0)));
-   --uart_write <= '1' when we_i='1' and addr_i=UART_TX else '0';
+   uart_write <= tx_write; --'1' when we_i='1' and addr_i=UART_TX else '0';
 
    -- Rx timing
    rx_timer : BRGen

@@ -9,6 +9,7 @@ vcom: vsim-libs
 	vcom -work work br_gen.vhdl
 	vcom -work work tx_unit.vhdl
 	vcom -work work rx_unit.vhdl
+	vcom -work work testbench.vhd
 
 vsim-libs:
 	if [ ! -d libraries/work ]; then \
