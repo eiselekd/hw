@@ -1,0 +1,57 @@
+[Project]
+Current Flow=Generic
+VCS=0
+version=3
+Current Config=compile
+
+[Configurations]
+compile=sim0
+
+[Library]
+sim0=.\sim0\sim0.lib
+
+[Settings]
+AccessRead=1
+AccessReadWrite=0
+AccessACCB=0
+AccessACCR=0
+AccessReadWriteSLP=0
+AccessReadTopLevel=0
+DisableC=1
+ENABLE_ADV_DATAFLOW=0
+FLOW_TYPE=HDL
+LANGUAGE=VHDL
+REFRESH_FLOW=1
+fileopenfolder=E:\hw\lattice\nandio0\aldec\sim0\nand
+
+[LocalVerilogSets]
+EnableSLP=1
+EnableDebug=0
+LibNames=ovi_ice;ice
+
+[LocalVhdlSets]
+CompileWithDebug=0
+
+[$LibMap$]
+sim0=.
+
+[Files]
+/..\..\..\nandio0_top.vhd=-1
+/nand_defines.vh=-1
+/nand_die_model.v=-1
+/nand_model.v=-1
+/nand_parameters.vh=-1
+
+[Files.Data]
+.\..\..\nandio0_top.vhd=VHDL Source Code
+.\src\nand_defines.vh=External File
+.\src\nand_die_model.v=Verilog Source Code
+.\src\nand_model.v=Verilog Source Code
+.\src\nand_parameters.vh=External File
+
+[SpecTracer]
+WindowVisible=0
+[HierarchyViewer]
+HierarchyInformation=nandio_top|rtl|0 
+ShowHide=ShowTopLevel
+Selected=
