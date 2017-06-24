@@ -1,0 +1,95 @@
+
+      *********************************************************
+      * IcoProg -- Programmer and Debug Tool for the IcoBoard *
+      *********************************************************
+
+
+The IcoBoard is a Raspberry PI hat featuring the ICE40 HX8K fpga. It
+can be programmed using the IceStorm Open Source FPGA flow:
+
+http://icoboard.org/
+http://www.clifford.at/icestorm/
+
+
+Installing (Raspberry PI)
+=========================
+
+Start by installing a RASPBIAN JESSIE image on an SD-card. Follow the
+installation guide on the Raspberry PI web page:
+
+	https://www.raspberrypi.org/downloads/raspbian/
+
+Boot the Raspberry PI from the SD card. Open a console window or
+login to the Raspberry PI via ssh and execute the commands below
+to setup the IcoBoard environment.
+
+
+Expanding the root Filesystem
+-----------------------------
+
+Optionally expand the root filesystem to the entire SD card:
+
+	sudo raspi-config
+
+Select "Expand Filesystem" and reboot the Raspberry PI.
+
+
+Installing wiringPi
+-------------------
+
+IcoProg uses the wiringPi library. So we need to install it:
+
+	cd $HOME
+	git clone git://git.drogon.net/wiringPi
+	cd wiringPi && ./build
+
+
+Installing IcoProg
+------------------
+
+Next we install IcoProg itself:
+
+	cd $HOME
+	git clone https://github.com/cliffordwolf/icotools.git
+	cd icotools/icoprog && make install
+
+
+Installing (USB Base Board)
+===========================
+
+The icoUSBaseboard is an alternative carrier board for the IcoBoard which allows
+programming the IcoBoard directly via USB from a Linux PC. Build IcoProg on the
+Linux PC with the make parameter `USBMODE=1` for this hardware setup:
+
+	cd $HOME
+	git clone https://github.com/cliffordwolf/icotools.git
+	cd icotools/icoprog && make USBMODE=1 install
+
+
+Installing (UP Board)
+=====================
+
+The UP Board is a Raspberry PI compatible X86 single-board computer. Build
+IcoProg on the UP Board with the make parameter `GPIOMODE=1`:
+
+	cd $HOME
+	git clone https://github.com/cliffordwolf/icotools.git
+	cd icotools/icoprog && make GPIOMODE=1 install
+
+
+Next Steps
+==========
+
+See http://www.clifford.at/icestorm/#install for instructions on
+installing the FOSS iCE40 toolchain. You can install it on any Linux
+PC, or directly on the raspberry pi.
+
+Running `make example_sram` in this directory will build a trivial example
+and upload it to the IcoBoard. On a PC it will expect the raspberry pi to be
+reachable with "ssh pi@raspi" without password authentication (i.e.
+authentication using SSH keys).
+
+See https://github.com/cliffordwolf/icotools/tree/master/icosoc for a
+much larger example application. (A complete SoC built around the
+PicoRV32 RISC-V CPU.)
+

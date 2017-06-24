@@ -1,0 +1,8 @@
+
+mxoprog - programming tool for the MachXO2 auxiliary FPGA on the IcoBoard
+
+All IcoBoard should come with a pre-programmed MachXO2 FPGA. There should be no
+need to run this tool on a board after the board has passed production testing.
+
+Usage example: sudo ./mxoprog < SCico_impl1.svf
+

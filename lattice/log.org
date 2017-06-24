@@ -109,3 +109,13 @@ end process;
 		
 end Behavioral;
 
+
+* Pico RISCV
+
+       (git clone git@github.com:cliffordwolf/picorv32.git)
+	cd picorv32
+	make download-tools
+	make -j$(nproc) build-tools
+
+
+[1] http://pramode.in/2016/10/23/running-riscv-on-an-icoboard/
