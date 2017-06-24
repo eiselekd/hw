@@ -119,3 +119,8 @@ end Behavioral;
 
 
 [1] http://pramode.in/2016/10/23/running-riscv-on-an-icoboard/
+
+* S25FL127SABMFV10 / IS61WV6416DBLL/10TLI
+
+[1] http://eu.mouser.com/ProductDetail/ISSI/IS61WV6416DBLL-10TLI/?qs=sGAEpiMZZMt9mBA6nIyysCCVJ7vBMQ5hq6O4NfGZ0gM%3d
+[2] http://eu.mouser.com/ProductDetail/Cypress-Semiconductor/S25FL127SABMFV100/?qs=sGAEpiMZZMtI%252bQ06EiAoG53n%252bVrGWNOtb5UMTrCB0LM%3d
