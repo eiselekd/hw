@@ -1,12 +1,13 @@
 * Diamond programmer ubuntu:
 
-** linux
+ 
+** linux diamond prog
 SUBSYSTEM == "usb", DRIVER == "usb", \
                     ATTRS{idVendor} == "0403", ATTRS{idProduct} == "6010", \
                     MODE := "0666", RUN += "/bin/sh -c 'basename %p:1.0 > /sys/bus/usb/drivers/ftdi_sio/unbind'"
 		    
 
-** program
+** program 
 add user plugdev and dialup
 sudo apt install  rpm libusb-0.1
 programmer_3_9_x64-99-2-x86_64.zip and programmer_3_9_x64-99-2-x86_64-linux.rpm
@@ -19,6 +20,8 @@ Set switches: set j6-7 3 switches setup: program spi
 Set switches: set j6-7 2 switch horizontal: program cram
               Device :  iCE40 HX8K ct256
 
+
+** led prog
 *** led0.pcf
 # ##############################################################################
 
