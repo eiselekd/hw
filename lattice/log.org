@@ -1,6 +1,108 @@
 * Diamond programmer ubuntu:
 
+** linux
 SUBSYSTEM == "usb", DRIVER == "usb", \
                     ATTRS{idVendor} == "0403", ATTRS{idProduct} == "6010", \
                     MODE := "0666", RUN += "/bin/sh -c 'basename %p:1.0 > /sys/bus/usb/drivers/ftdi_sio/unbind'"
 		    
+
+** program
+add user plugdev and dialup
+sudo apt install  rpm libusb-0.1
+programmer_3_9_x64-99-2-x86_64.zip and programmer_3_9_x64-99-2-x86_64-linux.rpm
+
+Program LED blink counter: LED_VHDL_bitmap.hex
+
+Set switches: set j6-7 3 switches setup: program spi
+              spi-dev:  N25Q032A - 13ESC40F, 8pin
+
+Set switches: set j6-7 2 switch horizontal: program cram
+              Device :  iCE40 HX8K ct256
+
+*** led0.pcf
+# ##############################################################################
+
+# iCEcube PCF
+
+# Version:            2012.09SP1.22498
+
+# File Generated:     Sep 14 2013 17:36:59
+
+# Family & Device:    iCE40HX8K
+
+# Package:            CT256
+
+# ##############################################################################
+
+###IOSet List 9
+set_io LED3 A2
+set_io LED7 B3
+set_io clk J3
+set_io LED2 B4
+set_io LED4 A1
+set_io LED6 C4
+set_io LED8 C3
+set_io LED1 B5
+set_io LED5 C5
+
+*** led.vhd
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.std_logic_unsigned.all;
+use IEEE.NUMERIC_STD.ALL;
+
+entity LED_VHDL is
+    Port ( clk : in  STD_LOGIC;
+           LED1 : out  STD_LOGIC;
+           LED2 : out  STD_LOGIC;
+           LED3 : out  STD_LOGIC;
+           LED4 : out  STD_LOGIC;
+           LED5 : out  STD_LOGIC;
+           LED6 : out  STD_LOGIC;
+           LED7 : out  STD_LOGIC;
+           LED8 : out  STD_LOGIC);
+end LED_VHDL;
+
+architecture Behavioral of LED_VHDL is
+
+	signal div_cntr1 : std_logic_vector(15 downto 0) := (others => '0');
+	signal div_cntr2 : std_logic_vector(6 downto 0)  := (others => '0');
+	signal dec_cntr  : std_logic  := '0';
+	signal half_sec_pulse : std_logic := '0';
+
+begin
+	
+process(clk)
+begin
+	if rising_edge(clk) then
+		div_cntr1 <= div_cntr1 + 1; 
+		if div_cntr1 = 0 then
+			if div_cntr2 = 91 then
+				div_cntr2 <= (others => '0');
+				half_sec_pulse <= '1';
+			else
+				div_cntr2 <= div_cntr2 + 1;
+			end if;
+		else
+				half_sec_pulse <= '0';
+		end if;
+		
+		if (half_sec_pulse = '1') then
+			dec_cntr <= not dec_cntr;
+		end if;
+		
+	end if;
+end process;
+
+	--LED decording
+	LED1 <= '1' when (div_cntr2(0) = '1') else '0';
+	LED2 <= '1' when (div_cntr2(1) = '1') else '0';
+	LED3 <= '1' when (div_cntr2(2) = '1') else '0';
+	LED4 <= '1' when (div_cntr2(3) = '1') else '0';
+	LED5 <= '1' when (div_cntr2(4) = '1') else '0';
+	LED6 <= '1' when (div_cntr2(5) = '1') else '0';
+	LED7 <= '1' when (div_cntr2(6) = '1') else '0';
+	LED8 <= '1' when (dec_cntr = '1') else '0';
+		
+end Behavioral;
+
