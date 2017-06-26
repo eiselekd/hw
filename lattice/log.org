@@ -124,3 +124,7 @@ end Behavioral;
 
 [1] http://eu.mouser.com/ProductDetail/ISSI/IS61WV6416DBLL-10TLI/?qs=sGAEpiMZZMt9mBA6nIyysCCVJ7vBMQ5hq6O4NfGZ0gM%3d
 [2] http://eu.mouser.com/ProductDetail/Cypress-Semiconductor/S25FL127SABMFV100/?qs=sGAEpiMZZMtI%252bQ06EiAoG53n%252bVrGWNOtb5UMTrCB0LM%3d
+* SL LP 6 SMD 038 
+http://www.produktinfo.conrad.com/datenblaetter/725000-749999/739346-da-01-de-STIFTLEISTE__SL_LP_6_SMD_051__40_Z.pdf
+
+ 2.54 
