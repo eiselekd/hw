@@ -128,3 +128,5 @@ end Behavioral;
 http://www.produktinfo.conrad.com/datenblaetter/725000-749999/739346-da-01-de-STIFTLEISTE__SL_LP_6_SMD_051__40_Z.pdf
 
  2.54 
+
+* https://www.elfa.se/sv/honlist-20p-smd-dubbelradigt-raka-wuerth-elektronik-61002021821/p/30024828?q=*&filter_Category3=Stift-%2Fhylslist&filter_Kontaktdon+utf%C3%B6rande=Dubbelradigt&filter_Buyable=1&filter_Raster~~mm=2.54&filter_Poler=20&page=6&origPos=891&origPageSize=50&simi=97.0
