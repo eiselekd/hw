@@ -52,7 +52,7 @@ ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
-DocumentUniqueId=HXSJCSFQ
+DocumentUniqueId=GAFMGGBM
 
 [Document2]
 DocumentPath=lib\ISSI-IS61WV6416DBLL-TSOP-2-44.SchLib
@@ -165,196 +165,68 @@ VariationCount=0
 ParamVariationCount=0
 
 [GeneratedDocument1]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram.1
-DItemRevisionGUID=
-
-[GeneratedDocument2]
 DocumentPath=Project Outputs for breakoutsram\breakoutsram.DRR
 DItemRevisionGUID=
 
-[GeneratedDocument3]
+[GeneratedDocument2]
 DocumentPath=Project Outputs for breakoutsram\breakoutsram.EXTREP
 DItemRevisionGUID=
 
-[GeneratedDocument4]
+[GeneratedDocument3]
 DocumentPath=Project Outputs for breakoutsram\breakoutsram.GBL
 DItemRevisionGUID=
 
-[GeneratedDocument5]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram.GBO
-DItemRevisionGUID=
-
-[GeneratedDocument6]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram.GBP
-DItemRevisionGUID=
-
-[GeneratedDocument7]
+[GeneratedDocument4]
 DocumentPath=Project Outputs for breakoutsram\breakoutsram.GBS
 DItemRevisionGUID=
 
-[GeneratedDocument8]
+[GeneratedDocument5]
 DocumentPath=Project Outputs for breakoutsram\breakoutsram.GD1
 DItemRevisionGUID=
 
-[GeneratedDocument9]
+[GeneratedDocument6]
 DocumentPath=Project Outputs for breakoutsram\breakoutsram.GG1
 DItemRevisionGUID=
 
-[GeneratedDocument10]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram.GKO
-DItemRevisionGUID=
-
-[GeneratedDocument11]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram.GM1
-DItemRevisionGUID=
-
-[GeneratedDocument12]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram.GM4
-DItemRevisionGUID=
-
-[GeneratedDocument13]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram.GM13
-DItemRevisionGUID=
-
-[GeneratedDocument14]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram.GM15
-DItemRevisionGUID=
-
-[GeneratedDocument15]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram.GM16
-DItemRevisionGUID=
-
-[GeneratedDocument16]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram.GML
-DItemRevisionGUID=
-
-[GeneratedDocument17]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram.GPB
-DItemRevisionGUID=
-
-[GeneratedDocument18]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram.GPT
-DItemRevisionGUID=
-
-[GeneratedDocument19]
+[GeneratedDocument7]
 DocumentPath=Project Outputs for breakoutsram\breakoutsram.GTL
 DItemRevisionGUID=
 
-[GeneratedDocument20]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram.GTO
-DItemRevisionGUID=
-
-[GeneratedDocument21]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram.GTP
-DItemRevisionGUID=
-
-[GeneratedDocument22]
+[GeneratedDocument8]
 DocumentPath=Project Outputs for breakoutsram\breakoutsram.GTS
 DItemRevisionGUID=
 
-[GeneratedDocument23]
+[GeneratedDocument9]
 DocumentPath=Project Outputs for breakoutsram\breakoutsram.LDP
 DItemRevisionGUID=
 
-[GeneratedDocument24]
+[GeneratedDocument10]
 DocumentPath=Project Outputs for breakoutsram\breakoutsram.REP
 DItemRevisionGUID=
 
-[GeneratedDocument25]
+[GeneratedDocument11]
 DocumentPath=Project Outputs for breakoutsram\breakoutsram.RUL
 DItemRevisionGUID=
 
-[GeneratedDocument26]
+[GeneratedDocument12]
 DocumentPath=Project Outputs for breakoutsram\breakoutsram.TXT
 DItemRevisionGUID=
 
-[GeneratedDocument27]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram_Copper_Signal_Bot.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument28]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram_Copper_Signal_Top.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument29]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram_Keep-out.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument30]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram_Legend_Bot.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument31]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram_Legend_Top.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument32]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram_Mechanical_1.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument33]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram_Mechanical_4.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument34]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram_Mechanical_13.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument35]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram_Mechanical_15.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument36]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram_Mechanical_16.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument37]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram_Pads_Bot.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument38]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram_Pads_Top.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument39]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram_Paste_Bot.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument40]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram_Paste_Top.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument41]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram_Profile.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument42]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram_Soldermask_Bot.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument43]
-DocumentPath=Project Outputs for breakoutsram\breakoutsram_Soldermask_Top.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument44]
-DocumentPath=Project Outputs for breakoutsram\Design Rule Check - breakoutsram.html
-DItemRevisionGUID=
-
 [Parameter1]
-Name=mProjectVersion
-Value=1
+Name=mProjectAuthor
+Value=Nils Minor
 
 [Parameter2]
-Name=mProjectRevision
-Value=0
-
-[Parameter3]
 Name=mProjectName
 Value=RPI BOARD
 
+[Parameter3]
+Name=mProjectRevision
+Value=0
+
 [Parameter4]
-Name=mProjectAuthor
-Value=Nils Minor
+Name=mProjectVersion
+Value=1
 
 [Configuration1]
 Name=Default Configuration
