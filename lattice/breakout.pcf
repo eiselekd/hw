@@ -1,0 +1,56 @@
+# ##############################################################################
+
+# Family & Device:    iCE40HX8K
+
+# Package:            CT256
+
+# ##############################################################################
+
+set_io clk_i J3
+
+
+set_io ce   N10
+set_io we   R1
+set_io oe   T5
+set_io lb   T7
+set_io ub   T6
+
+set_io addr(0)  T1
+set_io addr(1)  R2
+set_io addr(2)  R3
+set_io addr(3)  F1
+set_io addr(4)  H1
+set_io addr(5)  J1
+set_io addr(6)  K1
+set_io addr(7)  L1
+set_io addr(8)  M1
+set_io addr(9)  N2
+set_io addr(10) P2
+set_io addr(11) N12
+set_io addr(12) T13
+set_io addr(13) T15
+set_io addr(14) R16
+
+set_io data(0)  T11
+set_io data(1)  T16
+set_io data(2)  T14
+set_io data(3)  N11
+set_io data(4)  P1
+set_io data(5)  N3
+set_io data(6)  M2
+set_io data(7)  L3
+set_io data(8)  H2
+set_io data(9)  G2
+set_io data(10) F2
+set_io data(11) E2
+set_io data(12) R5
+set_io data(13) R4
+set_io data(14) T3
+set_io data(15) T2
+
+
+
+
+###ProDemote List 2
+demote_signal_unbuffered io_map.timerinst.un1_sample_0_g
+demote_signal_unbuffered zpu.insn_1_sqmuxa_g
