@@ -1,3 +1,6 @@
+
+# open_hw; connect_hw_server; open_hw_target -xvc_url localhost:2542
+
 # Add flash part, s25fl132k; default to erase and program (no verify)
 create_hw_cfgmem -hw_device [lindex [get_hw_devices xc7a50t_0] 0] [lindex [get_cfgmem_parts {s25fl132k-spi-x1_x2_x4}] 0]
 set_property PROGRAM.BLANK_CHECK  0 [ get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a50t_0] 0]]
