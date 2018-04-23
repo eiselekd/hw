@@ -1,0 +1,45 @@
+{
+   ExpandedHierarchyInLayout: "",
+   comment_0: "PCIe status LED logic
+LED output is active low
+
+- Flashing if link is up
+- Solid if link is in reset
+- no light if not in reset and link down
+
+reset_n && (clk || (!link_up))
+
+reset_n | link_up | clk | out
+    0            x          x      0
+    1            0          x      1
+    1            1                clk",
+   commentid: "comment_0|",
+   font_comment_0: "14",
+   guistr: "# # String gsaved with Nlview 6.6.11  2017-06-12 bk=1.3860 VDI=40 GEI=35 GUI=JA:1.6
+#  -string -flagsOSRD
+preplace port sys -pg 1 -y 60 -defaultsOSRD
+preplace port TxD -pg 1 -y 20 -defaultsOSRD
+preplace port pcie_mgt -pg 1 -y 100 -defaultsOSRD
+preplace port auxio -pg 1 -y 40 -defaultsOSRD
+preplace port sys_rst_n -pg 1 -y 80 -defaultsOSRD
+preplace port RxD -pg 1 -y 20 -defaultsOSRD
+preplace portBus do_edge -pg 1 -y 80 -defaultsOSRD
+preplace portBus clkreq_l -pg 1 -y 60 -defaultsOSRD
+preplace portBus di_edge -pg 1 -y 40 -defaultsOSRD
+preplace portBus status_leds -pg 1 -y 120 -defaultsOSRD
+preplace inst clkreq_l_tieoff -pg 1 -lvl 1 -y 580 -defaultsOSRD
+preplace inst axi_bram_ctrl_0_bram -pg 1 -lvl 1 -y 480 -defaultsOSRD
+preplace inst IOControl -pg 1 -lvl 1 -y 90 -defaultsOSRD
+preplace inst util_ds_buf -pg 1 -lvl 1 -y 680 -defaultsOSRD
+preplace inst xdma_0 -pg 1 -lvl 1 -y 850 -defaultsOSRD
+preplace inst StatusLEDControl -pg 1 -lvl 1 -y 230 -defaultsOSRD
+preplace inst axi_bram_ctrl_0 -pg 1 -lvl 1 -y 360 -defaultsOSRD
+levelinfo -pg 1 0 190 380 -top 0 -bot 970
+",
+   linktoobj_comment_0: "",
+   linktotype_comment_0: "bd_design",
+}
+
+{
+   /comment_0: "comment_0",
+}
