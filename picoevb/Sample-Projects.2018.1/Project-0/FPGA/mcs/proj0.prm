@@ -1,0 +1,11 @@
+===================================
+Configuration Memory information
+===================================
+File Format        MCS
+Interface          SPIX4
+Size               4M
+Start Address      0x00000000
+End Address        0x003FFFFF
+
+Addr1         Addr2         Date                    File(s)
+0x00000000    0x0016216F    Apr 23 21:08:10 2018    ./nanoevb/nanoevb.runs/impl_1/project_bd_wrapper.bit
