@@ -1,0 +1,79 @@
+diff --git a/InCallUI/src/com/android/incallui/ProximitySensor.java b/InCallUI/src/com/android/incallui/ProximitySensor.java
+index 021070472..14087f397 100644
+--- a/InCallUI/src/com/android/incallui/ProximitySensor.java
++++ b/InCallUI/src/com/android/incallui/ProximitySensor.java
+@@ -127,11 +127,11 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
+             mOrientation = AccelerometerListener.ORIENTATION_UNKNOWN;
+             mAccelerometerListener.enable(mIsPhoneOffhook);
+ 
+-            updateProximitySensorMode();
++            turnOffProximitySensor(true);
+         }
+ 
+         if (mHasIncomingCall) {
+-            updateProximitySensorMode();
++            turnOffProximitySensor(true);
+         }
+     }
+ 
+@@ -148,12 +148,12 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
+      */
+     @Override
+     public void onAudioMode(int mode) {
+-        updateProximitySensorMode();
++        turnOffProximitySensor(true);
+     }
+ 
+     public void onDialpadVisible(boolean visible) {
+         mDialpadVisible = visible;
+-        updateProximitySensorMode();
++        turnOffProximitySensor(true);
+     }
+ 
+     /**
+@@ -163,7 +163,7 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
+         mIsHardKeyboardOpen = newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO;
+ 
+         // Update the Proximity sensor based on keyboard state
+-        updateProximitySensorMode();
++        turnOffProximitySensor(true);
+     }
+ 
+     /**
+@@ -178,7 +178,7 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
+         } else if (mPowerManager.isScreenOn()) {
+             mUiShowing = false;
+         }
+-        updateProximitySensorMode();
++        turnOffProximitySensor(true);
+     }
+ 
+     void onDisplayStateChanged(boolean isDisplayOn) {
+@@ -284,12 +284,12 @@ public class ProximitySensor implements AccelerometerListener.OrientationListene
+                 Log.d(this, "Turning on proximity sensor");
+                 // Phone is idle.  We don't want any special proximity sensor
+                 // behavior in this case.
+-                turnOnProximitySensor();
++                turnOffProximitySensor(true);
+             } else {
+                 Log.d(this, "Turning off proximity sensor");
+                 // Phone is either idle, or ringing.  We don't want any special proximity sensor
+                 // behavior in either case.
+-                turnOffProximitySensor(screenOnImmediately);
++                turnOffProximitySensor(true);
+             }
+         }
+ 
+diff --git a/src/com/android/dialer/database/DialerDatabaseHelper.java b/src/com/android/dialer/database/DialerDatabaseHelper.java
+index 187a6c9f1..a731628fc 100644
+--- a/src/com/android/dialer/database/DialerDatabaseHelper.java
++++ b/src/com/android/dialer/database/DialerDatabaseHelper.java
+@@ -590,7 +590,7 @@ public class DialerDatabaseHelper extends SQLiteOpenHelper {
+     }
+ 
+     public void upgradeToVersion8(SQLiteDatabase db) {
+-        db.execSQL("ALTER TABLE smartdial_table ADD carrier_presence INTEGER NOT NULL DEFAULT 0");
++    /*    db.execSQL("ALTER TABLE smartdial_table ADD carrier_presence INTEGER NOT NULL DEFAULT 0"); */
+     }
+ 
+     /**
