@@ -21,6 +21,7 @@ source build/envsetup.sh
 breakfast jfltexx
 
 export ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4G"
+export LC_ALL=C.UTF-8
 
 croot
 brunch jfltexx
