@@ -1,0 +1,20 @@
+- enable dev mode:
+  click 7 times on build number (General->About->Build num)
+  enable "root access" and "android debugging" for adb
+
+- Bootloader update:
+ $make twrp
+ adb devices
+ (mega.nz: https://mega.nz/#!klcEHSZB!dNSvuO4_xcw8YUk-BgrY9mekAnWN2u0HBA0P72FcamQ)
+ adb push lineage-14.1-20180504-nightly-jfltexx-signed.zip /sdcard/
+ -> twrp-> wipe factory reset and upload/install 
+
+- updat eDialer app (proximity sensor fix):
+$adb devices
+$adb root
+ adb remount /system
+ adb push Dialer.apk /system/priv-app/Dialer/Dialer.apk
+
+android/lineage/packages/apps/Dialer: Dialer.diff
+
+
