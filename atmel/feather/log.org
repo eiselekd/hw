@@ -1,0 +1,4 @@
+* atmel ice SWD
+
+https://forum.arduino.cc/index.php?topic=425358.0
+
