@@ -1,0 +1,3 @@
+all:
+	nodejs conv.js
+
