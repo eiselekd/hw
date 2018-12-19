@@ -3,8 +3,12 @@
 https://forum.arduino.cc/index.php?topic=425358.0
 
 
-* bootloader
+* bootloader arduino:
 
 https://learn.adafruit.com/proper-step-debugging-atsamd21-arduino-zero-m0/restoring-bootloader
 NVMCTRL_BOOTPROT 0x7
 use featherm0bootloader_160305.hex
+
+* bootloader uf2:
+
+bootloader-feather_m0-v2.0.0-adafruit.7.bin
