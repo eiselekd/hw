@@ -3,6 +3,8 @@
 https://forum.arduino.cc/index.php?topic=425358.0
 
 
+* circuitpython 
+https://learn.adafruit.com/installing-circuitpython-on-samd21-boards/advanced-creating-your-own-port
 * bootloader arduino:
 
 https://learn.adafruit.com/proper-step-debugging-atsamd21-arduino-zero-m0/restoring-bootloader
