@@ -17,6 +17,8 @@ use featherm0bootloader_160305.hex
 * bootloader uf2:
 
 https://learn.adafruit.com/installing-circuitpython-on-samd21-boards/installing-the-uf2-bootloader
+https://github.com/adafruit/uf2-samdx1
+
 bootloader-feather_m0-v2.0.0-adafruit.7.bin
 
 * gcc
