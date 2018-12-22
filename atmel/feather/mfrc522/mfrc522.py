@@ -35,10 +35,11 @@ class MFRC522:
 
 	self.rst.value = True
 	self.init()
+        self.version()
 
     def _wreg(self, reg, val):
 
-        print("[%02x]<%02x" %(reg,val))
+        print(" [%02x]<%02x" %(reg,val))
 
 	self.cs.value = False
 	self.spi.write(b'%c' % int(0xff & ((reg << 1) & 0x7e)))
@@ -53,7 +54,7 @@ class MFRC522:
 	self.spi.readinto(val)
         self.cs.value = True
 
-        print("[%02x]   >%02x" %(reg,val[0]))
+        print(" [%02x]   >%02x" %(reg,val[0]))
 	return val[0]
 
     def _sflags(self, reg, mask):
@@ -156,11 +157,14 @@ class MFRC522:
 	self._wreg(0x01, 0x0F)
 
     def antenna_on(self, on=True):
-
+        print("antenna_on:")
 	if on and ~(self._rreg(0x14) & 0x03):
 	    self._sflags(0x14, 0x03)
 	else:
 	    self._cflags(0x14, 0x03)
+
+    def version(self):
+        print("version: %02x" %(self._rreg(0x37)))
 
     def request(self, mode):
 
