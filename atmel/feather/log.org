@@ -3,7 +3,7 @@
 https://forum.arduino.cc/index.php?topic=425358.0
 
 
-* circuitpython 
+* circuitpython
 https://learn.adafruit.com/installing-circuitpython-on-samd21-boards/advanced-creating-your-own-port
 ** build
 https://learn.adafruit.com/building-circuitpython?view=all
@@ -23,3 +23,6 @@ bootloader-feather_m0-v2.0.0-adafruit.7.bin
 
 * gcc
 https://developer.arm.com/open-source/gnu-toolchain/gnu-rm/downloads
+
+* spi
+https://github.com/miguelbalboa/rfid
