@@ -132,6 +132,12 @@
 
 * TODO
 
+ - unicorn-py uniform state 
+ - nodejs uniform state 
+
+* TODO
+
+#+BEGIN_SRC javascript
         EXEC_LOOP: for (; ; ) {
             switch (OPbyte) {
                 case 0x88://MOV Gb Eb Move
@@ -3721,3 +3727,6 @@
             }
         }
     } while (--cycles_left); //End Giant Core DO WHILE Execution Loop
+
+#+END_SRC
+

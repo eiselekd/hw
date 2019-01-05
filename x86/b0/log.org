@@ -21,3 +21,5 @@ REX + B0+ rb ib MOV r8***, imm8 OI Valid N.E. Move imm8 to r8
 
 MOV immediate byte into byte register
 
+* testcase
+ 
