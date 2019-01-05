@@ -1,0 +1,21 @@
+
+** TODO 0xf0: LOCK   Assert LOCK# Signal Prefix: 
+
+#+BEGIN_SRC javascript
+    case 0xf0://LOCK   Assert LOCK# Signal Prefix
+        if (CS_flags == init_CS_flags)
+            operation_size_function(eip_offset, OPbyte);
+        CS_flags |= 0x0040;
+        OPbyte = phys_mem8[physmem8_ptr++];
+        OPbyte |= (CS_flags & 0x0100);
+        break;
+#+END_SRC
+
+
+
+* 2-2 Vol. 2A 2.1.1
+
+Group 1
+— Lock and repeat prefixes:
+• LOCK prefix is encoded using F0H.
+

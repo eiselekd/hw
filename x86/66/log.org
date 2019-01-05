@@ -1,0 +1,21 @@
+
+** 0x66 : Operand-size override prefix
+   
+#+BEGIN_SRC javascript
+   case 0x66: //   Operand-size override prefix
+      if (CS_flags == init_CS_flags)
+          operation_size_function(eip_offset, OPbyte);
+      if (init_CS_flags & 0x0100)
+          CS_flags &= ~0x0100;
+      else
+          CS_flags |= 0x0100;
+      OPbyte = phys_mem8[physmem8_ptr++];
+      OPbyte |= (CS_flags & 0x0100);
+   break;
+#+END_SRC                
+
+* 2-2 Vol. 2A 2.1.1
+
+Group 3:
+Operand-size override prefix is encoded using 66H (66H is also used as a mandatory prefix for some
+instructions).

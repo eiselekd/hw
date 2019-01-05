@@ -1,0 +1,23 @@
+** TODO 0x67: Address-size override prefix
+
+#+BEGIN_SRC javascript
+    case 0x67://   Address-size override prefix
+        if (CS_flags == init_CS_flags)
+            operation_size_function(eip_offset, OPbyte);
+        if (init_CS_flags & 0x0080)
+            CS_flags &= ~0x0080;
+        else
+            CS_flags |= 0x0080;
+        OPbyte = phys_mem8[physmem8_ptr++];
+        OPbyte |= (CS_flags & 0x0100);
+        break;
+#+END_SRC                
+
+
+
+* 2-2 Vol. 2A 2.1.1
+
+Group 4
+• 67H—Address-size override prefix.
+
+* decode Table A-2. One-byte Opcode Map: (00H — F7H) 

@@ -1,0 +1,23 @@
+
+** TODO case 0xb0-0xb7: MOV Ib Zb Move
+
+#+BEGIN_SRC javascript
+     x = phys_mem8[physmem8_ptr++]; //r8
+     OPbyte &= 7; //last bits
+     last_tlb_val = (OPbyte & 4) << 1;
+     regs[OPbyte & 3] = (regs[OPbyte & 3] & ~(0xff << last_tlb_val)) | (((x) & 0xff) << last_tlb_val);
+     break EXEC_LOOP;
+#+END_SRC
+                
+* decode MOV MOVE : Vol. 2B 4-35
+
+Table A-2. One-byte Opcode Map: (00H — F7H)  
+
+MOV—Move
+
+B0+ rb ib MOV r8, imm8 OI Valid Valid Move imm8 to r8
+
+REX + B0+ rb ib MOV r8***, imm8 OI Valid N.E. Move imm8 to r8
+
+MOV immediate byte into byte register
+
