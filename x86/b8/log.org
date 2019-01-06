@@ -1,0 +1,54 @@
+** TODO case 0xb8-0xbf: MOV Ivqp Zvqp Move 
+
+#+BEGIN_SRC javascript
+                case 0xb8://MOV Ivqp Zvqp Move
+                case 0xb9:
+                case 0xba:
+                case 0xbb:
+                case 0xbc:
+                case 0xbd:
+                case 0xbe:
+                case 0xbf:
+                    {
+                        x = phys_mem8[physmem8_ptr] | (phys_mem8[physmem8_ptr + 1] << 8) | (phys_mem8[physmem8_ptr + 2] << 16) | (phys_mem8[physmem8_ptr + 3] << 24);
+                        physmem8_ptr += 4;
+                    }
+                    regs[OPbyte & 7] = x;
+                    break EXEC_LOOP;
+
+#+END_SRC
+
+#+BEGIN_SRC c
+    case 0xb8: case 0xb9: case 0xba: case 0xbb:
+    case 0xbc: case 0xbd: case 0xbe: case 0xbf: //case 0xb8 ... 0xbf: /* mov R, Iv */
+#ifdef TARGET_X86_64
+        if (dflag == MO_64) {
+            uint64_t tmp;
+            /* 64 bit case */
+            tmp = cpu_ldq_code(env, s->pc);
+            s->pc += 8;
+            reg = (b & 7) | REX_B(s);
+            tcg_gen_movi_tl(tcg_ctx, *cpu_T[0], tmp);
+            gen_op_mov_reg_v(tcg_ctx, MO_64, reg, *cpu_T[0]);
+        } else
+#endif
+        {
+            ot = dflag; // 16/32 bit select
+            val = insn_get(env, s, ot);
+            reg = (b & 7) | REX_B(s);
+            tcg_gen_movi_tl(tcg_ctx, *cpu_T[0], val);
+            gen_op_mov_reg_v(tcg_ctx, ot, reg, *cpu_T[0]);
+        }
+        break;
+#+END_SRC
+
+* decode MOV MOVE : Vol. 2B 4-35
+
+B8+ rw iw MOV r16, imm16 OI Valid Valid Move imm16 to r16. <= in 16 bit mode codesegment or prefix 0x66
+B8+ rd id MOV r32, imm32 OI Valid Valid Move imm32 to r32.
+
+
+* rtl
+
+ridx=ip[0]&7;
+regs.l[ridx]=ip[1..4]

@@ -1,0 +1,44 @@
+** TODO case 0x89: MOV Gvqp Evqp Move
+#+BEGIN_SRC javascript
+                    mem8 = phys_mem8[physmem8_ptr++];
+                    x = regs[(mem8 >> 3) & 7];
+                    if ((mem8 >> 6) == 3) {
+                        regs[mem8 & 7] = x;
+                    } else {
+                        mem8_loc = segment_translation(mem8);
+                        {
+                            last_tlb_val = _tlb_write_[mem8_loc >>> 12];
+                            if ((last_tlb_val | mem8_loc) & 3) {
+                                __st32_mem8_write(x);
+                            } else {
+                                phys_mem32[(mem8_loc ^ last_tlb_val) >> 2] = x;
+                            }
+                        }
+                    }
+                    break EXEC_LOOP;
+#+END_SRC
+
+#+BEGIN_SRC c
+    case 0x88:
+    case 0x89: /* mov Gv, Ev */
+        ot = mo_b_d(b, dflag);
+        modrm = cpu_ldub_code(env, s->pc++);
+        reg = ((modrm >> 3) & 7) | rex_r;
+
+        /* generate a generic store */
+        gen_ldst_modrm(env, s, modrm, ot, reg, 1);
+        break;
+#+END_SRC
+
+
+
+* decode MOV MOVE : Vol. 2B 4-35
+
+ModR/M : 2.1
+Table 2-2. 32-Bit Addressing Forms with the ModR/M Byte
+
+89 /r MOV r/m16,r16 MR Valid Valid Move r16 to r/m16.
+89 /r MOV r/m32,r32 MR Valid Valid Move r32 to r/m32.
+REX.W + 89 /r MOV r/m64,r64 MR Valid N.E. Move r64 to r/m64.
+
+* rtl

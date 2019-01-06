@@ -127,20 +127,10 @@
 
 #+END_SRC
 
-* opcodes
 
-
-* TODO
-
- - unicorn-py uniform state 
- - nodejs uniform state 
-
-* TODO
+** TODO case 0x88: MOV Gb Eb Move
 
 #+BEGIN_SRC javascript
-        EXEC_LOOP: for (; ; ) {
-            switch (OPbyte) {
-                case 0x88://MOV Gb Eb Move
                     mem8 = phys_mem8[physmem8_ptr++];
                     reg_idx1 = (mem8 >> 3) & 7;
                     x = (regs[reg_idx1 & 3] >> ((reg_idx1 & 4) << 1));
@@ -160,7 +150,23 @@
                         }
                     }
                     break EXEC_LOOP;
-                case 0x89://MOV Gvqp Evqp Move
+#+END_SRC
+
+#+BEGIN_SRC c
+    case 0x88:
+    case 0x89: /* mov Gv, Ev */
+        ot = mo_b_d(b, dflag);
+        modrm = cpu_ldub_code(env, s->pc++);
+        reg = ((modrm >> 3) & 7) | rex_r;
+
+        /* generate a generic store */
+        gen_ldst_modrm(env, s, modrm, ot, reg, 1);
+        break;
+#+END_SRC
+
+
+** TODO case 0x89: MOV Gvqp Evqp Move
+#+BEGIN_SRC javascript
                     mem8 = phys_mem8[physmem8_ptr++];
                     x = regs[(mem8 >> 3) & 7];
                     if ((mem8 >> 6) == 3) {
@@ -177,6 +183,34 @@
                         }
                     }
                     break EXEC_LOOP;
+#+END_SRC
+
+#+BEGIN_SRC c
+    case 0x88:
+    case 0x89: /* mov Gv, Ev */
+        ot = mo_b_d(b, dflag);
+        modrm = cpu_ldub_code(env, s->pc++);
+        reg = ((modrm >> 3) & 7) | rex_r;
+
+        /* generate a generic store */
+        gen_ldst_modrm(env, s, modrm, ot, reg, 1);
+        break;
+#+END_SRC
+
+
+* opcodes
+
+
+* TODO
+
+ - unicorn-py uniform state 
+ - nodejs uniform state 
+
+* TODO
+
+#+BEGIN_SRC javascript
+        EXEC_LOOP: for (; ; ) {
+            switch (OPbyte) {
                 case 0x8a://MOV Eb Gb Move
                     mem8 = phys_mem8[physmem8_ptr++];
                     if ((mem8 >> 6) == 3) {

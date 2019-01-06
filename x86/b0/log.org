@@ -8,6 +8,16 @@
      regs[OPbyte & 3] = (regs[OPbyte & 3] & ~(0xff << last_tlb_val)) | (((x) & 0xff) << last_tlb_val);
      break EXEC_LOOP;
 #+END_SRC
+
+#+BEGIN_SRC c
+    case 0xb0: case 0xb1: case 0xb2: case 0xb3:
+    case 0xb4: case 0xb5: case 0xb6: case 0xb7: //case 0xb0 ... 0xb7: /* mov R, Ib */
+        val = insn_get(env, s, MO_8);
+        tcg_gen_movi_tl(tcg_ctx, *cpu_T[0], val);
+        gen_op_mov_reg_v(tcg_ctx, MO_8, (b & 7) | REX_B(s), *cpu_T[0]);
+        break;
+#+END_SRC
+
                 
 * decode MOV MOVE : Vol. 2B 4-35
 
@@ -21,5 +31,8 @@ REX + B0+ rb ib MOV r8***, imm8 OI Valid N.E. Move imm8 to r8
 
 MOV immediate byte into byte register
 
-* testcase
+* rtl
  
+bidx=(ip[0]&4)?1:0;
+ridx=ip[0]&3;
+regs.l[ridx][bidx]=ip[1]
