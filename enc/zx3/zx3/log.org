@@ -1,0 +1,2 @@
+zx-3: 100080
+Component: xc7z020clg484-1 (active)
