@@ -227,44 +227,13 @@ end system_top;
 
 architecture structure of system_top is
 
-	component MarsZX3 is
+	component testfile is
 		port (
-			DDR_cas_n			: inout std_logic;
-			DDR_cke				: inout std_logic;
-			DDR_ck_n			: inout std_logic;
-			DDR_ck_p			: inout std_logic;
-			DDR_cs_n			: inout std_logic;
-			DDR_reset_n			: inout std_logic;
-			DDR_odt				: inout std_logic;
-			DDR_ras_n			: inout std_logic;
-			DDR_we_n			: inout std_logic;
-			DDR_ba				: inout std_logic_vector ( 2 downto 0 );
-			DDR_addr			: inout std_logic_vector ( 14 downto 0 );
-			DDR_dm				: inout std_logic_vector ( 3 downto 0 );
-			DDR_dq				: inout std_logic_vector ( 31 downto 0 );
-			DDR_dqs_n			: inout std_logic_vector ( 3 downto 0 );
-			DDR_dqs_p			: inout std_logic_vector ( 3 downto 0 );
-			FIXED_IO_mio		: inout std_logic_vector ( 53 downto 0 );
-			FIXED_IO_ddr_vrn	: inout std_logic;
-			FIXED_IO_ddr_vrp	: inout std_logic;
-			FIXED_IO_ps_srstb	: inout std_logic;
-			FIXED_IO_ps_clk		: inout std_logic;
-			FIXED_IO_ps_porb	: inout std_logic;
-			SDIO0_CDN           : in  STD_LOGIC;
-			SDIO0_WP            : in  STD_LOGIC;
-			gpio_tri_o			: out std_logic_vector ( 7 downto 0 );
-			UART_0_txd			: out std_logic;
-			UART_0_rxd			: in std_logic;
-			IIC_0_sda_i			: in std_logic;
-			IIC_0_sda_o			: out std_logic;
-			IIC_0_sda_t			: out std_logic;
-			IIC_0_scl_i			: in std_logic;
-			IIC_0_scl_o			: out std_logic;
-			IIC_0_scl_t			: out std_logic;
-			RESET_N				: out std_logic;
-			FCLK_CLK1			: out std_logic
+			clk		: in std_logic;
+			rst		: in std_logic;
+			fp      : out std_logic_vector(7 downto 0)
 		);
-	end component MarsZX3;
+	end component testfile;
 
 
 	signal IIC_0_sda_i 		: std_logic;
@@ -289,6 +258,8 @@ architecture structure of system_top is
 	signal SDIO0_CDN_s      : std_logic := '0';
 	signal SDIO0_WP_s       : std_logic := '1';
 	
+	signal fp : std_logic_vector(7 downto 0);
+	
 begin
 
 
@@ -296,44 +267,12 @@ begin
 	--	Processing System
 	------------------------------------------------------------------------------------------------
 
-	i_system : MarsZX3
+	v0 : testfile
 		port map (
-			DDR_addr			=> DDR_addr,
-			DDR_ba				=> DDR_ba,
-			DDR_cas_n			=> DDR_cas_n,
-			DDR_ck_n			=> DDR_ck_n,
-			DDR_ck_p			=> DDR_ck_p,
-			DDR_cke				=> DDR_cke,
-			DDR_cs_n			=> DDR_cs_n,
-			DDR_dm				=> DDR_dm,
-			DDR_dq				=> DDR_dq,
-			DDR_dqs_n			=> DDR_dqs_n,
-			DDR_dqs_p			=> DDR_dqs_p,
-			DDR_odt				=> DDR_odt,
-			DDR_ras_n			=> DDR_ras_n,
-			DDR_reset_n			=> DDR_reset_n,
-			DDR_we_n			=> DDR_we_n,
-			FCLK_CLK1			=> Clk,
-			FIXED_IO_ddr_vrn	=> FIXED_IO_ddr_vrn,
-			FIXED_IO_ddr_vrp	=> FIXED_IO_ddr_vrp,
-			FIXED_IO_mio		=> FIXED_IO_mio,
-			FIXED_IO_ps_clk		=> FIXED_IO_ps_clk,
-			FIXED_IO_ps_porb	=> FIXED_IO_ps_porb,
-			FIXED_IO_ps_srstb	=> FIXED_IO_ps_srstb,
-			RESET_N				=> Rst_N,
-			UART_0_rxd			=> UART0_RX,
-			UART_0_txd			=> UART0_TX,
-			SDIO0_CDN           => SDIO0_CDN_s,
-			SDIO0_WP            => SDIO0_WP_s, 
-			gpio_tri_o			=> GPIO,
-			IIC_0_sda_i 		=> IIC_0_sda_i,
-			IIC_0_sda_o  		=> IIC_0_sda_o,
-			IIC_0_sda_t  		=> IIC_0_sda_t,
-			IIC_0_scl_i  		=> IIC_0_scl_i,
-			IIC_0_scl_o  		=> IIC_0_scl_o,
-			IIC_0_scl_t  		=> IIC_0_scl_t
-
-		);
+			clk			=> CLK33,
+            rst         => Rst,
+            fp          => fp
+            );
 
 	-- supply voltage for thh DDR3 memory
     DDR3_VSEL       <= '0'; -- 1.35V
@@ -386,10 +325,14 @@ begin
     end process;
     
 
-    Led_N(3) <= not LedCount(LedCount'high);
-    Led_N(2) <= not GPIO(2);
-    Led_N(1) <= not GPIO(1);
-    Led_N(0) <= not GPIO(0);
+    -- Led_N(3) <= not LedCount(LedCount'high);
+    -- Led_N(2) <= not GPIO(2);
+    -- Led_N(1) <= not GPIO(1);
+    -- Led_N(0) <= not GPIO(0);
+    Led_N(3) <= fp(0);
+    Led_N(2) <= fp(2);
+    Led_N(1) <= fp(4);
+    Led_N(0) <= fp(6);
 
 
 	------------------------------------------------------------------------------------------------
