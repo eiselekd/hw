@@ -1,0 +1,59 @@
+* PG
+
+    /*
+       Typically, the upper 20 bits of CR3 become the page directory base register (PDBR),
+       which stores the physical address of the first page directory entry.
+    */
+    function do_tlb_set_page(Gd, Hd, ja) {
+        var Id, Jd, error_code, Kd, Ld, Md, Nd, ud, Od;
+        if (!(cpu.cr0 & (1 << 31))) { //CR0: bit31 PG Paging If 1, enable paging and use the CR3 register, else disable paging
+            cpu.tlb_set_page(Gd & -4096, Gd & -4096, 1);
+        } else {
+            Id = (cpu.cr3 & -4096) + ((Gd >> 20) & 0xffc);
+            Jd = cpu.ld32_phys(Id);
+            if (!(Jd & 0x00000001)) {
+                error_code = 0;
+            } else {
+                if (!(Jd & 0x00000020)) {
+                    Jd |= 0x00000020;
+                    cpu.st32_phys(Id, Jd);
+                }
+                Kd = (Jd & -4096) + ((Gd >> 10) & 0xffc);
+                Ld = cpu.ld32_phys(Kd);
+                if (!(Ld & 0x00000001)) {
+                    error_code = 0;
+                } else {
+                    Md = Ld & Jd;
+                    if (ja && !(Md & 0x00000004)) {
+                        error_code = 0x01;
+                    } else if (Hd && !(Md & 0x00000002)) {
+                        error_code = 0x01;
+                    } else {
+                        Nd = (Hd && !(Ld & 0x00000040));
+                        if (!(Ld & 0x00000020) || Nd) {
+                            Ld |= 0x00000020;
+                            if (Nd)
+                                Ld |= 0x00000040;
+                            cpu.st32_phys(Kd, Ld);
+                        }
+                        ud = 0;
+                        if ((Ld & 0x00000040) && (Md & 0x00000002))
+                            ud = 1;
+                        Od = 0;
+                        if (Md & 0x00000004)
+                            Od = 1;
+                        cpu.tlb_set_page(Gd & -4096, Ld & -4096, ud, Od);
+                        return;
+                    }
+                }
+            }
+            error_code |= Hd << 1;
+            if (ja)
+                error_code |= 0x04;
+            cpu.cr2 = Gd;
+            abort_with_error_code(14, error_code);
+        }
+    }
+
+* rtl
+
