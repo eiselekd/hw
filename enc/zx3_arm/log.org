@@ -1,0 +1,6 @@
+
+vivado:
+
+source scrips/create_project.tcl
+
+
