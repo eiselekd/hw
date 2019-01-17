@@ -1,5 +1,6 @@
 * PG
 
+
     /*
        Typically, the upper 20 bits of CR3 become the page directory base register (PDBR),
        which stores the physical address of the first page directory entry.
@@ -54,6 +55,314 @@
             abort_with_error_code(14, error_code);
         }
     }
+
+* segmentation / paging
+
+Vol 2a, page: 2-6
+
+    function init_segment_local_vars() {
+        CS_base = cpu.segs[1].base;//CS
+        SS_base = cpu.segs[2].base;//SS
+        if (cpu.segs[2].flags & (1 << 22))
+            SS_mask = -1;
+        else
+            SS_mask = 0xffff;
+        FS_usage_flag = (((CS_base | SS_base | cpu.segs[3].base | cpu.segs[0].base) == 0) && SS_mask == -1);
+        if (cpu.segs[1].flags & (1 << 22)) // D/B — Default operation size (0 = 16-bit segment; 1 = 32-bit segment)
+            init_CS_flags = 0;
+        else
+            init_CS_flags = 0x0100 | 0x0080;
+    }
+
+    /*
+       Segmented Memory Mode Routines
+       ================================================================================
+
+       Segmented Memory
+       -----------------
+       x86 memory segmentation refers to the implementation of memory
+       segmentation on the x86 architecture. Memory is divided into portions
+       that may be addressed by a single index register without changing a
+       16-bit segment selector. In real mode or V86 mode, a segment is always
+       64 kilobytes in size (using 16-bit offsets). In protected mode, a
+       segment can have variable length. Segments can overlap.
+
+       Within the x86 architectures, when operating in the real (compatible)
+       mode, physical address is computed as:
+
+       Address = 16*segment + offset
+
+       The 16-bit segment register is shifted
+       left by 4 bits and added to a 16-bit offset, resulting in a 20-bit
+       address.
+
+       When the 80386 is used to execute software designed for architectures
+       that don't have segments, it may be expedient to effectively "turn
+       off" the segmentation features of the 80386. The 80386 does not have a
+       mode that disables segmentation, but the same effect can be achieved
+       by initially loading the segment registers with selectors for
+       descriptors that encompass the entire 32-bit linear address
+       space. Once loaded, the segment registers don't need to be
+       changed. The 32-bit offsets used by 80386 instructions are adequate to
+       address the entire linear-address space.
+
+     */
+
+ModR/M: 6-7:Mod 
+        3-5:Reg/Opcode 
+        0-2:R/M
+
+
+    /*
+       segment translation routine (I believe):
+       Translates Logical Memory Address to Linear Memory Address
+     */
+    function segment_translation(mem8) {
+        var base, mem8_loc, Qb, Rb, Sb, Tb;
+        if (FS_usage_flag && (CS_flags & (0x000f | 0x0080)) == 0) {
+            switch ((mem8 & 7) | ((mem8 >> 3) & 0x18)) { /*  r/m : mod */
+                case 0x04: /* mod = 00  r/m: 4*/
+                    Qb = phys_mem8[physmem8_ptr++];
+                    base = Qb & 7;
+                    if (base == 5) {
+                        {
+                            mem8_loc = phys_mem8[physmem8_ptr] | (phys_mem8[physmem8_ptr + 1] << 8) | (phys_mem8[physmem8_ptr + 2] << 16) | (phys_mem8[physmem8_ptr + 3] << 24);
+                            physmem8_ptr += 4;
+                        }
+                    } else {
+                        mem8_loc = regs[base];
+                    }
+                    Rb = (Qb >> 3) & 7;
+                    if (Rb != 4) {
+                        mem8_loc = (mem8_loc + (regs[Rb] << (Qb >> 6))) >> 0;
+                    }
+                    break;
+                case 0x0c: /* mod = 01  r/m: 4 */
+                    Qb = phys_mem8[physmem8_ptr++];
+                    mem8_loc = ((phys_mem8[physmem8_ptr++] << 24) >> 24);
+                    base = Qb & 7;
+                    mem8_loc = (mem8_loc + regs[base]) >> 0;
+                    Rb = (Qb >> 3) & 7;
+                    if (Rb != 4) {
+                        mem8_loc = (mem8_loc + (regs[Rb] << (Qb >> 6))) >> 0;
+                    }
+                    break;
+                case 0x14: /* mod = 10  r/m: 4*/
+                    Qb = phys_mem8[physmem8_ptr++];
+                    {
+                        mem8_loc = phys_mem8[physmem8_ptr] | (phys_mem8[physmem8_ptr + 1] << 8) | (phys_mem8[physmem8_ptr + 2] << 16) | (phys_mem8[physmem8_ptr + 3] << 24);
+                        physmem8_ptr += 4;
+                    }
+                    base = Qb & 7;
+                    mem8_loc = (mem8_loc + regs[base]) >> 0;
+                    Rb = (Qb >> 3) & 7;
+                    if (Rb != 4) {
+                        mem8_loc = (mem8_loc + (regs[Rb] << (Qb >> 6))) >> 0;
+                    }
+                    break;
+                case 0x05: /* mod = 00  r/m: 5*/
+                    {
+                        mem8_loc = phys_mem8[physmem8_ptr] | (phys_mem8[physmem8_ptr + 1] << 8) | (phys_mem8[physmem8_ptr + 2] << 16) | (phys_mem8[physmem8_ptr + 3] << 24);
+                        physmem8_ptr += 4;
+                    }
+                    break;
+                case 0x00:
+                case 0x01:
+                case 0x02:
+                case 0x03:
+                case 0x06:
+                case 0x07: /* mod = 00  r/m: 0-7 | 4,5 missing*/
+                    base = mem8 & 7;
+                    mem8_loc = regs[base];
+                    break;
+                case 0x08:
+                case 0x09:
+                case 0x0a:
+                case 0x0b:
+                case 0x0d:
+                case 0x0e:
+                case 0x0f:  /* mod = 01  r/m: 0-7 | 4 missing*/
+                    mem8_loc = ((phys_mem8[physmem8_ptr++] << 24) >> 24);
+                    base = mem8 & 7;
+                    mem8_loc = (mem8_loc + regs[base]) >> 0;
+                    break;
+                case 0x10:
+                case 0x11:
+                case 0x12:
+                case 0x13:
+                case 0x15:
+                case 0x16:
+                case 0x17: /* mod = 10  r/m: 0-7 | 4 missing*/
+                default:
+                    {
+                        mem8_loc = phys_mem8[physmem8_ptr] | (phys_mem8[physmem8_ptr + 1] << 8) | (phys_mem8[physmem8_ptr + 2] << 16) | (phys_mem8[physmem8_ptr + 3] << 24);
+                        physmem8_ptr += 4;
+                    }
+                    base = mem8 & 7;
+                    mem8_loc = (mem8_loc + regs[base]) >> 0;
+                    break;
+            }
+            return mem8_loc;
+        } else if (CS_flags & 0x0080) {
+            if ((mem8 & 0xc7) == 0x06) {
+                mem8_loc = ld16_mem8_direct();
+                Tb = 3;
+            } else {
+                switch (mem8 >> 6) {
+                    case 0: /* mod = 00 */
+                        mem8_loc = 0;
+                        break;
+                    case 1: /* mod = 10 */
+                        mem8_loc = ((phys_mem8[physmem8_ptr++] << 24) >> 24);
+                        break;
+                    default: /* mod = xx */
+                        mem8_loc = ld16_mem8_direct();
+                        break;
+                }
+                switch (mem8 & 7) {
+                    case 0:
+                        mem8_loc = (mem8_loc + regs[3] + regs[6]) & 0xffff;
+                        Tb = 3;
+                        break;
+                    case 1:
+                        mem8_loc = (mem8_loc + regs[3] + regs[7]) & 0xffff;
+                        Tb = 3;
+                        break;
+                    case 2:
+                        mem8_loc = (mem8_loc + regs[5] + regs[6]) & 0xffff;
+                        Tb = 2;
+                        break;
+                    case 3:
+                        mem8_loc = (mem8_loc + regs[5] + regs[7]) & 0xffff;
+                        Tb = 2;
+                        break;
+                    case 4:
+                        mem8_loc = (mem8_loc + regs[6]) & 0xffff;
+                        Tb = 3;
+                        break;
+                    case 5:
+                        mem8_loc = (mem8_loc + regs[7]) & 0xffff;
+                        Tb = 3;
+                        break;
+                    case 6:
+                        mem8_loc = (mem8_loc + regs[5]) & 0xffff;
+                        Tb = 2;
+                        break;
+                    case 7:
+                    default:
+                        mem8_loc = (mem8_loc + regs[3]) & 0xffff;
+                        Tb = 3;
+                        break;
+                }
+            }
+            Sb = CS_flags & 0x000f;
+            if (Sb == 0) {
+                Sb = Tb;
+            } else {
+                Sb--;
+            }
+            mem8_loc = (mem8_loc + cpu.segs[Sb].base) >> 0;
+            return mem8_loc;
+        } else {
+            switch ((mem8 & 7) | ((mem8 >> 3) & 0x18)) {
+                case 0x04: /* mod = 00 */
+                    Qb = phys_mem8[physmem8_ptr++];
+                    base = Qb & 7;
+                    if (base == 5) {
+                        {
+                            mem8_loc = phys_mem8[physmem8_ptr] | (phys_mem8[physmem8_ptr + 1] << 8) | (phys_mem8[physmem8_ptr + 2] << 16) | (phys_mem8[physmem8_ptr + 3] << 24);
+                            physmem8_ptr += 4;
+                        }
+                        base = 0;
+                    } else {
+                        mem8_loc = regs[base];
+                    }
+                    Rb = (Qb >> 3) & 7;
+                    if (Rb != 4) {
+                        mem8_loc = (mem8_loc + (regs[Rb] << (Qb >> 6))) >> 0;
+                    }
+                    break;
+                case 0x0c: /* mod = 01 */
+                    Qb = phys_mem8[physmem8_ptr++];
+                    mem8_loc = ((phys_mem8[physmem8_ptr++] << 24) >> 24);
+                    base = Qb & 7;
+                    mem8_loc = (mem8_loc + regs[base]) >> 0;
+                    Rb = (Qb >> 3) & 7;
+                    if (Rb != 4) {
+                        mem8_loc = (mem8_loc + (regs[Rb] << (Qb >> 6))) >> 0;
+                    }
+                    break;
+                case 0x14: /* mod = 10 */
+                    Qb = phys_mem8[physmem8_ptr++];
+                    {
+                        mem8_loc = phys_mem8[physmem8_ptr] | (phys_mem8[physmem8_ptr + 1] << 8) | (phys_mem8[physmem8_ptr + 2] << 16) | (phys_mem8[physmem8_ptr + 3] << 24);
+                        physmem8_ptr += 4;
+                    }
+                    base = Qb & 7;
+                    mem8_loc = (mem8_loc + regs[base]) >> 0;
+                    Rb = (Qb >> 3) & 7;
+                    if (Rb != 4) {
+                        mem8_loc = (mem8_loc + (regs[Rb] << (Qb >> 6))) >> 0;
+                    }
+                    break;
+                case 0x05: /* mod = 00 */
+                    {
+                        mem8_loc = phys_mem8[physmem8_ptr] | (phys_mem8[physmem8_ptr + 1] << 8) | (phys_mem8[physmem8_ptr + 2] << 16) | (phys_mem8[physmem8_ptr + 3] << 24);
+                        physmem8_ptr += 4;
+                    }
+                    base = 0;
+                    break;
+                case 0x00:
+                case 0x01:
+                case 0x02:
+                case 0x03:
+                case 0x06:
+                case 0x07: /* mod = 00 */
+                    base = mem8 & 7;
+                    mem8_loc = regs[base];
+                    break;
+                case 0x08:
+                case 0x09:
+                case 0x0a:
+                case 0x0b:
+                case 0x0d:
+                case 0x0e:
+                case 0x0f: /* mod = 01 */
+                    mem8_loc = ((phys_mem8[physmem8_ptr++] << 24) >> 24);
+                    base = mem8 & 7;
+                    mem8_loc = (mem8_loc + regs[base]) >> 0;
+                    break;
+                case 0x10:
+                case 0x11:
+                case 0x12:
+                case 0x13:
+                case 0x15:
+                case 0x16:
+                case 0x17: /* mod = 10 */
+                default:
+                    {
+                        mem8_loc = phys_mem8[physmem8_ptr] | (phys_mem8[physmem8_ptr + 1] << 8) | (phys_mem8[physmem8_ptr + 2] << 16) | (phys_mem8[physmem8_ptr + 3] << 24);
+                        physmem8_ptr += 4;
+                    }
+                    base = mem8 & 7;
+                    mem8_loc = (mem8_loc + regs[base]) >> 0;
+                    break;
+            }
+            Sb = CS_flags & 0x000f;
+            if (Sb == 0) {
+                if (base == 4 || base == 5)
+                    Sb = 2;
+                else
+                    Sb = 3;
+            } else {
+                Sb--;
+            }
+            mem8_loc = (mem8_loc + cpu.segs[Sb].base) >> 0;
+            return mem8_loc;
+        }
+    }
+
+
 
 * rtl
 
