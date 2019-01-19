@@ -1,0 +1,4 @@
+
+state.addseg /* non zero if either DS/ES/SS have a non zero base */
+state.reg    /* reg */
+state.prefixseg /* seg prefix override */

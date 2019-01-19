@@ -699,3 +699,98 @@ static void gen_lea_modrm(CPUX86State *env, DisasContext *s, int modrm)
 
 * rtl
 
+switch state.amode:
+case MO32:
+case MO64:
+
+  if ModRM.rm = 4:
+    SIB=IP.b++
+    _base=SIB.base;
+    _scale=SIB.scale;
+    _index=SIB.index;
+  else:
+    _base=ModRM.rm
+    _scale=0;
+    undef(_index);
+
+  switch ModRM.mod:
+    case 0:
+      if _base = 5:
+        undef(_base)
+        _disp=IP.l++
+        if state.code64 && SIB.defined:
+          _disp += state.pc + s.rip_off;
+      else:
+        _disp=0;
+    case 1:
+      _disp=IP.b++
+    case 2:
+    case 3:
+      _disp=IP.l++
+
+  if _index.defined:
+    if _scale == 0:
+      sum = reg.l[_index]
+    else:
+      sum = reg.l[_index] << scale
+    if _base.defined:
+      sum += reg.l[_base]
+  elif _base.defined:
+    sum += reg.l[_base]
+
+  if state.addseg || state.prefixseg: 
+    if state.prefixseg:
+      seg = state.prefixseg;
+    else:
+      if _base == R_EBP || _base == R_ESP:
+        seg=R_SS
+      else:
+        seg=R_DS
+    sum += segs[seg].base
+
+case MO16:
+  _rm = ModRM.rm;
+  switch ModRM.mod:
+  case 0:
+    if _rm = 6:
+      _disp=IP.w++
+      undef(_rm);
+    else:
+      _disp=0;
+  case 1:
+    _disp=IP.b++
+  case 2:
+  case 3:
+    _disp=IP.w++
+
+  if _rm.defined:
+    switch _rm:
+    case 0:
+      sum = reg[R_EBX] + reg[R_ESI]
+    case 1:
+      sum = reg[R_EBX] + reg[R_EDI]
+    case 2:
+      sum = reg[R_EBP] + reg[R_ESI]
+    case 3:
+      sum = reg[R_EBP] + reg[R_EDI]
+    case 4:
+      sum = reg[R_ESI]
+    case 5:
+      sum = reg[R_EDI]
+    case 6:
+      sum = reg[R_EBP]
+    case 7:
+      sum = reg[R_EBX]
+    sum += _disp
+  else:
+    sum = _disp;
+  
+  if state.addseg || state.prefixseg: 
+    if state.prefixseg:
+      seg = state.prefixseg;
+    else:
+      if _rm.defined && (_rm == 2 || _rm == 3 || _rm == 6:
+        seg=R_SS
+      else:
+        seg=R_DS
+    sum += segs[seg].base
