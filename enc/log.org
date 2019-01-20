@@ -1,0 +1,4 @@
+* spi
+
+http://svn.navi.cx/misc/trunk/nds/spi-mem-emulator/
+
