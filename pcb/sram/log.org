@@ -1,0 +1,3 @@
+
+* PCB
+http://support.seeedstudio.com/knowledgebase/articles/1118680-how-to-generate-gerber-files-in-altium-designer
