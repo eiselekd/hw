@@ -697,6 +697,13 @@ static void gen_lea_modrm(CPUX86State *env, DisasContext *s, int modrm)
 }
 
 
+* v
+0:
+if modrm.rm = 4:
+  mc_f.t0.src=modrm.rg[1:0]
+  mc_f.d1.src=modrm.rg[1:0]
+  
+
 * rtl
 
 switch state.amode:
@@ -794,3 +801,6 @@ case MO16:
       else:
         seg=R_DS
     sum += segs[seg].base
+
+
+

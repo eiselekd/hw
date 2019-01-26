@@ -62,8 +62,22 @@ segment registers: 3A 3.4.5
 
 # write reg.b -> reg.b/mem.b
 
-t0.b=regs[ModRM.reg[0:2]].b[ModRM.reg[3]]     #high/low byte of ModRM.reg
+t0.b=regs[ModRM.reg[0:1]].b[ModRM.reg[2]]     #high/low byte of ModRM.reg
 if ModRM.mod = 3:
-   regs[ModRM.rm[0:2]].b[ModRM.rm[3]]=t0.b    #store into high/low byte of ModRM.rm
+   regs[ModRM.rm[0:1]].b[ModRM.rm[2]]=t0.b    #store into high/low byte of ModRM.rm
 else:
    mem.b[tlb(seg(ModRM))]=t0.b                          
+
+
+* v
+
+0:
+0.mc_f.t0.src=modrm.rg[1:0]
+0.mc_f.d1.src=modrm.rg[1:0]
+if ModRM.mod==3:
+  1.mc_w.rd.s=b
+  1.mc_w.rd.o=modrm.rm[2]
+  1.mc_w.rd.e=0
+else:
+  1.mc_m_s.s=b 
+  

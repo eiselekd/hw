@@ -36,3 +36,7 @@ MOV immediate byte into byte register
 bidx=(ip[0]&4)?1:0;
 ridx=ip[0]&3;
 regs.l[ridx][bidx]=ip[1]
+
+
+
+
