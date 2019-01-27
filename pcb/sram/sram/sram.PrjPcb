@@ -301,362 +301,266 @@ DocumentPath=Project Outputs for sram\sram.DRR
 DItemRevisionGUID=
 
 [GeneratedDocument3]
-DocumentPath=..\..\..\..\gerber\GerberX2\sram.EXTREP
-DItemRevisionGUID=
-
-[GeneratedDocument4]
 DocumentPath=Project Outputs for Free Documents\GerberX2\sram.EXTREP
 DItemRevisionGUID=
 
-[GeneratedDocument5]
+[GeneratedDocument4]
 DocumentPath=Project Outputs for sram\sram.EXTREP
 DItemRevisionGUID=
 
-[GeneratedDocument6]
+[GeneratedDocument5]
 DocumentPath=Project Outputs for sram\sram.GBL
 DItemRevisionGUID=
 
-[GeneratedDocument7]
+[GeneratedDocument6]
 DocumentPath=Project Outputs for sram\sram.GBO
 DItemRevisionGUID=
 
-[GeneratedDocument8]
+[GeneratedDocument7]
 DocumentPath=Project Outputs for sram\sram.GBP
 DItemRevisionGUID=
 
-[GeneratedDocument9]
+[GeneratedDocument8]
 DocumentPath=Project Outputs for sram\sram.GBS
 DItemRevisionGUID=
 
-[GeneratedDocument10]
+[GeneratedDocument9]
 DocumentPath=Project Outputs for sram\sram.GD1
 DItemRevisionGUID=
 
-[GeneratedDocument11]
+[GeneratedDocument10]
 DocumentPath=Project Outputs for sram\sram.GG1
 DItemRevisionGUID=
 
-[GeneratedDocument12]
+[GeneratedDocument11]
 DocumentPath=Project Outputs for sram\sram.GKO
 DItemRevisionGUID=
 
-[GeneratedDocument13]
+[GeneratedDocument12]
 DocumentPath=Project Outputs for sram\sram.GM1
 DItemRevisionGUID=
 
-[GeneratedDocument14]
+[GeneratedDocument13]
 DocumentPath=Project Outputs for sram\sram.GM4
 DItemRevisionGUID=
 
-[GeneratedDocument15]
+[GeneratedDocument14]
 DocumentPath=Project Outputs for sram\sram.GM13
 DItemRevisionGUID=
 
-[GeneratedDocument16]
+[GeneratedDocument15]
 DocumentPath=Project Outputs for sram\sram.GM15
 DItemRevisionGUID=
 
-[GeneratedDocument17]
+[GeneratedDocument16]
 DocumentPath=Project Outputs for sram\sram.GM16
 DItemRevisionGUID=
 
-[GeneratedDocument18]
+[GeneratedDocument17]
 DocumentPath=Project Outputs for sram\sram.GTL
 DItemRevisionGUID=
 
-[GeneratedDocument19]
+[GeneratedDocument18]
 DocumentPath=Project Outputs for sram\sram.GTO
 DItemRevisionGUID=
 
-[GeneratedDocument20]
+[GeneratedDocument19]
 DocumentPath=Project Outputs for sram\sram.GTP
 DItemRevisionGUID=
 
-[GeneratedDocument21]
+[GeneratedDocument20]
 DocumentPath=Project Outputs for sram\sram.GTS
 DItemRevisionGUID=
 
-[GeneratedDocument22]
+[GeneratedDocument21]
 DocumentPath=Project Outputs for sram\sram.LDP
 DItemRevisionGUID=
 
-[GeneratedDocument23]
-DocumentPath=..\..\..\..\gerber\GerberX2\sram.REP
-DItemRevisionGUID=
-
-[GeneratedDocument24]
+[GeneratedDocument22]
 DocumentPath=Project Outputs for Free Documents\GerberX2\sram.REP
 DItemRevisionGUID=
 
-[GeneratedDocument25]
+[GeneratedDocument23]
 DocumentPath=Project Outputs for sram\sram.REP
 DItemRevisionGUID=
 
-[GeneratedDocument26]
-DocumentPath=..\..\..\..\gerber\GerberX2\sram.RUL
-DItemRevisionGUID=
-
-[GeneratedDocument27]
+[GeneratedDocument24]
 DocumentPath=Project Outputs for Free Documents\GerberX2\sram.RUL
 DItemRevisionGUID=
 
-[GeneratedDocument28]
+[GeneratedDocument25]
 DocumentPath=Project Outputs for sram\sram.RUL
 DItemRevisionGUID=
 
-[GeneratedDocument29]
+[GeneratedDocument26]
 DocumentPath=Project Outputs for sram\sram.TXT
 DItemRevisionGUID=
 
-[GeneratedDocument30]
-DocumentPath=..\..\..\..\gerber\GerberX2\sram_Copper_Signal_Bot.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument31]
+[GeneratedDocument27]
 DocumentPath=Project Outputs for Free Documents\GerberX2\sram_Copper_Signal_Bot.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument32]
+[GeneratedDocument28]
 DocumentPath=Project Outputs for sram\sram_Copper_Signal_Bot.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument33]
-DocumentPath=..\..\..\..\gerber\GerberX2\sram_Copper_Signal_Top.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument34]
+[GeneratedDocument29]
 DocumentPath=Project Outputs for Free Documents\GerberX2\sram_Copper_Signal_Top.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument35]
+[GeneratedDocument30]
 DocumentPath=Project Outputs for sram\sram_Copper_Signal_Top.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument36]
-DocumentPath=..\..\..\..\gerber\GerberX2\sram_Drawing_1.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument37]
+[GeneratedDocument31]
 DocumentPath=Project Outputs for Free Documents\GerberX2\sram_Drawing_1.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument38]
+[GeneratedDocument32]
 DocumentPath=Project Outputs for sram\sram_Drawing_1.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument39]
-DocumentPath=..\..\..\..\gerber\GerberX2\sram_Drillmap_1.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument40]
+[GeneratedDocument33]
 DocumentPath=Project Outputs for Free Documents\GerberX2\sram_Drillmap_1.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument41]
+[GeneratedDocument34]
 DocumentPath=Project Outputs for sram\sram_Drillmap_1.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument42]
-DocumentPath=..\..\..\..\gerber\GerberX2\sram_Keep-out.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument43]
+[GeneratedDocument35]
 DocumentPath=Project Outputs for Free Documents\GerberX2\sram_Keep-out.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument44]
+[GeneratedDocument36]
 DocumentPath=Project Outputs for sram\sram_Keep-out.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument45]
-DocumentPath=..\..\..\..\gerber\GerberX2\sram_Legend_Bot.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument46]
+[GeneratedDocument37]
 DocumentPath=Project Outputs for Free Documents\GerberX2\sram_Legend_Bot.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument47]
+[GeneratedDocument38]
 DocumentPath=Project Outputs for sram\sram_Legend_Bot.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument48]
-DocumentPath=..\..\..\..\gerber\GerberX2\sram_Legend_Top.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument49]
+[GeneratedDocument39]
 DocumentPath=Project Outputs for Free Documents\GerberX2\sram_Legend_Top.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument50]
+[GeneratedDocument40]
 DocumentPath=Project Outputs for sram\sram_Legend_Top.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument51]
-DocumentPath=..\..\..\..\gerber\GerberX2\sram_Mechanical_1.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument52]
+[GeneratedDocument41]
 DocumentPath=Project Outputs for Free Documents\GerberX2\sram_Mechanical_1.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument53]
+[GeneratedDocument42]
 DocumentPath=Project Outputs for sram\sram_Mechanical_1.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument54]
-DocumentPath=..\..\..\..\gerber\GerberX2\sram_Mechanical_4.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument55]
+[GeneratedDocument43]
 DocumentPath=Project Outputs for Free Documents\GerberX2\sram_Mechanical_4.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument56]
+[GeneratedDocument44]
 DocumentPath=Project Outputs for sram\sram_Mechanical_4.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument57]
-DocumentPath=..\..\..\..\gerber\GerberX2\sram_Mechanical_13.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument58]
+[GeneratedDocument45]
 DocumentPath=Project Outputs for Free Documents\GerberX2\sram_Mechanical_13.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument59]
+[GeneratedDocument46]
 DocumentPath=Project Outputs for sram\sram_Mechanical_13.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument60]
-DocumentPath=..\..\..\..\gerber\GerberX2\sram_Mechanical_15.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument61]
+[GeneratedDocument47]
 DocumentPath=Project Outputs for Free Documents\GerberX2\sram_Mechanical_15.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument62]
+[GeneratedDocument48]
 DocumentPath=Project Outputs for sram\sram_Mechanical_15.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument63]
-DocumentPath=..\..\..\..\gerber\GerberX2\sram_Mechanical_16.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument64]
+[GeneratedDocument49]
 DocumentPath=Project Outputs for Free Documents\GerberX2\sram_Mechanical_16.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument65]
+[GeneratedDocument50]
 DocumentPath=Project Outputs for sram\sram_Mechanical_16.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument66]
-DocumentPath=..\..\..\..\gerber\GerberX2\sram_NPTH_Drill.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument67]
+[GeneratedDocument51]
 DocumentPath=Project Outputs for Free Documents\GerberX2\sram_NPTH_Drill.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument68]
+[GeneratedDocument52]
 DocumentPath=Project Outputs for sram\sram_NPTH_Drill.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument69]
-DocumentPath=..\..\..\..\gerber\GerberX2\sram_Pads_Bot.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument70]
+[GeneratedDocument53]
 DocumentPath=Project Outputs for Free Documents\GerberX2\sram_Pads_Bot.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument71]
+[GeneratedDocument54]
 DocumentPath=Project Outputs for sram\sram_Pads_Bot.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument72]
-DocumentPath=..\..\..\..\gerber\GerberX2\sram_Pads_Top.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument73]
+[GeneratedDocument55]
 DocumentPath=Project Outputs for Free Documents\GerberX2\sram_Pads_Top.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument74]
+[GeneratedDocument56]
 DocumentPath=Project Outputs for sram\sram_Pads_Top.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument75]
-DocumentPath=..\..\..\..\gerber\GerberX2\sram_Paste_Bot.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument76]
+[GeneratedDocument57]
 DocumentPath=Project Outputs for Free Documents\GerberX2\sram_Paste_Bot.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument77]
+[GeneratedDocument58]
 DocumentPath=Project Outputs for sram\sram_Paste_Bot.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument78]
-DocumentPath=..\..\..\..\gerber\GerberX2\sram_Paste_Top.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument79]
+[GeneratedDocument59]
 DocumentPath=Project Outputs for Free Documents\GerberX2\sram_Paste_Top.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument80]
+[GeneratedDocument60]
 DocumentPath=Project Outputs for sram\sram_Paste_Top.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument81]
-DocumentPath=..\..\..\..\gerber\GerberX2\sram_Profile.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument82]
+[GeneratedDocument61]
 DocumentPath=Project Outputs for Free Documents\GerberX2\sram_Profile.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument83]
+[GeneratedDocument62]
 DocumentPath=Project Outputs for sram\sram_Profile.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument84]
-DocumentPath=..\..\..\..\gerber\GerberX2\sram_PTH_Drill.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument85]
+[GeneratedDocument63]
 DocumentPath=Project Outputs for Free Documents\GerberX2\sram_PTH_Drill.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument86]
+[GeneratedDocument64]
 DocumentPath=Project Outputs for sram\sram_PTH_Drill.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument87]
-DocumentPath=..\..\..\..\gerber\GerberX2\sram_Soldermask_Bot.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument88]
+[GeneratedDocument65]
 DocumentPath=Project Outputs for Free Documents\GerberX2\sram_Soldermask_Bot.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument89]
+[GeneratedDocument66]
 DocumentPath=Project Outputs for sram\sram_Soldermask_Bot.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument90]
-DocumentPath=..\..\..\..\gerber\GerberX2\sram_Soldermask_Top.gbr
-DItemRevisionGUID=
-
-[GeneratedDocument91]
+[GeneratedDocument67]
 DocumentPath=Project Outputs for Free Documents\GerberX2\sram_Soldermask_Top.gbr
 DItemRevisionGUID=
 
-[GeneratedDocument92]
+[GeneratedDocument68]
 DocumentPath=Project Outputs for sram\sram_Soldermask_Top.gbr
 DItemRevisionGUID=
 
