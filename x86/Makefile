@@ -5,7 +5,7 @@ uni:
 
 
 prepare:
-	apt-get install verilator cmake
+	sudo apt-get install verilator cmake
 
 keystone-build:
 	mkdir -p keystone-src/build keystone-lib/
