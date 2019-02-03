@@ -29,13 +29,14 @@
 
 * decode MOV MOVE : Vol. 2B 4-35
 
-8B /r MOV r16,r/m16 RM Valid Valid Move r/m16 to r16.
+8B /r MOV r16,r/m16 RM Valid Valid Move r/m16 to r16.        // prefix or segment switch
 8B /r MOV r32,r/m32 RM Valid Valid Move r/m32 to r32.
 REX.W + 8B /r MOV r64,r/m64 RM Valid N.E. Move r/m64 to r64.
 
 * rtl
 
-# write reg.w/mem.w -> reg.w 
+# write reg.w/mem.w -> reg.w
+# todo: 16 bit mode  
 if ModRM.mod = 3:
   t0.w = regs[ModRM.rm[0:1]]
 else:
