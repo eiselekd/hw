@@ -1,0 +1,47 @@
+* TODO case 0x8a://MOV Eb Gb Move
+
+#+BEGIN_SRC javascript
+                case 0x8a://MOV Eb Gb Move
+                    mem8 = phys_mem8[physmem8_ptr++];
+                    if ((mem8 >> 6) == 3) {
+                        reg_idx0 = mem8 & 7;
+                        x = (regs[reg_idx0 & 3] >> ((reg_idx0 & 4) << 1));
+                    } else {
+                        mem8_loc = segment_translation(mem8);
+                        x = (((last_tlb_val = _tlb_read_[mem8_loc >>> 12]) == -1) ? __ld_8bits_mem8_read() : phys_mem8[mem8_loc ^ last_tlb_val]);
+                    }
+                    reg_idx1 = (mem8 >> 3) & 7;
+                    last_tlb_val = (reg_idx1 & 4) << 1;
+                    regs[reg_idx1 & 3] = (regs[reg_idx1 & 3] & ~(0xff << last_tlb_val)) | (((x) & 0xff) << last_tlb_val);
+                    break EXEC_LOOP;
+#+END_SRC
+
+#+BEGIN_SRC c
+
+    case 0x8a:
+    case 0x8b: /* mov Ev, Gv */
+        ot = mo_b_d(b, dflag);
+        modrm = cpu_ldub_code(env, s->pc++);
+        reg = ((modrm >> 3) & 7) | rex_r;
+
+        gen_ldst_modrm(env, s, modrm, ot, OR_TMP0, 0);
+        gen_op_mov_reg_v(tcg_ctx, ot, reg, *cpu_T[0]);
+        break;
+
+#+END_SRC
+
+* decode MOV MOVE : Vol. 2B 4-35
+
+8A /r MOV r8,r/m8 RM Valid Valid Move r/m8 to r8.
+REX + 8A /r MOV r8***,r/m8*** RM Valid N.E. Move r/m8 to r8.
+
+* rtl
+
+# write reg.b/mem.b -> reg.b 
+
+if ModRM.mod = 3:
+  t0.b = regs[ModRM.rm[0:1]].b[ModRM.rm[2]]
+else:
+  t0.b = mem.b[tlb(seg(ModRM))]
+regs[ModRM.reg[0:1]].b[ModRM.reg[2]] = t0.b
+

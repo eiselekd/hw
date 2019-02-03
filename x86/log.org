@@ -197,6 +197,36 @@
         break;
 #+END_SRC
 
+** TODO case 0x8a://MOV Eb Gb Move
+#+BEGIN_SRC javascript
+                case 0x8a://MOV Eb Gb Move
+                    mem8 = phys_mem8[physmem8_ptr++];
+                    if ((mem8 >> 6) == 3) {
+                        reg_idx0 = mem8 & 7;
+                        x = (regs[reg_idx0 & 3] >> ((reg_idx0 & 4) << 1));
+                    } else {
+                        mem8_loc = segment_translation(mem8);
+                        x = (((last_tlb_val = _tlb_read_[mem8_loc >>> 12]) == -1) ? __ld_8bits_mem8_read() : phys_mem8[mem8_loc ^ last_tlb_val]);
+                    }
+                    reg_idx1 = (mem8 >> 3) & 7;
+                    last_tlb_val = (reg_idx1 & 4) << 1;
+                    regs[reg_idx1 & 3] = (regs[reg_idx1 & 3] & ~(0xff << last_tlb_val)) | (((x) & 0xff) << last_tlb_val);
+                    break EXEC_LOOP;
+#+END_SRC
+
+** TODO case 0x8b://MOV Evqp Gvqp Move
+#+BEGIN_SRC javascript
+                case 0x8b://MOV Evqp Gvqp Move
+                    mem8 = phys_mem8[physmem8_ptr++];
+                    if ((mem8 >> 6) == 3) {
+                        x = regs[mem8 & 7];
+                    } else {
+                        mem8_loc = segment_translation(mem8);
+                        x = (((last_tlb_val = _tlb_read_[mem8_loc >>> 12]) | mem8_loc) & 3 ? __ld_32bits_mem8_read() : phys_mem32[(mem8_loc ^ last_tlb_val) >> 2]);
+                    }
+                    regs[(mem8 >> 3) & 7] = x;
+                    break EXEC_LOOP;
+#+END_SRC
 
 * opcodes
 
@@ -211,29 +241,6 @@
 #+BEGIN_SRC javascript
         EXEC_LOOP: for (; ; ) {
             switch (OPbyte) {
-                case 0x8a://MOV Eb Gb Move
-                    mem8 = phys_mem8[physmem8_ptr++];
-                    if ((mem8 >> 6) == 3) {
-                        reg_idx0 = mem8 & 7;
-                        x = (regs[reg_idx0 & 3] >> ((reg_idx0 & 4) << 1));
-                    } else {
-                        mem8_loc = segment_translation(mem8);
-                        x = (((last_tlb_val = _tlb_read_[mem8_loc >>> 12]) == -1) ? __ld_8bits_mem8_read() : phys_mem8[mem8_loc ^ last_tlb_val]);
-                    }
-                    reg_idx1 = (mem8 >> 3) & 7;
-                    last_tlb_val = (reg_idx1 & 4) << 1;
-                    regs[reg_idx1 & 3] = (regs[reg_idx1 & 3] & ~(0xff << last_tlb_val)) | (((x) & 0xff) << last_tlb_val);
-                    break EXEC_LOOP;
-                case 0x8b://MOV Evqp Gvqp Move
-                    mem8 = phys_mem8[physmem8_ptr++];
-                    if ((mem8 >> 6) == 3) {
-                        x = regs[mem8 & 7];
-                    } else {
-                        mem8_loc = segment_translation(mem8);
-                        x = (((last_tlb_val = _tlb_read_[mem8_loc >>> 12]) | mem8_loc) & 3 ? __ld_32bits_mem8_read() : phys_mem32[(mem8_loc ^ last_tlb_val) >> 2]);
-                    }
-                    regs[(mem8 >> 3) & 7] = x;
-                    break EXEC_LOOP;
                 case 0xa0://MOV Ob AL Move byte at (seg:offset) to AL
                     mem8_loc = segmented_mem8_loc_for_MOV();
                     x = ld_8bits_mem8_read();

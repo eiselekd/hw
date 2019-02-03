@@ -1,0 +1,44 @@
+* TODO case 0x8b://MOV Evqp Gvqp Move
+
+#+BEGIN_SRC javascript
+                case 0x8b://MOV Evqp Gvqp Move
+                    mem8 = phys_mem8[physmem8_ptr++];
+                    if ((mem8 >> 6) == 3) {
+                        x = regs[mem8 & 7];
+                    } else {
+                        mem8_loc = segment_translation(mem8);
+                        x = (((last_tlb_val = _tlb_read_[mem8_loc >>> 12]) | mem8_loc) & 3 ? __ld_32bits_mem8_read() : phys_mem32[(mem8_loc ^ last_tlb_val) >> 2]);
+                    }
+                    regs[(mem8 >> 3) & 7] = x;
+                    break EXEC_LOOP;
+#+END_SRC
+
+#+BEGIN_SRC c
+
+    case 0x8a:
+    case 0x8b: /* mov Ev, Gv */
+        ot = mo_b_d(b, dflag);
+        modrm = cpu_ldub_code(env, s->pc++);
+        reg = ((modrm >> 3) & 7) | rex_r;
+
+        gen_ldst_modrm(env, s, modrm, ot, OR_TMP0, 0);
+        gen_op_mov_reg_v(tcg_ctx, ot, reg, *cpu_T[0]);
+        break;
+
+#+END_SRC
+
+* decode MOV MOVE : Vol. 2B 4-35
+
+8B /r MOV r16,r/m16 RM Valid Valid Move r/m16 to r16.
+8B /r MOV r32,r/m32 RM Valid Valid Move r/m32 to r32.
+REX.W + 8B /r MOV r64,r/m64 RM Valid N.E. Move r/m64 to r64.
+
+* rtl
+
+# write reg.w/mem.w -> reg.w 
+if ModRM.mod = 3:
+  t0.w = regs[ModRM.rm[0:1]]
+else:
+  t0.w = mem.b[tlb(seg(ModRM))]
+regs[ModRM.reg[0:1]] = t0.b
+
