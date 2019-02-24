@@ -51,6 +51,14 @@ REX.W + A1 MOV RAX,moffs64* FD Valid N.E. Move quadword at (offset) to RAX.
 Operand Encoding:
 FD op1:AL/AX/EAX/RAX op2:Moffs 
 
+
+* nasm
+
+MOV		reg_ax,mem_offs			[-i:	o16 a1 iwdq]				8086,SM
+MOV		reg_eax,mem_offs		[-i:	o32 a1 iwdq]				386,SM
+MOV		reg_rax,mem_offs		[-i:	o64 a1 iwdq]				X64,SM
+
+
 * asm
 
 

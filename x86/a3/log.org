@@ -51,6 +51,12 @@ Operand Encoding:
 TD op1:Moffs(w) op2:AL/AX/EAX/RAX NA NA
 
 
+* nasm
+
+MOV		mem_offs,reg_ax			[i-:	o16 a3 iwdq]				8086,SM,NOHLE
+MOV		mem_offs,reg_eax		[i-:	o32 a3 iwdq]				386,SM,NOHLE
+MOV		mem_offs,reg_rax		[i-:	o64 a3 iwdq]				X64,SM,NOHLE
+
 * asm
 
 

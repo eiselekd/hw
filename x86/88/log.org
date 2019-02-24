@@ -58,6 +58,12 @@ segment registers: 3A 3.4.5
 
 * see mem/log.org
 
+
+* nasm
+
+MOV		mem,reg8			[mr:	hlexr 88 /r]				8086,SM
+MOV		reg8,reg8			[mr:	88 /r]					8086
+
 * rtl
 
 # write reg.b -> reg.b/mem.b

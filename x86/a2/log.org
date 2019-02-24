@@ -50,8 +50,13 @@ Operand Encoding:
 TD op1:Moffs(w) op2:AL/AX/EAX/RAX NA NA
 
 
+* nasm
+
+
 * asm
 
+
+MOV		mem_offs,reg_al			[i-:	a2 iwdq]				8086,SM,NOHLE
 
 * rtl
 # todo 16 bit mode

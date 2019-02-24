@@ -48,7 +48,12 @@ A0 MOV AL,moffs8* FD Valid Valid Move byte at (seg:offset) to AL.
 Operand Encoding:
 FD op1:AL/AX/EAX/RAX op2:Moffs 
 
+* nasm
+
+MOV		reg_al,mem_offs			[-i:	a0 iwdq]				8086,SM
+
 * asm
+
 
 
 * rtl

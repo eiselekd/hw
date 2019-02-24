@@ -111,7 +111,7 @@ k1-7	OPMASKREG	opmaskreg	1   TFLAG_BRC_OPT
 bnd0-3	BNDREG		bndreg		0
 
 
-** mov 
+** mov  x86/insns.dat
 
 MOV		mem,reg8			[mr:	hlexr 88 /r]				8086,SM
 MOV		reg8,reg8			[mr:	88 /r]					8086
