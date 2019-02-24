@@ -1,0 +1,60 @@
+                
+** TODO case 0xa0://MOV Ob AL Move byte at (seg:offset) to AL
+#+BEGIN_SRC javascript
+                    mem8_loc = segmented_mem8_loc_for_MOV();
+                    x = ld_8bits_mem8_read();
+                    regs[0] = (regs[0] & -256) | x;
+                    break EXEC_LOOP;
+#+END_SRC
+
+
+#+BEGIN_SRC c
+    case 0xa0: /* mov EAX, Ov */
+    case 0xa1:
+    case 0xa2: /* mov Ov, EAX */
+    case 0xa3:
+        {
+            target_ulong offset_addr;
+
+            ot = mo_b_d(b, dflag);
+            switch (s->aflag) {
+#ifdef TARGET_X86_64
+            case MO_64:
+                offset_addr = cpu_ldq_code(env, s->pc);
+                s->pc += 8;
+                break;
+#endif
+            default:
+                offset_addr = insn_get(env, s, s->aflag);
+                break;
+            }
+            tcg_gen_movi_tl(tcg_ctx, cpu_A0, offset_addr);
+            gen_add_A0_ds_seg(s);
+            if ((b & 2) == 0) {
+                gen_op_ld_v(s, ot, *cpu_T[0], cpu_A0);
+                gen_op_mov_reg_v(tcg_ctx, ot, R_EAX, *cpu_T[0]);
+            } else {
+                gen_op_mov_v_reg(tcg_ctx, ot, *cpu_T[0], R_EAX);
+                gen_op_st_v(s, ot, *cpu_T[0], cpu_A0);
+            }
+        }
+        break;
+#+END_SRC
+
+* decode MOV MOVE : Vol. 2B 4-35
+
+A0 MOV AL,moffs8* FD Valid Valid Move byte at (seg:offset) to AL.
+
+Operand Encoding:
+FD op1:AL/AX/EAX/RAX op2:Moffs 
+
+* asm
+
+
+* rtl
+# todo 16 bit mode
+
+t0.b = mem.b[tlb(seg(IP.l++))]
+regs[0].b = t0.b
+
+

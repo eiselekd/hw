@@ -1,0 +1,63 @@
+                
+** TODO 0xa1://MOV Ovqp rAX Move dword at (seg:offset) to EAX
+#+BEGIN_SRC javascript
+                case 0xa1://MOV Ovqp rAX Move dword at (seg:offset) to EAX
+                    mem8_loc = segmented_mem8_loc_for_MOV();
+                    x = ld_32bits_mem8_read();
+                    regs[0] = x;
+                    break EXEC_LOOP;
+#+END_SRC
+
+
+#+BEGIN_SRC c
+    case 0xa0: /* mov EAX, Ov */
+    case 0xa1:
+    case 0xa2: /* mov Ov, EAX */
+    case 0xa3:
+        {
+            target_ulong offset_addr;
+
+            ot = mo_b_d(b, dflag);
+            switch (s->aflag) {
+#ifdef TARGET_X86_64
+            case MO_64:
+                offset_addr = cpu_ldq_code(env, s->pc);
+                s->pc += 8;
+                break;
+#endif
+            default:
+                offset_addr = insn_get(env, s, s->aflag);
+                break;
+            }
+            tcg_gen_movi_tl(tcg_ctx, cpu_A0, offset_addr);
+            gen_add_A0_ds_seg(s);
+            if ((b & 2) == 0) {
+                gen_op_ld_v(s, ot, *cpu_T[0], cpu_A0);
+                gen_op_mov_reg_v(tcg_ctx, ot, R_EAX, *cpu_T[0]);
+            } else {
+                gen_op_mov_v_reg(tcg_ctx, ot, *cpu_T[0], R_EAX);
+                gen_op_st_v(s, ot, *cpu_T[0], cpu_A0);
+            }
+        }
+        break;
+#+END_SRC
+
+* decode MOV MOVE : Vol. 2B 4-35
+
+A1 MOV AX,moffs16* FD Valid Valid Move word at (seg:offset) to AX.
+A1 MOV EAX,moffs32* FD Valid Valid Move doubleword at (seg:offset) to EAX.
+REX.W + A1 MOV RAX,moffs64* FD Valid N.E. Move quadword at (offset) to RAX.
+
+Operand Encoding:
+FD op1:AL/AX/EAX/RAX op2:Moffs 
+
+* asm
+
+
+* rtl
+# todo 16 bit mode
+
+t0.l = mem.b[tlb(seg(IP.l++))]
+regs[0].l = t0.l
+
+

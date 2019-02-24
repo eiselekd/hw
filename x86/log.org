@@ -231,6 +231,24 @@
 
 
 
+** TODO case 0xa0://MOV Ob AL Move byte at (seg:offset) to AL
+#+BEGIN_SRC javascript
+                    mem8_loc = segmented_mem8_loc_for_MOV();
+                    x = ld_8bits_mem8_read();
+                    regs[0] = (regs[0] & -256) | x;
+                    break EXEC_LOOP;
+#+END_SRC
+
+
+** TODO 0xa1://MOV Ovqp rAX Move dword at (seg:offset) to EAX
+#+BEGIN_SRC javascript
+                case 0xa1://MOV Ovqp rAX Move dword at (seg:offset) to EAX
+                    mem8_loc = segmented_mem8_loc_for_MOV();
+                    x = ld_32bits_mem8_read();
+                    regs[0] = x;
+                    break EXEC_LOOP;
+#+END_SRC
+
 * opcodes
 
 
@@ -244,11 +262,6 @@
 #+BEGIN_SRC javascript
         EXEC_LOOP: for (; ; ) {
             switch (OPbyte) {
-                case 0xa0://MOV Ob AL Move byte at (seg:offset) to AL
-                    mem8_loc = segmented_mem8_loc_for_MOV();
-                    x = ld_8bits_mem8_read();
-                    regs[0] = (regs[0] & -256) | x;
-                    break EXEC_LOOP;
                 case 0xa1://MOV Ovqp rAX Move dword at (seg:offset) to EAX
                     mem8_loc = segmented_mem8_loc_for_MOV();
                     x = ld_32bits_mem8_read();
