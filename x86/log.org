@@ -89,7 +89,7 @@
                     break;
 #+END_SRC                
 
-** TODO case 0xb0-0xb7: MOV Ib Zb Move 
+** TODO 0xb0-0xb7: MOV Ib Zb Move 
 
 #+BEGIN_SRC javascript
                 case 0xb0://MOV Ib Zb Move
@@ -107,7 +107,7 @@
                     break EXEC_LOOP;
 #+END_SRC
 
-** TODO case 0xb8-0xbf: MOV Ivqp Zvqp Move 
+** TODO 0xb8-0xbf: MOV Ivqp Zvqp Move 
 
 #+BEGIN_SRC javascript
                 case 0xb8://MOV Ivqp Zvqp Move
@@ -127,8 +127,7 @@
 
 #+END_SRC
 
-
-** TODO case 0x88: MOV Gb Eb Move
+** TODO 0x88: MOV Gb Eb Move
 
 #+BEGIN_SRC javascript
                     mem8 = phys_mem8[physmem8_ptr++];
@@ -164,8 +163,7 @@
         break;
 #+END_SRC
 
-
-** TODO case 0x89: MOV Gvqp Evqp Move
+** TODO 0x89: MOV Gvqp Evqp Move
 #+BEGIN_SRC javascript
                     mem8 = phys_mem8[physmem8_ptr++];
                     x = regs[(mem8 >> 3) & 7];
@@ -197,7 +195,7 @@
         break;
 #+END_SRC
 
-** TODO case 0x8a://MOV Eb Gb Move
+** TODO 0x8a: MOV Eb Gb Move
 #+BEGIN_SRC javascript
                 case 0x8a://MOV Eb Gb Move
                     mem8 = phys_mem8[physmem8_ptr++];
@@ -214,7 +212,7 @@
                     break EXEC_LOOP;
 #+END_SRC
 
-** TODO case 0x8b://MOV Evqp Gvqp Move
+** TODO 0x8b: MOV Evqp Gvqp Move
 #+BEGIN_SRC javascript
                 case 0x8b://MOV Evqp Gvqp Move
                     mem8 = phys_mem8[physmem8_ptr++];
@@ -230,8 +228,7 @@
 
 
 
-
-** TODO case 0xa0://MOV Ob AL Move byte at (seg:offset) to AL
+** TODO 0xa0: MOV Ob AL Move byte at (seg:offset) to AL
 #+BEGIN_SRC javascript
                     mem8_loc = segmented_mem8_loc_for_MOV();
                     x = ld_8bits_mem8_read();
@@ -239,8 +236,7 @@
                     break EXEC_LOOP;
 #+END_SRC
 
-
-** TODO 0xa1://MOV Ovqp rAX Move dword at (seg:offset) to EAX
+** TODO 0xa1: MOV Ovqp rAX Move dword at (seg:offset) to EAX
 #+BEGIN_SRC javascript
                 case 0xa1://MOV Ovqp rAX Move dword at (seg:offset) to EAX
                     mem8_loc = segmented_mem8_loc_for_MOV();
@@ -248,6 +244,23 @@
                     regs[0] = x;
                     break EXEC_LOOP;
 #+END_SRC
+
+** TODO 0xa2: MOV AL Ob Move AL to (seg:offset)
+#+BEGIN_SRC javascript
+                case 0xa2://MOV AL Ob Move AL to (seg:offset)
+                    mem8_loc = segmented_mem8_loc_for_MOV();
+                    st8_mem8_write(regs[0]);
+                    break EXEC_LOOP;
+#+END_SRC
+
+** TODO 0xa3: MOV rAX Ovqp Move EAX to (seg:offset)
+#+BEGIN_SRC javascript
+                case 0xa3://MOV rAX Ovqp Move EAX to (seg:offset)
+                    mem8_loc = segmented_mem8_loc_for_MOV();
+                    st32_mem8_write(regs[0]);
+                    break EXEC_LOOP;
+#+END_SRC
+
 
 * opcodes
 
@@ -262,19 +275,6 @@
 #+BEGIN_SRC javascript
         EXEC_LOOP: for (; ; ) {
             switch (OPbyte) {
-                case 0xa1://MOV Ovqp rAX Move dword at (seg:offset) to EAX
-                    mem8_loc = segmented_mem8_loc_for_MOV();
-                    x = ld_32bits_mem8_read();
-                    regs[0] = x;
-                    break EXEC_LOOP;
-                case 0xa2://MOV AL Ob Move AL to (seg:offset)
-                    mem8_loc = segmented_mem8_loc_for_MOV();
-                    st8_mem8_write(regs[0]);
-                    break EXEC_LOOP;
-                case 0xa3://MOV rAX Ovqp Move EAX to (seg:offset)
-                    mem8_loc = segmented_mem8_loc_for_MOV();
-                    st32_mem8_write(regs[0]);
-                    break EXEC_LOOP;
                 case 0xd7://XLAT (DS:)[rBX+AL] AL Table Look-up Translation
                     mem8_loc = (regs[3] + (regs[0] & 0xff)) >> 0;
                     if (CS_flags & 0x0080)
