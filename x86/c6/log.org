@@ -1,0 +1,48 @@
+
+** TODO  0xc6://MOV Ib Eb Move
+
+#+BEGIN_SRC javascript
+                    mem8 = phys_mem8[physmem8_ptr++];
+                    if ((mem8 >> 6) == 3) {
+                        x = phys_mem8[physmem8_ptr++];
+                        set_word_in_register(mem8 & 7, x);
+                    } else {
+                        mem8_loc = segment_translation(mem8);
+                        x = phys_mem8[physmem8_ptr++];
+                        st8_mem8_write(x);
+                    }
+                    break EXEC_LOOP;
+
+
+    function set_word_in_register(reg_idx1, x) {
+        /*
+           if arg[0] is = 1xx  then set register xx's upper two bytes to two bytes in arg[1]
+           if arg[0] is = 0xx  then set register xx's lower two bytes to two bytes in arg[1]
+        */
+        if (reg_idx1 & 4)
+            regs[reg_idx1 & 3] = (regs[reg_idx1 & 3] & -65281) | ((x & 0xff) << 8);
+        else
+            regs[reg_idx1 & 3] = (regs[reg_idx1 & 3] & -256) | (x & 0xff);
+    }
+
+#+END_SRC
+
+
+
+* decode MOV MOVE : Vol. 2B 4-35
+
+C6       /0 ib MOV r/m8,    imm8 MI Valid Valid Move imm8 to r/m8.
+REX + C6 /0 ib MOV r/m8***, imm8 MI Valid N.E.  Move imm8 to r/m8.
+
+MI 
+op1: ModRM:r/m (w) 
+op2: imm8/16/32/64  NA NA
+
+
+* rtl
+
+t0 = IP.b++
+if ModRM.mod == 3:
+  reg[modrm.rm&3].b[modrm.rm.bits[2]] = t0.b
+else:
+  mem.b[tlb(seg(ModRM))] = t0.b

@@ -262,20 +262,9 @@
 #+END_SRC
 
 
-* opcodes
-
-
-* TODO
-
- - unicorn-py uniform state 
- - nodejs uniform state 
-
-* TODO
+** TODO 0xd7: XLAT (DS:)[rBX+AL] AL Table Look-up Translation
 
 #+BEGIN_SRC javascript
-        EXEC_LOOP: for (; ; ) {
-            switch (OPbyte) {
-                case 0xd7://XLAT (DS:)[rBX+AL] AL Table Look-up Translation
                     mem8_loc = (regs[3] + (regs[0] & 0xff)) >> 0;
                     if (CS_flags & 0x0080)
                         mem8_loc &= 0xffff;
@@ -288,6 +277,59 @@
                     x = ld_8bits_mem8_read();
                     set_word_in_register(0, x);
                     break EXEC_LOOP;
+#+END_SRC
+                
+
+** TODO  0xc6://MOV Ib Eb Move
+
+#+BEGIN_SRC javascript
+                    mem8 = phys_mem8[physmem8_ptr++];
+                    if ((mem8 >> 6) == 3) {
+                        x = phys_mem8[physmem8_ptr++];
+                        set_word_in_register(mem8 & 7, x);
+                    } else {
+                        mem8_loc = segment_translation(mem8);
+                        x = phys_mem8[physmem8_ptr++];
+                        st8_mem8_write(x);
+                    }
+                    break EXEC_LOOP;
+#+END_SRC
+
+** TODO  0xc7://MOV Ivds Evqp Move
+
+#+BEGIN_SRC javascript
+                    mem8 = phys_mem8[physmem8_ptr++];
+                    if ((mem8 >> 6) == 3) {
+                        {
+                            x = phys_mem8[physmem8_ptr] | (phys_mem8[physmem8_ptr + 1] << 8) | (phys_mem8[physmem8_ptr + 2] << 16) | (phys_mem8[physmem8_ptr + 3] << 24);
+                            physmem8_ptr += 4;
+                        }
+                        regs[mem8 & 7] = x;
+                    } else {
+                        mem8_loc = segment_translation(mem8);
+                        {
+                            x = phys_mem8[physmem8_ptr] | (phys_mem8[physmem8_ptr + 1] << 8) | (phys_mem8[physmem8_ptr + 2] << 16) | (phys_mem8[physmem8_ptr + 3] << 24);
+                            physmem8_ptr += 4;
+                        }
+                        st32_mem8_write(x);
+                    }
+                    break EXEC_LOOP;
+#+END_SRC
+                
+
+* opcodes
+
+
+* TODO
+
+ - unicorn-py uniform state 
+ - nodejs uniform state 
+   
+* TODO
+
+#+BEGIN_SRC javascript
+        EXEC_LOOP: for (; ; ) {
+            switch (OPbyte) {
                 case 0xc6://MOV Ib Eb Move
                     mem8 = phys_mem8[physmem8_ptr++];
                     if ((mem8 >> 6) == 3) {

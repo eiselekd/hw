@@ -1,0 +1,44 @@
+** TODO 0xd7: XLAT (DS:)[rBX+AL] AL Table Look-up Translation
+
+#+BEGIN_SRC javascript
+    mem8_loc = (regs[3] + (regs[0] & 0xff)) >> 0;
+    if (CS_flags & 0x0080)
+        mem8_loc &= 0xffff;
+    reg_idx1 = CS_flags & 0x000f;
+    if (reg_idx1 == 0)
+        reg_idx1 = 3;
+    else
+        reg_idx1--;
+    mem8_loc = (mem8_loc + cpu.segs[reg_idx1].base) >> 0;
+    x = ld_8bits_mem8_read();
+    set_word_in_register(0, x);
+    break EXEC_LOOP;
+#+END_SRC
+
+
+#+BEGIN_SRC
+    case 0xd7: /* xlat */
+        tcg_gen_mov_tl(tcg_ctx, cpu_A0, *cpu_regs[R_EBX]);
+        tcg_gen_ext8u_tl(tcg_ctx, *cpu_T[0], *cpu_regs[R_EAX]);
+        tcg_gen_add_tl(tcg_ctx, cpu_A0, cpu_A0, *cpu_T[0]);
+        gen_extu(tcg_ctx, s->aflag, cpu_A0);
+        gen_add_A0_ds_seg(s);
+        gen_op_ld_v(s, MO_8, *cpu_T[0], cpu_A0);
+        gen_op_mov_reg_v(tcg_ctx, MO_8, R_EAX, *cpu_T[0]);
+        break;
+#+END_SRC
+
+
+* decode XLAT Vol. 2C 5-576 
+
+Opcode Instruction Op/ En  64-Bit Mode Compat/Leg Mode Description
+
+D7         XLAT m8 ZO Valid Valid Set AL to memory byte DS:[(E)BX + unsigned AL].
+D7         XLATB   ZO Valid Valid Set AL to memory byte DS:[(E)BX + unsigned AL].
+REX.W + D7 XLATB   ZO Valid N.E.  Set AL to memory byte [RBX + unsigned AL].
+
+* rtl
+
+t0 = rbx + eax.u
+t1 = t0 + segs[seg].base
+eax.b = mem[tlb(t1)].b

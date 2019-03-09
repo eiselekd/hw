@@ -1,0 +1,36 @@
+** TODO  0xc7://MOV Ivds Evqp Move
+
+#+BEGIN_SRC javascript
+                    mem8 = phys_mem8[physmem8_ptr++];
+                    if ((mem8 >> 6) == 3) {
+                        {
+                            x = phys_mem8[physmem8_ptr] | (phys_mem8[physmem8_ptr + 1] << 8) | (phys_mem8[physmem8_ptr + 2] << 16) | (phys_mem8[physmem8_ptr + 3] << 24);
+                            physmem8_ptr += 4;
+                        }
+                        regs[mem8 & 7] = x;
+                    } else {
+                        mem8_loc = segment_translation(mem8);
+                        {
+                            x = phys_mem8[physmem8_ptr] | (phys_mem8[physmem8_ptr + 1] << 8) | (phys_mem8[physmem8_ptr + 2] << 16) | (phys_mem8[physmem8_ptr + 3] << 24);
+                            physmem8_ptr += 4;
+                        }
+                        st32_mem8_write(x);
+                    }
+                    break EXEC_LOOP;
+#+END_SRC
+
+* decode MOV MOVE : Vol. 2B 4-35
+
+
+C7 /0 iw MOV r/m16, imm16 MI Valid Valid Move imm16 to r/m16.
+C7 /0 id MOV r/m32, imm32 MI Valid Valid Move imm32 to r/m32.
+REX.W + C7 /0 id MOV r/m64, imm32 MI Valid N.E. Move imm32 sign extended to 64-bits to
+r/m64.
+
+* rtl
+
+t0 = IP.l++
+if ModRM.mod == 3:
+  reg[modrm.rm] = t0.l
+else:
+  mem.b[tlb(seg(ModRM))] = t0.l
