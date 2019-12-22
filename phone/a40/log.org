@@ -603,3 +603,22 @@ https://androidfilehost.com/?w=file-thanks&fid=1899786940962590809&mid=267&downl
 https://www.androidinfotech.com/root-samsung-galaxy-a40-sm-a405fn-fm-s-pie/
 https://www.android-hilfe.de/forum/samsung-galaxy-a40.3537/rom-gsi-inoffiziell-pie-lineageos-16-0-andyvan.928318.html
 https://forum.xda-developers.com/android/development/recovery-twrp-galaxy-a40-t3968586
+
+https://github.com/topjohnwu/Magisk/blob/f8b4190a11fc5dd3a5c7162d72a27b5bf174ef4a/docs/install.md#samsung-system-as-root
+
+* notes:
+
+** vbmeta problem
+after magisk : patch AP and HOME_CSC only : vbmeta overwrite proble in BL
+https://github.com/topjohnwu/Magisk/issues/1961
+
+** boot as root
+
+Boot with Volume up + Power pressed:
+ - When bootloader warning comes first time the bootloader 
+   has decided to go to recovery already, 
+   + when releasing Volume up , root is booted
+   + when keeping Volume up pressed (and also release power) 
+     recovery is entered
+
+
