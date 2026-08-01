@@ -1,0 +1,86 @@
+diff --git a/Cargo.toml b/Cargo.toml
+index f7ad7aa..90b3e61 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -7,6 +7,9 @@ edition = "2021"
+ [features]
+ default = []
+ profiler = []
++# Win98 ISA census: counts every executed instruction (interpreted *and*
++# compiled) into win98stats::win98_buffer.  See x86/win98/tools/.
++win98stats = []
+ 
+ [lib]
+ crate-type = ["cdylib"]
+diff --git a/Makefile b/Makefile
+index 5132d22..6519e12 100644
+--- a/Makefile
++++ b/Makefile
+@@ -236,6 +236,14 @@ with-profiler: $(RUST_FILES) build/softfloat.o build/zstddeclib.o Cargo.toml
+ 	cargo rustc --release --features profiler $(CARGO_FLAGS)
+ 	cp build/wasm32-unknown-unknown/release/v86.wasm build/v86.wasm || true
+ 
++# Win98 ISA census build: counts every executed instruction (interpreted and
++# compiled).  Release build, so a full Win98 boot is still fast.
++with-win98stats: $(RUST_FILES) build/softfloat.o build/zstddeclib.o Cargo.toml
++	mkdir -p build/
++	cargo rustc --release --features win98stats $(CARGO_FLAGS)
++	cp build/wasm32-unknown-unknown/release/v86.wasm build/v86.wasm || true
++	-$(WASM_OPT) && wasm-opt -O2 --strip-debug build/v86.wasm -o build/v86.wasm
++
+ watch:
+ 	cargo watch -x 'rustc $(CARGO_FLAGS)' -s 'cp build/wasm32-unknown-unknown/debug/v86.wasm build/v86-debug.wasm'
+ 
+diff --git a/src/rust/cpu/cpu.rs b/src/rust/cpu/cpu.rs
+index 19f79b0..0496fe0 100644
+--- a/src/rust/cpu/cpu.rs
++++ b/src/rust/cpu/cpu.rs
+@@ -3206,6 +3206,20 @@ unsafe fn jit_run_interpreted(mut phys_addr: u32) {
+         i += 1;
+         let start_eip = *instruction_pointer;
+         let opcode = *memory::mem8.offset(phys_addr as isize) as i32;
++        #[cfg(feature = "win98stats")]
++        {
++            // read up to 4 bytes without crossing the page: decode() only
++            // needs prefixes + opcode + modrm
++            let mut instr: u32 = 0;
++            for k in 0..4u32 {
++                let a = phys_addr + k;
++                if (a & 0xFFF) < (phys_addr & 0xFFF) {
++                    break;
++                }
++                instr |= (*memory::mem8.offset(a as isize) as u32) << (8 * k);
++            }
++            crate::win98stats::record_interpreted(instr, *is_32);
++        }
+         *instruction_pointer += 1;
+         dbg_assert!(*prefixes == 0);
+         run_instruction(opcode | (*is_32 as i32) << 8);
+diff --git a/src/rust/jit.rs b/src/rust/jit.rs
+index fb2a388..d8d8dd3 100644
+--- a/src/rust/jit.rs
++++ b/src/rust/jit.rs
+@@ -2096,6 +2096,11 @@ fn jit_generate_basic_block(ctx: &mut JitContext, block: &BasicBlock) {
+             opstats::gen_opstats(ctx.builder, instruction);
+             opstats::record_opstat_compiled(instruction);
+         }
++        #[cfg(feature = "win98stats")]
++        {
++            let i = memory::read32s(ctx.cpu.eip) as u32;
++            crate::win98stats::gen_record_compiled(ctx.builder, i, ctx.cpu.state_flags.is_32());
++        }
+ 
+         if ctx.cpu.eip == last_instruction_addr {
+             // Before the last instruction:
+diff --git a/src/rust/lib.rs b/src/rust/lib.rs
+index 0027145..b61966e 100644
+--- a/src/rust/lib.rs
++++ b/src/rust/lib.rs
+@@ -23,6 +23,7 @@ mod opstats;
+ mod page;
+ mod prefix;
+ mod regs;
++pub mod win98stats;
+ mod softfloat;
+ mod state_flags;
+ mod wasmgen;

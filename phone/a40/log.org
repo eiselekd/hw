@@ -622,3 +622,5 @@ Boot with Volume up + Power pressed:
      recovery is entered
 
 
+* TWRP and magisk
+https://android.gadgethacks.com/how-to/magisk-101-install-magisk-root-with-twrp-0179668/1

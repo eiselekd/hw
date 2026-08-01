@@ -1,0 +1,119 @@
+{
+  "_comment": [
+    "Registry of census targets.  A 'target' is one guest OS we want an ISA",
+    "census for; results land in x86/<target>/.  Every field under 'image' is",
+    "copied verbatim from v86/src/browser/main.js -- note that the remote",
+    "directory on i.copy.sh often differs from the profile id.",
+    "",
+    "  boot_seconds  how long a cold boot needs before the desktop is up",
+    "  shots         seconds at which to grab screenshots during a cold boot",
+    "  cpuid_level   some guests (NT4) hang unless this is capped"
+  ],
+
+  "targets": {
+    "win98": {
+      "name": "Windows 98",
+      "image": {
+        "remote": "windows98",
+        "file": "windows98.img",
+        "size": 314572800,
+        "state": "windows98_state-v2.bin.zst"
+      },
+      "memory": 128,
+      "boot_seconds": 240,
+      "phase_every": 60,
+      "shots": [20, 45, 90, 150]
+    },
+
+    "winnt": {
+      "name": "Windows NT 4.0",
+      "image": {
+        "remote": "winnt4_noacpi",
+        "file": "winnt4.img",
+        "size": 523837440,
+        "state": null
+      },
+      "memory": 512,
+      "cpuid_level": 2,
+      "boot_seconds": 300,
+      "phase_every": 60,
+      "shots": [30, 90, 180, 240],
+      "_login": "Administrator with a blank password; NT needs the SAS first",
+      "login": [
+        { "at": 45, "cad": true },
+        { "at": 60, "type": "\\n" },
+        { "at": 120, "key": "esc" }
+      ]
+    },
+
+    "winnt35": {
+      "name": "Windows NT 3.51",
+      "image": {
+        "remote": "windowsnt351-v2",
+        "file": "winnt35.img",
+        "size": 163577856,
+        "state": null
+      },
+      "memory": 256,
+      "boot_seconds": 600,
+      "phase_every": 120,
+      "shots": [30, 90, 180, 300]
+    },
+
+    "winnt31": {
+      "name": "Windows NT 3.1",
+      "image": {
+        "remote": "winnt31",
+        "file": "winnt31.img",
+        "size": 91226112,
+        "state": null
+      },
+      "memory": 256,
+      "boot_seconds": 600,
+      "phase_every": 120,
+      "shots": [30, 90, 180, 300]
+    },
+
+    "win2000": {
+      "name": "Windows 2000",
+      "image": {
+        "remote": "windows2k-v2",
+        "file": "windows2k.img",
+        "size": 2147483648,
+        "state": "windows2k_state-v4.bin.zst"
+      },
+      "memory": 512,
+      "boot_seconds": 360,
+      "phase_every": 90,
+      "shots": [30, 90, 180, 300]
+    },
+
+    "winme": {
+      "name": "Windows ME",
+      "image": {
+        "remote": "windowsme-v3",
+        "file": "windowsme.img",
+        "size": 1073741824,
+        "state": "windows-me_state-v3.bin.zst"
+      },
+      "memory": 256,
+      "boot_seconds": 600,
+      "phase_every": 120,
+      "shots": [30, 90, 180, 300]
+    },
+
+    "win95": {
+      "name": "Windows 95",
+      "image": {
+        "remote": "windows95",
+        "file": "windows95.img",
+        "size": 471859200,
+        "state": null
+      },
+      "memory": 64,
+      "boot_seconds": 240,
+      "phase_every": 60,
+      "shots": [20, 45, 90, 150]
+    }
+  }
+}

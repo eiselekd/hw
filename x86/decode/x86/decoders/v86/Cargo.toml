@@ -1,0 +1,33 @@
+[package]
+name = "v86"
+version = "0.1.0"
+publish = false
+edition = "2021"
+
+[features]
+default = []
+profiler = []
+# Win98 ISA census: counts every executed instruction (interpreted *and*
+# compiled) into win98stats::win98_buffer.  See x86/win98/tools/.
+win98stats = []
+
+[lib]
+crate-type = ["cdylib"]
+path = "src/rust/lib.rs"
+
+[profile.test]
+lto = false
+opt-level = 2
+overflow-checks = false
+
+[profile.dev]
+lto = true
+opt-level = 2
+panic = "abort"
+overflow-checks = false
+
+[profile.release]
+lto = true
+opt-level = 3
+incremental = false
+panic = "abort"

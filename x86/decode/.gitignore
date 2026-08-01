@@ -1,0 +1,16 @@
+__pycache__/
+*.so
+
+# x86reference.xml (ref.x86asm.net) is vendored -- it is the encoding-layout
+# source that annotate.py joins against.
+# v86 is vendored too (x86/decoders/v86); its own .gitignore keeps build
+# artifacts, the closure-compiler jar and the generated opcode tables out.
+
+# disk images: the .bz2 archives ARE committed (they are the test input);
+# the uncompressed .img files are build products of `make images`
+x86/*/images/*.img
+x86/*/images/*.img.tmp
+x86/*/images/.parts-*/
+
+# saved emulator states are re-downloadable: tools/fetch_image.sh <target> state
+x86/*/images/*.bin.zst

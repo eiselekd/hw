@@ -1,0 +1,185 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  eslint:
+    name: eslint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Run eslint
+        run: sudo npm install -g eslint; make eslint
+
+  test:
+    runs-on: ubuntu-latest
+    name: Build and test
+    timeout-minutes: 60
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          filter: tree:0
+
+      - name: Setup Node.js version
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24.17.0'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Setup toolchain
+        run: |
+          rustup toolchain install stable --profile minimal
+          rustup target add wasm32-unknown-unknown
+          rustup component add rustfmt
+
+      - name: Install APT packages
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install nasm gdb qemu-system-x86 libc6-dev-i386 -y
+
+      - name: Build all-debug
+        run: |
+          rustc --version
+          make all-debug
+
+      - name: Build all
+        run: make all
+
+      - name: Build fallback
+        run: make build/v86-fallback.wasm
+
+      - name: rustfmt check
+        run: make rustfmt
+
+      - name: Fetch kvm-unit-test cache
+        uses: actions/cache@v5
+        id: cache-kvm-unit-test
+        with:
+          path: tests/kvm-unit-tests/
+          key: ${{ runner.os }}-kvm-unit-test
+
+      - name: Build kvm-unit-test
+        if: steps.cache-kvm-unit-test.outputs.cache-hit != 'true'
+        run: tests/kvm-unit-tests/build.sh
+
+      - name: Run kvm-unit-test
+        run: |
+          tests/kvm-unit-tests/run.mjs tests/kvm-unit-tests/x86/taskswitch.flat
+          tests/kvm-unit-tests/run.mjs tests/kvm-unit-tests/x86/taskswitch2.flat
+          tests/kvm-unit-tests/run.mjs tests/kvm-unit-tests/x86/realmode.flat
+
+      - name: Fetch namsmtests cache
+        uses: actions/cache@v5
+        id: cache-nasmtests
+        with:
+          path: tests/nasm/build/
+          key: ${{ runner.os }}-nasmtests
+
+      - name: Run nasmtests
+        run: MAX_PARALLEL_TESTS=1 make nasmtests
+
+      - name: Run nasmtests-force-jit
+        run: MAX_PARALLEL_TESTS=1 make nasmtests-force-jit
+
+      - name: Run rust-test
+        run: make rust-test
+
+      - name: Fetch image cache
+        uses: actions/cache@v5
+        id: cache-images
+        with:
+          path: images/
+          key: ${{ runner.os }}-images-v2
+
+      - name: Download uncached images
+        if: steps.cache-images.outputs.cache-hit != 'true'
+        run: mkdir -p images && curl --compressed --output-dir images --remote-name-all https://i.copy.sh/{linux.iso,linux3.iso,linux4.iso,buildroot-bzimage68.bin,TinyCore-11.0.iso,oberon.img,msdos.img,openbsd-floppy.img,kolibri.img,windows101.img,os8.img,freedos722.img,mobius-fd-release5.img,msdos622.img}
+
+      - name: Run api-tests
+        run: make api-tests
+
+      - name: Run qemutests
+        run: make qemutests
+
+      - name: Run qemutests-release
+        run: make qemutests-release
+
+      - name: Run jitpagingtests
+        run: make jitpagingtests
+
+      - name: Run integration tests
+        run: MAX_PARALLEL_TESTS=1 make tests
+
+      - name: Run devices tests
+        run: make devices-test
+
+      - name: Run expect tests
+        run: make expect-tests
+
+      - name: Update package.json version
+        run: make update-package-json-version
+
+      - name: Upload the artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: v86
+          path: |
+            package.json
+            LICENSE
+            Readme.md
+            v86.d.ts
+            build/libv86*.js
+            build/libv86*.js.map
+            build/v86*.wasm
+            build/*.mjs
+
+  upload:
+    name: Upload release
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/master'
+
+    permissions:
+      id-token: write
+      contents: write
+
+    steps:
+      - name: Delete old release and tag
+        uses: dev-drprasad/delete-tag-and-release@v1.0.1
+        with:
+          delete_release: true
+          tag_name: latest
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get artifacts
+        uses: actions/download-artifact@v8
+        with:
+          name: v86
+
+      - name: Display structure of downloaded files
+        run: ls -R
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24.17.0'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Release to GitHub
+        uses: ncipollo/release-action@v1
+        with:
+          name: Latest Release
+          tag: latest
+          commit: master
+          body: ${{ github.event.head_commit.message }}
+          artifacts: "build/libv86*.js,build/libv86*.js.map,build/*.mjs,build/v86*.wasm"
+          prerelease: true
+
+      - name: Release to NPM
+        run: npm publish --provenance --access public
+        if: github.repository == 'copy/v86'

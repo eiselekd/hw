@@ -1,0 +1,872 @@
+# win98 instruction census: 868 distinct encodings, 8,951,069,828 instructions executed
+# layout source: x86reference.xml (ref.x86asm.net)
+#
+#         count       %  md opcode ext  m/r  mnemonic   operands                       since  flags
+    869957578  9.7190  32 74     -    r    JZ         rel8sx                         8086   -
+    593952279  6.6355  32 8B     -    m    MOV        reg16/32, r/m16/32             8086   -
+    461842734  5.1596  32 75     -    r    JNZ        rel8sx                         8086   -
+    359440543  4.0156  32 85     -    r    TEST       r/m16/32, reg16/32             8086   oszapc
+    325641220  3.6380  32 33     -    r    XOR        reg16/32, r/m16/32             8086   oszapc
+    263774671  2.9469  32 C3     -    r    RETN                                      8086   -
+    247856086  2.7690  32 F6     /0   m    TEST       r/m8, imm8                     8086   oszapc
+    244790732  2.7348  32 81     /7   m    CMP        r/m16/32, imm16/32sx           8086   oszapc
+    243720377  2.7228  32 80     /7   m    CMP        r/m8, imm8                     8086   oszapc
+    223118655  2.4926  32 83     /7   m    CMP        r/m16/32, imm8sx               8086   oszapc
+    215634165  2.4090  32 8A     -    m    MOV        reg8, r/m8                     8086   -
+    181079291  2.0230  32 0F 84  -    r    JZ         rel16/32sx                     80386  -
+    180436368  2.0158  32 FA     -    r    CLI                                       8086   i
+    178196706  1.9908  32 0F 85  -    r    JNZ        rel16/32sx                     80386  -
+    174865578  1.9536  32 8B     -    r    MOV        reg16/32, r/m16/32             8086   -
+    173791276  1.9416  32 E8     -    r    CALL       rel16/32sx                     8086   -
+    173788006  1.9415  32 90     -    r    XCHG       reg(in-opcode)16/32, rAX       8086   -
+    169763416  1.8966  32 3B     -    m    CMP        reg16/32, r/m16/32             8086   oszapc
+    164100492  1.8333  32 EB     -    r    JMP        rel8sx                         8086   -
+    157011743  1.7541  32 80     /4   r    AND        r/m8, imm8                     8086   oszapc
+    142752323  1.5948  32 73     -    r    JNB        rel8sx                         8086   -
+    138921536  1.5520  32 22     -    r    AND        reg8, r/m8                     8086   oszapc
+     96797040  1.0814  32 56     -    r    PUSH       reg(in-opcode)16/32            8086   -
+     95358747  1.0653  32 5E     -    r    POP        reg(in-opcode)16/32            8086   -
+     93520588  1.0448  32 FF     /2   m    CALL       r/m16/32                       8086   -
+     90005680  1.0055  32 E9     -    r    JMP        rel16/32sx                     8086   -
+     88864416  0.9928  32 FB     -    r    STI                                       8086   i
+     87375400  0.9761  32 F6     /0   r    TEST       r/m8, imm8                     8086   oszapc
+     77487113  0.8657  32 39     -    m    CMP        r/m16/32, reg16/32             8086   oszapc
+     75400050  0.8424  32 8D     -    m    LEA        reg16/32, mem                  8086   -
+     73894961  0.8255  32 85     -    m    TEST       r/m16/32, reg16/32             8086   oszapc
+     73633190  0.8226  32 55     -    r    PUSH       reg(in-opcode)16/32            8086   -
+     72528587  0.8103  32 A1     -    r    MOV        rAX, moffs16/32                8086   -
+     72477624  0.8097  32 5D     -    r    POP        reg(in-opcode)16/32            8086   -
+     72395251  0.8088  32 B8     -    r    MOV        reg(in-opcode)16/32, imm16/32  8086   -
+     72062324  0.8051  32 51     -    r    PUSH       reg(in-opcode)16/32            8086   -
+     71821906  0.8024  32 B9     -    r    MOV        reg(in-opcode)16/32, imm16/32  8086   -
+     71545727  0.7993  32 59     -    r    POP        reg(in-opcode)16/32            8086   -
+     71338135  0.7970  32 81     /4   r    AND        r/m16/32, imm16/32sx           8086   oszapc
+     70370314  0.7862  32 83     /4   r    AND        r/m16/32, imm8sx               80386  oszapc
+     69967378  0.7817  32 F6     /2   r    NOT        r/m8                           8086   -
+     69664397  0.7783  32 0C     -    r    OR         AL, imm8                       8086   oszapc
+     69338788  0.7746  32 80     /0   r    ADD        r/m8, imm8                     8086   oszapc
+     69330529  0.7746  32 D0     /2   r    RCL        r/m8, 1                        8086   oszapc
+     69330529  0.7746  32 D0     /3   r    RCR        r/m8, 1                        8086   oszapc
+     56152567  0.6273  16 75     -    r    JNZ        rel8sx                         8086   -
+     40181673  0.4489  16 8B     -    m    MOV        reg16/32, r/m16/32             8086   -
+     36413892  0.4068  32 89     -    r    MOV        r/m16/32, reg16/32             8086   -
+     30444003  0.3401  16 8B     -    r    MOV        reg16/32, r/m16/32             8086   -
+     29629055  0.3310  16 8E     -    r    MOV        sreg16, r/m16                  8086   -
+     28576770  0.3193  32 89     -    m    MOV        r/m16/32, reg16/32             8086   -
+     27135551  0.3032  16 74     -    r    JZ         rel8sx                         8086   -
+     23751818  0.2654  16 3D     -    r    CMP        rAX, imm16/32sx                8086   oszapc
+     22744179  0.2541  16 C3     -    r    RETN                                      8086   -
+     20217936  0.2259  16 E8     -    r    CALL       rel16/32sx                     8086   -
+     20170845  0.2253  16 89     -    r    MOV        r/m16/32, reg16/32             8086   -
+     17603860  0.1967  32 88     -    m    MOV        r/m8, reg8                     8086   -
+     17603160  0.1967  32 49     -    r    DEC        reg(in-opcode)16/32            8086   oszap
+     17389503  0.1943  16 85     -    r    TEST       r/m16/32, reg16/32             8086   oszapc
+     17141959  0.1915  16 8E     -    m    MOV        sreg16, r/m16                  8086   -
+     16818530  0.1879  16 B9     -    r    MOV        reg(in-opcode)16/32, imm16/32  8086   -
+     16749316  0.1871  16 31     -    r    XOR        r/m16/32, reg16/32             8086   oszapc
+     16168957  0.1806  16 83     /7   m    CMP        r/m16/32, imm8sx               8086   oszapc
+     15366954  0.1717  16 1E     -    r    PUSH       DS                             8086   -
+     15195609  0.1698  16 1F     -    r    POP        DS                             8086   -
+     15011412  0.1677  16 0B     -    r    OR         reg16/32, r/m16/32             8086   oszapc
+     14385010  0.1607  16 72     -    r    JB         rel8sx                         8086   -
+     14245167  0.1591  16 8C     -    r    MOV        mem16, sreg16                  8086   -
+     13453407  0.1503  16 9A     -    r    CALLF      far-ptr16:16/16:32             8086   -
+     13081061  0.1461  16 8A     -    m    MOV        reg8, r/m8                     8086   -
+     13070477  0.1460  16 C1     /5   r    SHR        r/m16/32, imm8                 8086   oszapc
+     12915705  0.1443  16 51     -    r    PUSH       reg(in-opcode)16/32            8086   -
+     12905945  0.1442  16 CB     -    r    RETF                                      8086   -
+     12734767  0.1423  16 59     -    r    POP        reg(in-opcode)16/32            8086   -
+     12269864  0.1371  16 2B     -    m    SUB        reg16/32, r/m16/32             8086   oszapc
+     12203328  0.1363  16 1B     -    m    SBB        reg16/32, r/m16/32             8086   oszapc
+     11370496  0.1270  16 89     -    m    MOV        r/m16/32, reg16/32             8086   -
+     11310392  0.1264  32 53     -    r    PUSH       reg(in-opcode)16/32            8086   -
+     11310366  0.1264  32 5B     -    r    POP        reg(in-opcode)16/32            8086   -
+     10078716  0.1126  16 0F B7  -    r    MOVZX      reg16/32, r/m16                80386  -
+      9964624  0.1113  32 72     -    r    JB         rel8sx                         8086   -
+      9277475  0.1036  16 A8     -    r    TEST       AL, imm8                       8086   oszapc
+      8870210  0.0991  32 77     -    r    JNBE       rel8sx                         8086   -
+      8177649  0.0914  32 83     /0   r    ADD        r/m16/32, imm8sx               8086   oszapc
+      7600914  0.0849  16 88     -    m    MOV        r/m8, reg8                     8086   -
+      7557471  0.0844  16 EC     -    r    IN         AL, DX                         8086   -
+      7510028  0.0839  32 83     /7   r    CMP        r/m16/32, imm8sx               8086   oszapc
+      7322471  0.0818  32 2B     -    m    SUB        reg16/32, r/m16/32             8086   oszapc
+      7287415  0.0814  16 5B     -    r    POP        reg(in-opcode)16/32            8086   -
+      7196409  0.0804  16 53     -    r    PUSH       reg(in-opcode)16/32            8086   -
+      6899261  0.0771  16 90     -    r    XCHG       reg(in-opcode)16/32, rAX       8086   -
+      6851944  0.0765  16 81     /7   r    CMP        r/m16/32, imm16/32sx           8086   oszapc
+      6337316  0.0708  16 0F 84  -    r    JZ         rel16/32sx                     80386  -
+      6023419  0.0673  32 FF     /6   m    PUSH       r/m16/32                       8086   -
+      5952379  0.0665  32 E4     -    r    IN         AL, imm8                       8086   -
+      5912646  0.0661  32 0F B6  -    m    MOVZX      reg16/32, r/m8                 80386  -
+      5912563  0.0661  32 D3     /5   r    SHR        r/m16/32, CL                   8086   oszapc
+      5912563  0.0661  32 0F 31  -    r    RDTSC                                     P1     -
+      5912563  0.0661  32 0F AD  -    r    SHRD       r/m16/32, reg16/32, CL         80386  oszapc
+      5897306  0.0659  32 3B     -    r    CMP        reg16/32, r/m16/32             8086   oszapc
+      5696822  0.0636  32 31     -    r    XOR        r/m16/32, reg16/32             8086   oszapc
+      5683217  0.0635  32 9C     -    r    PUSHF                                     8086   -
+      5635300  0.0630  16 E9     -    r    JMP        rel16/32sx                     8086   -
+      5621561  0.0628  16 EB     -    r    JMP        rel8sx                         8086   -
+      5602732  0.0626  32 9D     -    r    POPF                                      8086   -
+      5600798  0.0626  32 57     -    r    PUSH       reg(in-opcode)16/32            8086   -
+      5427777  0.0606  32 50     -    r    PUSH       reg(in-opcode)16/32            8086   -
+      5396348  0.0603  32 EE     -    r    OUT        DX, AL                         8086   -
+      5332816  0.0596  16 56     -    r    PUSH       reg(in-opcode)16/32            8086   -
+      5313009  0.0594  32 0F B6  -    r    MOVZX      reg16/32, r/m8                 80386  -
+      5232024  0.0585  16 5E     -    r    POP        reg(in-opcode)16/32            8086   -
+      5195462  0.0580  16 E2     -    r    LOOP       rel8sx                         8086   -
+      5194139  0.0580  32 E2     -    r    LOOP       rel8sx                         8086   -
+      5053558  0.0565  32 03     -    m    ADD        reg16/32, r/m16/32             8086   oszapc
+      4984522  0.0557  16 57     -    r    PUSH       reg(in-opcode)16/32            8086   -
+      4909918  0.0549  16 5F     -    r    POP        reg(in-opcode)16/32            8086   -
+      4831352  0.0540  32 83     /5   r    SUB        r/m16/32, imm8sx               8086   oszapc
+      4752161  0.0531  32 FF     /4   m    JMP        r/m16/32                       8086   -
+      4716360  0.0527  16 76     -    r    JBE        rel8sx                         8086   -
+      4625868  0.0517  16 C4     -    m    LES        reg16/32, mem16:16/16:32       8086   -
+      4587277  0.0512  32 2B     -    r    SUB        reg16/32, r/m16/32             8086   oszapc
+      4511369  0.0504  16 FF     /0   m    INC        r/m16/32                       8086   oszap
+      4444532  0.0497  32 5F     -    r    POP        reg(in-opcode)16/32            8086   -
+      4437555  0.0496  32 8A     -    r    MOV        reg8, r/m8                     8086   -
+      4315739  0.0482  32 03     -    r    ADD        reg16/32, r/m16/32             8086   oszapc
+      4256014  0.0475  16 3B     -    r    CMP        reg16/32, r/m16/32             8086   oszapc
+      4197798  0.0469  32 0F B7  -    r    MOVZX      reg16/32, r/m16                80386  -
+      4197713  0.0469  32 3C     -    r    CMP        AL, imm8                       8086   oszapc
+      4197386  0.0469  16 3C     -    r    CMP        AL, imm8                       8086   oszapc
+      4131763  0.0462  32 0B     -    r    OR         reg16/32, r/m16/32             8086   oszapc
+      4058949  0.0453  32 C2     -    r    RETN       imm16                          8086   -
+      4031410  0.0450  16 8D     -    m    LEA        reg16/32, mem                  8086   -
+      3989009  0.0446  16 32     -    r    XOR        reg8, r/m8                     8086   oszapc
+      3897369  0.0435  32 EC     -    r    IN         AL, DX                         8086   -
+      3795644  0.0424  32 BE     -    r    MOV        reg(in-opcode)16/32, imm16/32  8086   -
+      3790155  0.0423  16 80     /7   m    CMP        r/m8, imm8                     8086   oszapc
+      3789502  0.0423  32 F7     /3   r    NEG        r/m16/32                       8086   oszapc
+      3758926  0.0420  16 F6     /0   r    TEST       r/m8, imm8                     8086   oszapc
+      3752487  0.0419  32 FF     /0   m    INC        r/m16/32                       8086   oszap
+      3706889  0.0414  32 ED     -    r    IN         eAX, DX                        8086   -
+      3695583  0.0413  16 FC     -    r    CLD                                       8086   d
+      3552394  0.0397  16 FA     -    r    CLI                                       8086   i
+      3504294  0.0391  16 FB     -    r    STI                                       8086   i
+      3469523  0.0388  32 C7     /0   m    MOV        r/m16/32, imm16/32sx           8086   -
+      3459207  0.0386  32 E6     -    r    OUT        imm8, AL                       8086   -
+      3437549  0.0384  32 3D     -    r    CMP        rAX, imm16/32sx                8086   oszapc
+      3372708  0.0377  16 FF     /2   r    CALL       r/m16/32                       8086   -
+      3357531  0.0375  16 D3     /5   r    SHR        r/m16/32, CL                   8086   oszapc
+      3353656  0.0375  16 0F B6  -    r    MOVZX      reg16/32, r/m8                 80386  -
+      3348380  0.0374  16 0F 97  /0   r    SETNBE     r/m8                           80386  -
+      3344260  0.0374  32 6A     -    r    PUSH       imm8sx                         80186  -
+      3342764  0.0373  16 0F 31  -    r    RDTSC                                     P1     -
+      3342764  0.0373  16 0F AD  -    r    SHRD       r/m16/32, reg16/32, CL         80386  oszapc
+      3342080  0.0373  16 29     -    r    SUB        r/m16/32, reg16/32             8086   oszapc
+      3340407  0.0373  16 0F 9F  /0   r    SETNLE     r/m8                           80386  -
+      3298466  0.0368  32 0F B7  -    m    MOVZX      reg16/32, r/m16                80386  -
+      3215770  0.0359  32 29     -    r    SUB        r/m16/32, reg16/32             8086   oszapc
+      3214388  0.0359  32 0F 9F  /0   r    SETNLE     r/m8                           80386  -
+      3158794  0.0353  32 86     -    r    XCHG       reg8, r/m8                     8086   -
+      3090840  0.0345  16 FF     /6   m    PUSH       r/m16/32                       8086   -
+      3011239  0.0336  32 87     -    m    XCHG       reg16/32, r/m16/32             8086   -
+      2998414  0.0335  32 01     -    r    ADD        r/m16/32, reg16/32             8086   oszapc
+      2980339  0.0333  16 3A     -    m    CMP        reg8, r/m8                     8086   oszapc
+      2958295  0.0330  32 01     -    m    ADD        r/m16/32, reg16/32             8086   oszapc
+      2926449  0.0327  16 39     -    m    CMP        r/m16/32, reg16/32             8086   oszapc
+      2917143  0.0326  32 13     -    m    ADC        reg16/32, r/m16/32             8086   oszapc
+      2897201  0.0324  32 C1     /5   r    SHR        r/m16/32, imm8                 8086   oszapc
+      2893567  0.0323  16 A1     -    r    MOV        rAX, moffs16/32                8086   -
+      2864944  0.0320  32 76     -    r    JBE        rel8sx                         8086   -
+      2725699  0.0305  16 46     -    r    INC        reg(in-opcode)16/32            8086   oszap
+      2645619  0.0296  16 80     /7   r    CMP        r/m8, imm8                     8086   oszapc
+      2441510  0.0273  32 48     -    r    DEC        reg(in-opcode)16/32            8086   oszap
+      2416418  0.0270  32 52     -    r    PUSH       reg(in-opcode)16/32            8086   -
+      2398390  0.0268  32 88     -    r    MOV        r/m8, reg8                     8086   -
+      2326051  0.0260  16 B8     -    r    MOV        reg(in-opcode)16/32, imm16/32  8086   -
+      2322603  0.0259  32 F7     /0   r    TEST       r/m16/32, imm16/32             8086   oszapc
+      2266842  0.0253  16 47     -    r    INC        reg(in-opcode)16/32            8086   oszap
+      2234830  0.0250  32 C1     /4   r    SHL        r/m16/32, imm8                 8086   oszapc
+      2145469  0.0240  32 68     -    r    PUSH       imm16/32                       80186  -
+      2129551  0.0238  16 81     /7   m    CMP        r/m16/32, imm16/32sx           8086   oszapc
+      2112360  0.0236  32 58     -    r    POP        reg(in-opcode)16/32            8086   -
+      2099563  0.0235  32 21     -    r    AND        r/m16/32, reg16/32             8086   oszapc
+      2099264  0.0235  32 C6     /0   m    MOV        r/m8, imm8                     8086   -
+      2098611  0.0234  32 A8     -    r    TEST       AL, imm8                       8086   oszapc
+      2098578  0.0234  32 0F AF  -    m    IMUL       reg16/32, r/m16/32             80386  oszapc
+      2098568  0.0234  32 38     -    r    CMP        r/m8, reg8                     8086   oszapc
+      2089529  0.0233  32 60     -    r    PUSHA                                     80186  -
+      2089385  0.0233  32 61     -    r    POPA                                      80186  -
+      2020344  0.0226  16 77     -    r    JNBE       rel8sx                         8086   -
+      2001704  0.0224  16 C9     -    r    LEAVE                                     80186  -
+      1996842  0.0223  16 33     -    r    XOR        reg16/32, r/m16/32             8086   oszapc
+      1949868  0.0218  32 80     /7   r    CMP        r/m8, imm8                     8086   oszapc
+      1925733  0.0215  16 50     -    r    PUSH       reg(in-opcode)16/32            8086   -
+      1924022  0.0215  32 5A     -    r    POP        reg(in-opcode)16/32            8086   -
+      1907350  0.0213  32 FF     /1   m    DEC        r/m16/32                       8086   oszap
+      1844373  0.0206  16 C6     /0   m    MOV        r/m8, imm8                     8086   -
+      1802923  0.0201  16 2C     -    r    SUB        AL, imm8                       8086   oszapc
+      1776709  0.0198  32 0F 82  -    r    JB         rel16/32sx                     80386  -
+      1760852  0.0197  32 23     -    r    AND        reg16/32, r/m16/32             8086   oszapc
+      1666805  0.0186  32 FC     -    r    CLD                                       8086   d
+      1647373  0.0184  32 81     /7   r    CMP        r/m16/32, imm16/32sx           8086   oszapc
+      1637008  0.0183  32 A5     -    r    MOVS       ES:[DI], DS:[SI]               8086   -
+      1527847  0.0171  16 83     /0   r    ADD        r/m16/32, imm8sx               8086   oszapc
+      1517716  0.0170  16 38     -    r    CMP        r/m8, reg8                     8086   oszapc
+      1503847  0.0168  32 47     -    r    INC        reg(in-opcode)16/32            8086   oszap
+      1497544  0.0167  16 98     -    r    CBW                                       8086   -
+      1473307  0.0165  16 0F 85  -    r    JNZ        rel16/32sx                     80386  -
+      1358713  0.0152  32 46     -    r    INC        reg(in-opcode)16/32            8086   oszap
+      1356066  0.0151  16 0F 87  -    r    JNBE       rel16/32sx                     80386  -
+      1336583  0.0149  16 CA     -    r    RETF       imm16                          8086   -
+      1321731  0.0148  32 1B     -    r    SBB        reg16/32, r/m16/32             8086   oszapc
+      1259603  0.0141  32 83     /2   r    ADC        r/m16/32, imm8sx               8086   oszapc
+      1243554  0.0139  16 C8     -    r    ENTER      imm16, imm8                    80186  -
+      1199238  0.0134  32 19     -    r    SBB        r/m16/32, reg16/32             8086   oszapc
+      1199201  0.0134  32 B0     -    r    MOV        reg(in-opcode)8, imm8          8086   -
+      1199193  0.0134  32 78     -    r    JS         rel8sx                         8086   -
+      1199188  0.0134  32 0F 88  -    r    JS         rel16/32sx                     80386  -
+      1151455  0.0129  32 80     /1   m    OR         r/m8, imm8                     8086   oszapc
+      1132257  0.0126  32 80     /4   m    AND        r/m8, imm8                     8086   oszapc
+      1110842  0.0124  32 41     -    r    INC        reg(in-opcode)16/32            8086   oszap
+      1108296  0.0124  16 55     -    r    PUSH       reg(in-opcode)16/32            8086   -
+      1103690  0.0123  32 25     -    r    AND        rAX, imm16/32sx                8086   oszapc
+      1103093  0.0123  32 C9     -    r    LEAVE                                     80186  -
+      1092808  0.0122  32 E3     -    r    JCXZ       rel8sx                         8086   -
+      1089313  0.0122  32 84     -    r    TEST       r/m8, reg8                     8086   oszapc
+      1085474  0.0121  32 40     -    r    INC        reg(in-opcode)16/32            8086   oszap
+      1056902  0.0118  32 F7     /0   m    TEST       r/m16/32, imm16/32             8086   oszapc
+      1056640  0.0118  16 0F 86  -    r    JBE        rel16/32sx                     80386  -
+      1043856  0.0117  32 8E     -    r    MOV        sreg16, r/m16                  8086   -
+      1037035  0.0116  16 F6     /0   m    TEST       r/m8, imm8                     8086   oszapc
+      1033060  0.0115  32 7F     -    r    JNLE       rel8sx                         8086   -
+      1008857  0.0113  32 38     -    m    CMP        r/m8, reg8                     8086   oszapc
+       999406  0.0112  32 BF     -    r    MOV        reg(in-opcode)16/32, imm16/32  8086   -
+       995115  0.0111  32 C0     /5   r    SHR        r/m8, imm8                     8086   oszapc
+       967133  0.0108  32 24     -    r    AND        AL, imm8                       8086   oszapc
+       962734  0.0108  16 E3     -    r    JCXZ       rel8sx                         8086   -
+       932694  0.0104  16 3B     -    m    CMP        reg16/32, r/m16/32             8086   oszapc
+       912177  0.0102  32 0A     -    m    OR         reg8, r/m8                     8086   oszapc
+       888254  0.0099  16 58     -    r    POP        reg(in-opcode)16/32            8086   -
+       880593  0.0098  32 8F     /0   m    POP        r/m16/32                       8086   -
+       871178  0.0097  16 03     -    r    ADD        reg16/32, r/m16/32             8086   oszapc
+       844851  0.0094  32 99     -    r    CWD                                       8086   -
+       806348  0.0090  16 78     -    r    JS         rel8sx                         8086   -
+       794492  0.0089  32 7C     -    r    JL         rel8sx                         8086   -
+       783926  0.0088  32 33     -    m    XOR        reg16/32, r/m16/32             8086   oszapc
+       781803  0.0087  32 AD     -    r    LODS       DS:[SI]                        8086   -
+       777253  0.0087  16 7B     -    r    JNP        rel8sx                         8086   -
+       764247  0.0085  32 F9     -    r    STC                                       8086   c
+       722337  0.0081  32 43     -    r    INC        reg(in-opcode)16/32            8086   oszap
+       722004  0.0081  16 8C     -    m    MOV        mem16, sreg16                  8086   -
+       714548  0.0080  16 2B     -    r    SUB        reg16/32, r/m16/32             8086   oszapc
+       702712  0.0079  32 39     -    r    CMP        r/m16/32, reg16/32             8086   oszapc
+       702184  0.0078  16 0F 8F  -    r    JNLE       rel16/32sx                     80386  -
+       701556  0.0078  16 C5     -    m    LDS        reg16/32, mem16:16/16:32       8086   -
+       691931  0.0077  32 0F 87  -    r    JNBE       rel16/32sx                     80386  -
+       690768  0.0077  16 7F     -    r    JNLE       rel8sx                         8086   -
+       688583  0.0077  16 07     -    r    POP        ES                             8086   -
+       686682  0.0077  16 8A     -    r    MOV        reg8, r/m8                     8086   -
+       679229  0.0076  32 4A     -    r    DEC        reg(in-opcode)16/32            8086   oszap
+       671513  0.0075  16 02     -    m    ADD        reg8, r/m8                     8086   oszapc
+       670214  0.0075  32 F7     /4   r    MUL        r/m16/32                       8086   oszapc
+       669083  0.0075  16 80     /2   r    ADC        r/m8, imm8                     8086   oszapc
+       645876  0.0072  32 0F 83  -    r    JNB        rel16/32sx                     80386  -
+       643110  0.0072  16 C2     -    r    RETN       imm16                          8086   -
+       641767  0.0072  32 32     -    r    XOR        reg8, r/m8                     8086   oszapc
+       640819  0.0072  16 A4     -    r    MOVS       (ES:)[rDI], (DS:)[rSI]         8086   -
+       637616  0.0071  32 42     -    r    INC        reg(in-opcode)16/32            8086   oszap
+       635837  0.0071  32 F7     /2   r    NOT        r/m16/32                       8086   -
+       632350  0.0071  32 29     -    m    SUB        r/m16/32, reg16/32             8086   oszapc
+       624505  0.0070  32 83     /0   m    ADD        r/m16/32, imm8sx               8086   oszapc
+       622122  0.0070  32 0F BE  -    r    MOVSX      reg16/32, r/m8                 80386  -
+       615086  0.0069  32 0A     -    r    OR         reg8, r/m8                     8086   oszapc
+       606761  0.0068  16 C1     /4   r    SHL        r/m16/32, imm8                 8086   oszapc
+       599629  0.0067  32 09     -    r    OR         r/m16/32, reg16/32             8086   oszapc
+       599626  0.0067  32 7E     -    r    JLE        rel8sx                         8086   -
+       599621  0.0067  32 F7     /6   r    DIV        r/m16/32                       8086   oszapc
+       599615  0.0067  32 05     -    r    ADD        rAX, imm16/32sx                8086   oszapc
+       599603  0.0067  32 81     /0   r    ADD        r/m16/32, imm16/32sx           8086   oszapc
+       599597  0.0067  32 81     /5   r    SUB        r/m16/32, imm16/32sx           8086   oszapc
+       599596  0.0067  32 69     -    m    IMUL       reg16/32, r/m16/32, imm16/32sx 80186  oszapc
+       599592  0.0067  32 A4     -    r    MOVS       (ES:)[rDI], (DS:)[rSI]         8086   -
+       599590  0.0067  32 0F AF  -    r    IMUL       reg16/32, r/m16/32             80386  oszapc
+       599589  0.0067  32 6F     -    r    OUTS       DX, DS:[SI]                    80186  -
+       597521  0.0067  16 FF     /5   m    JMPF       mem16:32/16:64                 8086   -
+       553173  0.0062  32 F8     -    r    CLC                                       8086   c
+       542510  0.0061  32 0F A9  -    r    POP        GS                             80386  -
+       533988  0.0060  16 7C     -    r    JL         rel8sx                         8086   -
+       531417  0.0059  16 C7     /0   m    MOV        r/m16/32, imm16/32sx           8086   -
+       529637  0.0059  16 F7     /0   m    TEST       r/m16/32, imm16/32             8086   oszapc
+       527379  0.0059  32 1A     -    r    SBB        reg8, r/m8                     8086   oszapc
+       507076  0.0057  16 06     -    r    PUSH       ES                             8086   -
+       505487  0.0056  32 FF     /2   r    CALL       r/m16/32                       8086   -
+       496168  0.0055  32 23     -    m    AND        reg16/32, r/m16/32             8086   oszapc
+       489486  0.0055  32 BB     -    r    MOV        reg(in-opcode)16/32, imm16/32  8086   -
+       482654  0.0054  16 FF     /3   m    CALLF      mem16:32/16:64                 8086   -
+       481589  0.0054  32 6B     -    r    IMUL       reg16/32, r/m16/32, imm8sx     80186  oszapc
+       477571  0.0053  32 81     /4   m    AND        r/m16/32, imm16/32sx           8086   oszapc
+       477150  0.0053  32 0F 86  -    r    JBE        rel16/32sx                     80386  -
+       474868  0.0053  32 22     -    m    AND        reg8, r/m8                     8086   oszapc
+       473949  0.0053  32 A2     -    r    MOV        moffs8, AL                     8086   -
+       470545  0.0053  32 FD     -    r    STD                                       8086   d
+       468679  0.0052  32 09     -    m    OR         r/m16/32, reg16/32             8086   oszapc
+       465940  0.0052  16 4D     -    r    DEC        reg(in-opcode)16/32            8086   oszap
+       464930  0.0052  32 BA     -    r    MOV        reg(in-opcode)16/32, imm16/32  8086   -
+       463883  0.0052  32 0F A8  -    r    PUSH       GS                             80386  -
+       454025  0.0051  32 AF     -    r    SCAS       ES:[DI]                        8086   oszapc
+       453664  0.0051  32 02     -    r    ADD        reg8, r/m8                     8086   oszapc
+       453571  0.0051  32 7D     -    r    JNL        rel8sx                         8086   -
+       448739  0.0050  16 C0     /1   r    ROR        r/m8, imm8                     8086   oszapc
+       445700  0.0050  16 73     -    r    JNB        rel8sx                         8086   -
+       443585  0.0050  32 0B     -    m    OR         reg16/32, r/m16/32             8086   oszapc
+       443584  0.0050  32 0F BA  /6   m    BTR        r/m16/32, imm8                 80286  oszapc
+       425910  0.0048  32 AC     -    r    LODS       (DS:)[rSI]                     8086   -
+       425332  0.0048  16 48     -    r    DEC        reg(in-opcode)16/32            8086   oszap
+       418888  0.0047  16 0E     -    r    PUSH       CS                             8086   -
+       411468  0.0046  32 0F A0  -    r    PUSH       FS                             80386  -
+       411258  0.0046  32 0D     -    r    OR         rAX, imm16/32sx                8086   oszapc
+       410997  0.0046  32 0F A1  -    r    POP        FS                             80386  -
+       407357  0.0046  16 34     -    r    XOR        AL, imm8                       8086   oszapc
+       402447  0.0045  32 79     -    r    JNS        rel8sx                         8086   -
+       395163  0.0044  32 83     /5   m    SUB        r/m16/32, imm8sx               8086   oszapc
+       379926  0.0042  16 83     /4   r    AND        r/m16/32, imm8sx               80386  oszapc
+       379375  0.0042  32 D1     /4   m    SHL        r/m16/32, 1                    8086   oszapc
+       377160  0.0042  16 2A     -    r    SUB        reg8, r/m8                     8086   oszapc
+       375883  0.0042  16 92     -    r    XCHG       reg(in-opcode)16/32, rAX       8086   -
+       372971  0.0042  32 83     /4   m    AND        r/m16/32, imm8sx               80386  oszapc
+       368790  0.0041  32 08     -    m    OR         r/m8, reg8                     8086   oszapc
+       367222  0.0041  32 F7     /6   m    DIV        r/m16/32                       8086   oszapc
+       363384  0.0041  16 16     -    r    PUSH       SS                             8086   -
+       362411  0.0040  32 D0     /4   r    SHL        r/m8, 1                        8086   oszapc
+       361244  0.0040  16 52     -    r    PUSH       reg(in-opcode)16/32            8086   -
+       360053  0.0040  32 2C     -    r    SUB        AL, imm8                       8086   oszapc
+       359523  0.0040  32 04     -    r    ADD        AL, imm8                       8086   oszapc
+       358361  0.0040  16 0F A4  -    r    SHLD       r/m16/32, reg16/32, imm8       80386  oszapc
+       355875  0.0040  16 5D     -    r    POP        reg(in-opcode)16/32            8086   -
+       353884  0.0040  16 4F     -    r    DEC        reg(in-opcode)16/32            8086   oszap
+       352727  0.0039  32 A0     -    r    MOV        AL, moffs8                     8086   -
+       342895  0.0038  16 33     -    m    XOR        reg16/32, r/m16/32             8086   oszapc
+       338443  0.0038  16 4A     -    r    DEC        reg(in-opcode)16/32            8086   oszap
+       336095  0.0038  16 83     /7   r    CMP        r/m16/32, imm8sx               8086   oszapc
+       325633  0.0036  16 A3     -    r    MOV        moffs16/32, rAX                8086   -
+       324875  0.0036  32 FE     /0   m    INC        r/m8                           8086   oszap
+       316243  0.0035  16 FF     /1   m    DEC        r/m16/32                       8086   oszap
+       314453  0.0035  32 C1     /1   m    ROR        r/m16/32, imm8                 8086   oszapc
+       309526  0.0035  32 0F 8F  -    r    JNLE       rel16/32sx                     80386  -
+       308534  0.0034  16 87     -    m    XCHG       reg16/32, r/m16/32             8086   -
+       307130  0.0034  32 83     /1   r    OR         r/m16/32, imm8sx               80386  oszapc
+       306990  0.0034  32 FE     /1   m    DEC        r/m8                           8086   oszap
+       302459  0.0034  32 A9     -    r    TEST       rAX, imm16/32sx                8086   oszapc
+       301124  0.0034  32 CF     -    r    IRET                                      8086   -
+       299796  0.0033  32 4E     -    r    DEC        reg(in-opcode)16/32            8086   oszap
+       299796  0.0033  32 F7     /7   r    IDIV       r/m16/32                       8086   oszapc
+       299795  0.0033  32 6D     -    r    INS        ES:[DI], DX                    80186  -
+       297087  0.0033  32 4F     -    r    DEC        reg(in-opcode)16/32            8086   oszap
+       295600  0.0033  16 FE     /1   m    DEC        r/m8                           8086   oszap
+       295309  0.0033  32 C0     /4   r    SHL        r/m8, imm8                     8086   oszapc
+       294662  0.0033  16 D1     /5   r    SHR        r/m16/32, 1                    8086   oszapc
+       291907  0.0033  16 5A     -    r    POP        reg(in-opcode)16/32            8086   -
+       291792  0.0033  32 A3     -    r    MOV        moffs16/32, rAX                8086   -
+       289131  0.0032  32 AB     -    r    STOS       ES:[DI]                        8086   -
+       273358  0.0031  16 AC     -    r    LODS       (DS:)[rSI]                     8086   -
+       262355  0.0029  16 38     -    m    CMP        r/m8, reg8                     8086   oszapc
+       262175  0.0029  16 FE     /0   m    INC        r/m8                           8086   oszap
+       259467  0.0029  32 D1     /2   r    RCL        r/m16/32, 1                    8086   oszapc
+       257533  0.0029  16 80     /4   r    AND        r/m8, imm8                     8086   oszapc
+       257521  0.0029  16 0F 8D  -    r    JNL        rel16/32sx                     80386  -
+       254640  0.0028  32 0F 8C  -    r    JL         rel16/32sx                     80386  -
+       253383  0.0028  16 68     -    r    PUSH       imm16/32                       80186  -
+       249928  0.0028  16 BB     -    r    MOV        reg(in-opcode)16/32, imm16/32  8086   -
+       246894  0.0028  16 D0     /5   r    SHR        r/m8, 1                        8086   oszapc
+       246501  0.0028  16 83     /5   r    SUB        r/m16/32, imm8sx               8086   oszapc
+       238123  0.0027  16 AA     -    r    STOS       (ES:)[rDI]                     8086   -
+       237679  0.0027  32 8E     -    m    MOV        sreg16, r/m16                  8086   -
+       235361  0.0026  16 03     -    m    ADD        reg16/32, r/m16/32             8086   oszapc
+       233912  0.0026  32 8C     -    r    MOV        mem16, sreg16                  8086   -
+       231700  0.0026  16 BA     -    r    MOV        reg(in-opcode)16/32, imm16/32  8086   -
+       222342  0.0025  16 0A     -    r    OR         reg8, r/m8                     8086   oszapc
+       222070  0.0025  16 05     -    r    ADD        rAX, imm16/32sx                8086   oszapc
+       219752  0.0025  16 01     -    m    ADD        r/m16/32, reg16/32             8086   oszapc
+       219061  0.0024  32 D1     /5   r    SHR        r/m16/32, 1                    8086   oszapc
+       216839  0.0024  16 C1     /1   r    ROR        r/m16/32, imm8                 8086   oszapc
+       216606  0.0024  16 AD     -    r    LODS       DS:[SI]                        8086   -
+       216073  0.0024  16 40     -    r    INC        reg(in-opcode)16/32            8086   oszap
+       215496  0.0024  16 6A     -    r    PUSH       imm8sx                         80186  -
+       215388  0.0024  32 3A     -    m    CMP        reg8, r/m8                     8086   oszapc
+       215385  0.0024  32 1E     -    r    PUSH       DS                             8086   -
+       213455  0.0024  32 07     -    r    POP        ES                             8086   -
+       212759  0.0024  32 C1     /1   r    ROR        r/m16/32, imm8                 8086   oszapc
+       208702  0.0023  32 1F     -    r    POP        DS                             8086   -
+       208003  0.0023  16 31     -    m    XOR        r/m16/32, reg16/32             8086   oszapc
+       206226  0.0023  32 06     -    r    PUSH       ES                             8086   -
+       200272  0.0022  16 B4     -    r    MOV        reg(in-opcode)8, imm8          8086   -
+       198474  0.0022  32 0F 94  /0   r    SETZ       r/m8                           80386  -
+       194481  0.0022  32 CB     -    r    RETF                                      8086   -
+       192933  0.0022  32 0E     -    r    PUSH       CS                             8086   -
+       192725  0.0022  16 9C     -    r    PUSHF                                     8086   -
+       188476  0.0021  16 79     -    r    JNS        rel8sx                         8086   -
+       187180  0.0021  16 F8     -    r    CLC                                       8086   c
+       186127  0.0021  32 D3     /4   r    SHL        r/m16/32, CL                   8086   oszapc
+       186100  0.0021  16 A5     -    r    MOVS       ES:[DI], DS:[SI]               8086   -
+       184215  0.0021  32 0F 01  /3   m    LIDT       mem6/10                        80286  -
+       182725  0.0020  32 0F BA  /4   m    BT         r/m16/32, imm8                 80286  oszapc
+       179394  0.0020  32 0F 95  /0   r    SETNZ      r/m8                           80386  -
+       171116  0.0019  32 1C     -    r    SBB        AL, imm8                       8086   oszapc
+       169650  0.0019  32 8C     -    m    MOV        mem16, sreg16                  8086   -
+       164636  0.0018  16 0B     -    m    OR         reg16/32, r/m16/32             8086   oszapc
+       163804  0.0018  16 24     -    r    AND        AL, imm8                       8086   oszapc
+       163427  0.0018  16 7D     -    r    JNL        rel8sx                         8086   -
+       161477  0.0018  32 02     -    m    ADD        reg8, r/m8                     8086   oszapc
+       160864  0.0018  16 2A     -    m    SUB        reg8, r/m8                     8086   oszapc
+       159773  0.0018  16 D0     /2   r    RCL        r/m8, 1                        8086   oszapc
+       157315  0.0018  32 E0     -    r    LOOPNZ     rel8sx                         8086   -
+       153934  0.0017  32 2A     -    r    SUB        reg8, r/m8                     8086   oszapc
+       150444  0.0017  32 0F BA  /5   m    BTS        r/m16/32, imm8                 80286  oszapc
+       150392  0.0017  16 CF     -    r    IRET                                      8086   -
+       149902  0.0017  16 F7     /6   r    DIV        r/m16/32                       8086   oszapc
+       148819  0.0017  16 13     -    r    ADC        reg16/32, r/m16/32             8086   oszapc
+       145324  0.0016  16 AE     -    r    SCAS       (ES:)[rDI]                     8086   oszapc
+       143155  0.0016  16 9D     -    r    POPF                                      8086   -
+       142898  0.0016  16 FE     /1   r    DEC        r/m8                           8086   oszap
+       141128  0.0016  16 F7     /2   r    NOT        r/m16/32                       8086   -
+       140126  0.0016  32 20     -    m    AND        r/m8, reg8                     8086   oszapc
+       138503  0.0015  32 80     /1   r    OR         r/m8, imm8                     8086   oszapc
+       136764  0.0015  32 80     /5   r    SUB        r/m8, imm8                     8086   oszapc
+       136682  0.0015  32 0F BF  -    m    MOVSX      reg16/32, r/m16                80386  -
+       131876  0.0015  16 83     /1   r    OR         r/m16/32, imm8sx               80386  oszapc
+       129142  0.0014  16 80     /4   m    AND        r/m8, imm8                     8086   oszapc
+       128595  0.0014  16 81     /0   r    ADD        r/m16/32, imm16/32sx           8086   oszapc
+       127317  0.0014  32 AE     -    r    SCAS       (ES:)[rDI]                     8086   oszapc
+       125765  0.0014  16 0F A1  -    r    POP        FS                             80386  -
+       125680  0.0014  16 84     -    r    TEST       r/m8, reg8                     8086   oszapc
+       120551  0.0013  16 FF     /2   m    CALL       r/m16/32                       8086   -
+       118251  0.0013  16 83     /4   m    AND        r/m16/32, imm8sx               80386  oszapc
+       116592  0.0013  16 43     -    r    INC        reg(in-opcode)16/32            8086   oszap
+       114241  0.0013  32 D1     /1   r    ROR        r/m16/32, 1                    8086   oszapc
+       113495  0.0013  16 EA     -    r    JMPF       far-ptr16:16/16:32             8086   -
+       111732  0.0012  16 85     -    m    TEST       r/m16/32, reg16/32             8086   oszapc
+       111609  0.0012  16 0F A9  -    r    POP        GS                             80386  -
+       110088  0.0012  32 83     /1   m    OR         r/m16/32, imm8sx               80386  oszapc
+       108536  0.0012  32 3A     -    r    CMP        reg8, r/m8                     8086   oszapc
+       107740  0.0012  16 83     /0   m    ADD        r/m16/32, imm8sx               8086   oszapc
+       107671  0.0012  32 83     /2   m    ADC        r/m16/32, imm8sx               8086   oszapc
+       105535  0.0012  16 25     -    r    AND        rAX, imm16/32sx                8086   oszapc
+       105227  0.0012  32 AA     -    r    STOS       (ES:)[rDI]                     8086   -
+       104706  0.0012  16 C1     /0   r    ROL        r/m16/32, imm8                 8086   oszapc
+       104594  0.0012  32 2D     -    r    SUB        rAX, imm16/32sx                8086   oszapc
+       104367  0.0012  32 C1     /0   r    ROL        r/m16/32, imm8                 8086   oszapc
+       100717  0.0011  32 87     -    r    XCHG       reg16/32, r/m16/32             8086   -
+       100580  0.0011  16 0F AC  -    r    SHRD       r/m16/32, reg16/32, imm8       80386  oszapc
+        96983  0.0011  16 D1     /3   r    RCR        r/m16/32, 1                    8086   oszapc
+        95405  0.0011  16 63     -    m    ARPL       r/m16, reg16                   80286  z
+        94688  0.0011  32 0F 8D  -    r    JNL        rel16/32sx                     80386  -
+        93809  0.0010  16 A2     -    r    MOV        moffs8, AL                     8086   -
+        92575  0.0010  32 F5     -    r    CMC                                       8086   c
+        91907  0.0010  16 A7     -    r    CMPS       ES:[DI], DS:[SI]               8086   oszapc
+        90937  0.0010  16 FF     /4   m    JMP        r/m16/32                       8086   -
+        90593  0.0010  32 0F BA  /6   r    BTR        r/m16/32, imm8                 80286  oszapc
+        89749  0.0010  32 0F AB  -    m    BTS        r/m16/32, reg16/32             80386  oszapc
+        87523  0.0010  16 D1     /4   r    SHL        r/m16/32, 1                    8086   oszapc
+        85155  0.0010  16 8F     /0   m    POP        r/m16/32                       8086   -
+        83675  0.0009  16 AB     -    r    STOS       ES:[DI]                        8086   -
+        78917  0.0009  32 D0     /0   r    ROL        r/m8, 1                        8086   oszapc
+        78886  0.0009  32 D1     /4   r    SHL        r/m16/32, 1                    8086   oszapc
+        76326  0.0009  32 F4     -    r    HLT                                       8086   -
+        73704  0.0008  16 BF     -    r    MOV        reg(in-opcode)16/32, imm16/32  8086   -
+        70684  0.0008  32 21     -    m    AND        r/m16/32, reg16/32             8086   oszapc
+        69814  0.0008  16 CD     -    r    INT        imm8                           8086   i
+        67604  0.0008  32 4B     -    r    DEC        reg(in-opcode)16/32            8086   oszap
+        66631  0.0007  32 81     /1   r    OR         r/m16/32, imm16/32sx           8086   oszapc
+        63008  0.0007  32 FE     /1   r    DEC        r/m8                           8086   oszap
+        62314  0.0007  16 F9     -    r    STC                                       8086   c
+        61140  0.0007  16 0C     -    r    OR         AL, imm8                       8086   oszapc
+        60797  0.0007  16 86     -    r    XCHG       reg8, r/m8                     8086   -
+        59808  0.0007  32 0F B3  -    m    BTR        r/m16/32, reg16/32             80386  oszapc
+        58074  0.0006  16 41     -    r    INC        reg(in-opcode)16/32            8086   oszap
+        57288  0.0006  16 B0     -    r    MOV        reg(in-opcode)8, imm8          8086   -
+        56983  0.0006  16 A6     -    r    CMPS       (ES:)[rDI], (DS:)[rSI]         8086   oszapc
+        56195  0.0006  16 49     -    r    DEC        reg(in-opcode)16/32            8086   oszap
+        56091  0.0006  16 80     /6   r    XOR        r/m8, imm8                     8086   oszapc
+        55075  0.0006  32 45     -    r    INC        reg(in-opcode)16/32            8086   oszap
+        53933  0.0006  16 22     -    r    AND        reg8, r/m8                     8086   oszapc
+        53392  0.0006  16 A0     -    r    MOV        AL, moffs8                     8086   -
+        52835  0.0006  16 4B     -    r    DEC        reg(in-opcode)16/32            8086   oszap
+        49461  0.0006  32 0F A3  -    m    BT         r/m16/32, reg16/32             80386  oszapc
+        48911  0.0005  32 D1     /0   r    ROL        r/m16/32, 1                    8086   oszapc
+        48715  0.0005  16 E0     -    r    LOOPNZ     rel8sx                         8086   -
+        48577  0.0005  16 E4     -    r    IN         AL, imm8                       8086   -
+        46962  0.0005  16 EE     -    r    OUT        DX, AL                         8086   -
+        45958  0.0005  16 87     -    r    XCHG       reg16/32, r/m16/32             8086   -
+        45672  0.0005  32 D0     /1   r    ROR        r/m8, 1                        8086   oszapc
+        44409  0.0005  16 39     -    r    CMP        r/m16/32, reg16/32             8086   oszapc
+        43868  0.0005  16 D7     -    r    XLAT       (DS:)[rBX+AL]                  8086   -
+        42721  0.0005  16 7E     -    r    JLE        rel8sx                         8086   -
+        42394  0.0005  16 01     -    r    ADD        r/m16/32, reg16/32             8086   oszapc
+        41612  0.0005  32 A7     -    r    CMPS       ES:[DI], DS:[SI]               8086   oszapc
+        40842  0.0005  16 0F B7  -    m    MOVZX      reg16/32, r/m16                80386  -
+        39277  0.0004  16 11     -    m    ADC        r/m16/32, reg16/32             8086   oszapc
+        39241  0.0004  32 13     -    r    ADC        reg16/32, r/m16/32             8086   oszapc
+        39079  0.0004  16 29     -    m    SUB        r/m16/32, reg16/32             8086   oszapc
+        38888  0.0004  32 F7     /4   m    MUL        r/m16/32                       8086   oszapc
+        37583  0.0004  16 0F 82  -    r    JB         rel16/32sx                     80386  -
+        37146  0.0004  32 14     -    r    ADC        AL, imm8                       8086   oszapc
+        35317  0.0004  32 A6     -    r    CMPS       (ES:)[rDI], (DS:)[rSI]         8086   oszapc
+        35265  0.0004  32 FE     /0   r    INC        r/m8                           8086   oszap
+        34344  0.0004  16 B6     -    r    MOV        reg(in-opcode)8, imm8          8086   -
+        34264  0.0004  32 00     -    m    ADD        r/m8, reg8                     8086   oszapc
+        32998  0.0004  32 0F BF  -    r    MOVSX      reg16/32, r/m16                80386  -
+        31743  0.0004  32 0F 92  /0   m    SETB       r/m8                           80386  -
+        31578  0.0004  16 D1     /2   r    RCL        r/m16/32, 1                    8086   oszapc
+        30909  0.0003  32 B3     -    r    MOV        reg(in-opcode)8, imm8          8086   -
+        29236  0.0003  32 81     /1   m    OR         r/m16/32, imm16/32sx           8086   oszapc
+        27948  0.0003  16 B1     -    r    MOV        reg(in-opcode)8, imm8          8086   -
+        27371  0.0003  16 4E     -    r    DEC        reg(in-opcode)16/32            8086   oszap
+        27165  0.0003  32 0F BA  /4   r    BT         r/m16/32, imm8                 80286  oszapc
+        26970  0.0003  16 30     -    m    XOR        r/m8, reg8                     8086   oszapc
+        26389  0.0003  32 C1     /7   r    SAR        r/m16/32, imm8                 8086   oszapc
+        26335  0.0003  16 99     -    r    CWD                                       8086   -
+        26321  0.0003  16 02     -    r    ADD        reg8, r/m8                     8086   oszapc
+        25951  0.0003  32 69     -    r    IMUL       reg16/32, r/m16/32, imm16/32sx 80186  oszapc
+        25824  0.0003  32 D2     /4   r    SHL        r/m8, CL                       8086   oszapc
+        25132  0.0003  16 FE     /0   r    INC        r/m8                           8086   oszap
+        24853  0.0003  16 0F BF  -    m    MOVSX      reg16/32, r/m16                80386  -
+        23825  0.0003  32 D1     /7   r    SAR        r/m16/32, 1                    8086   oszapc
+        23732  0.0003  16 80     /1   m    OR         r/m8, imm8                     8086   oszapc
+        23228  0.0003  16 0F BF  -    r    MOVSX      reg16/32, r/m16                80386  -
+        23193  0.0003  32 91     -    r    XCHG       reg(in-opcode)16/32, rAX       8086   -
+        22811  0.0003  16 E6     -    r    OUT        imm8, AL                       8086   -
+        22254  0.0002  32 80     /2   m    ADC        r/m8, imm8                     8086   oszapc
+        21997  0.0002  32 0F 22  -    r    MOV        CRn32, r(mod=11)32             80386  oszapc
+        21920  0.0002  16 F7     /0   r    TEST       r/m16/32, imm16/32             8086   oszapc
+        21819  0.0002  32 83     /3   r    SBB        r/m16/32, imm8sx               8086   oszapc
+        21574  0.0002  16 86     -    m    XCHG       reg8, r/m8                     8086   -
+        21414  0.0002  16 83     /2   r    ADC        r/m16/32, imm8sx               8086   oszapc
+        21282  0.0002  32 84     -    m    TEST       r/m8, reg8                     8086   oszapc
+        21080  0.0002  32 4D     -    r    DEC        reg(in-opcode)16/32            8086   oszap
+        20926  0.0002  16 6B     -    r    IMUL       reg16/32, r/m16/32, imm8sx     80186  oszapc
+        20635  0.0002  16 04     -    r    ADD        AL, imm8                       8086   oszapc
+        20610  0.0002  16 42     -    r    INC        reg(in-opcode)16/32            8086   oszap
+        20467  0.0002  16 F7     /3   r    NEG        r/m16/32                       8086   oszapc
+        20391  0.0002  32 80     /0   m    ADD        r/m8, imm8                     8086   oszapc
+        20313  0.0002  16 BE     -    r    MOV        reg(in-opcode)16/32, imm16/32  8086   -
+        20312  0.0002  16 22     -    m    AND        reg8, r/m8                     8086   oszapc
+        19544  0.0002  32 B4     -    r    MOV        reg(in-opcode)8, imm8          8086   -
+        19475  0.0002  32 80     /5   m    SUB        r/m8, imm8                     8086   oszapc
+        19384  0.0002  16 23     -    r    AND        reg16/32, r/m16/32             8086   oszapc
+        19254  0.0002  32 0F 00  /0   m    SLDT       mem16                          80286  -
+        19244  0.0002  32 0F 02  -    m    LAR        reg16/32, mem16                80286  z
+        18879  0.0002  16 D1     /1   r    ROR        r/m16/32, 1                    8086   oszapc
+        18826  0.0002  32 C8     -    r    ENTER      imm16, imm8                    80186  -
+        18745  0.0002  16 80     /1   r    OR         r/m8, imm8                     8086   oszapc
+        18615  0.0002  16 D1     /0   r    ROL        r/m16/32, 1                    8086   oszapc
+        18458  0.0002  16 3A     -    r    CMP        reg8, r/m8                     8086   oszapc
+        18326  0.0002  16 08     -    m    OR         r/m8, reg8                     8086   oszapc
+        18321  0.0002  32 FF     /4   r    JMP        r/m16/32                       8086   -
+        18191  0.0002  16 D3     /4   r    SHL        r/m16/32, CL                   8086   oszapc
+        18058  0.0002  32 BD     -    r    MOV        reg(in-opcode)16/32, imm16/32  8086   -
+        17043  0.0002  32 81     /0   m    ADD        r/m16/32, imm16/32sx           8086   oszapc
+        16885  0.0002  16 D1     /7   r    SAR        r/m16/32, 1                    8086   oszapc
+        16575  0.0002  32 0F BC  -    r    BSF        reg16/32, r/m16/32             80386  oszapc
+        16373  0.0002  32 0F 01  /0   m    SGDT       mem6/10                        80286  -
+        16361  0.0002  16 2D     -    r    SUB        rAX, imm16/32sx                8086   oszapc
+        15932  0.0002  16 81     /4   r    AND        r/m16/32, imm16/32sx           8086   oszapc
+        15327  0.0002  16 D0     /4   r    SHL        r/m8, 1                        8086   oszapc
+        15142  0.0002  32 FF     /3   m    CALLF      mem16:32/16:64                 8086   -
+        14872  0.0002  16 F7     /4   m    MUL        r/m16/32                       8086   oszapc
+        14470  0.0002  16 0F A0  -    r    PUSH       FS                             80386  -
+        14460  0.0002  16 B3     -    r    MOV        reg(in-opcode)8, imm8          8086   -
+        14303  0.0002  16 0F 02  -    r    LAR        reg16/32, mem16                80286  z
+        13934  0.0002  16 61     -    r    POPA                                      80186  -
+        13927  0.0002  16 60     -    r    PUSHA                                     80186  -
+        13716  0.0002  16 91     -    r    XCHG       reg(in-opcode)16/32, rAX       8086   -
+        13331  0.0001  16 83     /2   m    ADC        r/m16/32, imm8sx               8086   oszapc
+        13319  0.0001  32 0F 9D  /0   r    SETNL      r/m8                           80386  -
+        13101  0.0001  32 0F 20  -    r    MOV        r(mod=11)32, CRn32             80386  oszapc
+        13086  0.0001  16 A9     -    r    TEST       rAX, imm16/32sx                8086   oszapc
+        12236  0.0001  16 93     -    r    XCHG       reg(in-opcode)16/32, rAX       8086   -
+        12026  0.0001  16 BC     -    r    MOV        reg(in-opcode)16/32, imm16/32  8086   -
+        11988  0.0001  16 D0     /1   r    ROR        r/m8, 1                        8086   oszapc
+        11795  0.0001  32 98     -    r    CBW                                       8086   -
+        11790  0.0001  32 0F 92  /0   r    SETB       r/m8                           80386  -
+        11785  0.0001  32 83     /6   r    XOR        r/m16/32, imm8sx               80386  oszapc
+        11689  0.0001  16 BD     -    r    MOV        reg(in-opcode)16/32, imm16/32  8086   -
+        11331  0.0001  16 83     /5   m    SUB        r/m16/32, imm8sx               8086   oszapc
+        11251  0.0001  16 88     -    r    MOV        r/m8, reg8                     8086   -
+        11136  0.0001  32 0F 8E  -    r    JLE        rel16/32sx                     80386  -
+        11077  0.0001  16 81     /4   m    AND        r/m16/32, imm16/32sx           8086   oszapc
+        10695  0.0001  32 F6     /4   r    MUL        r/m8                           8086   oszapc
+        10628  0.0001  16 F7     /4   r    MUL        r/m16/32                       8086   oszapc
+        10215  0.0001  32 0F BE  -    m    MOVSX      reg16/32, r/m8                 80386  -
+         9604  0.0001  32 F7     /5   m    IMUL       r/m16/32                       8086   oszapc
+         9264  0.0001  32 2A     -    m    SUB        reg8, r/m8                     8086   oszapc
+         8988  0.0001  32 31     -    m    XOR        r/m16/32, reg16/32             8086   oszapc
+         8835  0.0001  32 32     -    m    XOR        reg8, r/m8                     8086   oszapc
+         8793  0.0001  16 B2     -    r    MOV        reg(in-opcode)8, imm8          8086   -
+         8552  0.0001  16 09     -    m    OR         r/m16/32, reg16/32             8086   oszapc
+         8409  0.0001  32 0F 93  /0   r    SETNB      r/m8                           80386  -
+         8094  0.0001  16 D3     /1   r    ROR        r/m16/32, CL                   8086   oszapc
+         8085  0.0001  16 45     -    r    INC        reg(in-opcode)16/32            8086   oszap
+         8056  0.0001  32 C0     /1   r    ROR        r/m8, imm8                     8086   oszapc
+         8000  0.0001  32 0F 02  -    r    LAR        reg16/32, mem16                80286  z
+         7842  0.0001  32 D1     /3   r    RCR        r/m16/32, 1                    8086   oszapc
+         7811  0.0001  32 0F BC  -    m    BSF        reg16/32, r/m16/32             80386  oszapc
+         7789  0.0001  32 86     -    m    XCHG       reg8, r/m8                     8086   -
+         7521  0.0001  16 0F 02  -    m    LAR        reg16/32, mem16                80286  z
+         7442  0.0001  32 93     -    r    XCHG       reg(in-opcode)16/32, rAX       8086   -
+         7201  0.0001  16 23     -    m    AND        reg16/32, r/m16/32             8086   oszapc
+         7044  0.0001  16 1A     -    r    SBB        reg8, r/m8                     8086   oszapc
+         6934  0.0001  16 0A     -    m    OR         reg8, r/m8                     8086   oszapc
+         6912  0.0001  32 B1     -    r    MOV        reg(in-opcode)8, imm8          8086   -
+         6795  0.0001  16 B7     -    r    MOV        reg(in-opcode)8, imm8          8086   -
+         6772  0.0001  16 80     /0   m    ADD        r/m8, imm8                     8086   oszapc
+         6565  0.0001  32 0F 9C  /0   r    SETL       r/m8                           80386  -
+         6554  0.0001  16 FD     -    r    STD                                       8086   d
+         6550  0.0001  16 F5     -    r    CMC                                       8086   c
+         6437  0.0001  32 D3     /7   r    SAR        r/m16/32, CL                   8086   oszapc
+         6296  0.0001  16 80     /2   m    ADC        r/m8, imm8                     8086   oszapc
+         6251  0.0001  32 0F 03  -    r    LSL        reg16/32, mem16                80286  z
+         6181  0.0001  16 70     -    r    JO         rel8sx                         8086   -
+         5991  0.0001  16 83     /1   m    OR         r/m16/32, imm8sx               80386  oszapc
+         5990  0.0001  32 B2     -    r    MOV        reg(in-opcode)8, imm8          8086   -
+         5877  0.0001  16 C0     /5   r    SHR        r/m8, imm8                     8086   oszapc
+         5871  0.0001  16 0F 01  /4   r    SMSW       mem16                          80286  -
+         5869  0.0001  16 D1     /5   m    SHR        r/m16/32, 1                    8086   oszapc
+         5813  0.0001  32 0F C1  -    m    XADD       r/m16/32, reg16/32             80486  oszapc
+         5564  0.0001  16 1B     -    r    SBB        reg16/32, r/m16/32             8086   oszapc
+         5137  0.0001  16 80     /0   r    ADD        r/m8, imm8                     8086   oszapc
+         5087  0.0001  16 17     -    r    POP        SS                             8086   -
+         4803  0.0001  16 EF     -    r    OUT        DX, eAX                        8086   -
+         4796  0.0001  16 80     /5   r    SUB        r/m8, imm8                     8086   oszapc
+         4708  0.0001  16 C1     /7   r    SAR        r/m16/32, imm8                 8086   oszapc
+         4359  0.0000  16 F6     /3   r    NEG        r/m8                           8086   oszapc
+         4301  0.0000  32 0F AB  -    r    BTS        r/m16/32, reg16/32             80386  oszapc
+         4233  0.0000  32 97     -    r    XCHG       reg(in-opcode)16/32, rAX       8086   -
+         4226  0.0000  32 CD     -    r    INT        imm8                           8086   i
+         4178  0.0000  16 AF     -    r    SCAS       ES:[DI]                        8086   oszapc
+         4041  0.0000  32 B5     -    r    MOV        reg(in-opcode)8, imm8          8086   -
+         4026  0.0000  16 0F 8C  -    r    JL         rel16/32sx                     80386  -
+         4010  0.0000  16 0F 03  -    r    LSL        reg16/32, mem16                80286  z
+         3938  0.0000  16 F6     /4   r    MUL        r/m8                           8086   oszapc
+         3934  0.0000  32 34     -    r    XOR        AL, imm8                       8086   oszapc
+         3792  0.0000  16 0D     -    r    OR         rAX, imm16/32sx                8086   oszapc
+         3752  0.0000  32 30     -    m    XOR        r/m8, reg8                     8086   oszapc
+         3705  0.0000  16 0F B2  -    m    LSS        reg16/32, mem16:32/16:64       80386  -
+         3660  0.0000  16 0F AF  -    r    IMUL       reg16/32, r/m16/32             80386  oszapc
+         3618  0.0000  32 1B     -    m    SBB        reg16/32, r/m16/32             8086   oszapc
+         3438  0.0000  16 97     -    r    XCHG       reg(in-opcode)16/32, rAX       8086   -
+         3288  0.0000  16 F6     /2   r    NOT        r/m8                           8086   -
+         3181  0.0000  16 0F 83  -    r    JNB        rel16/32sx                     80386  -
+         3169  0.0000  32 80     /3   m    SBB        r/m8, imm8                     8086   oszapc
+         3006  0.0000  32 0F A4  -    r    SHLD       r/m16/32, reg16/32, imm8       80386  oszapc
+         2932  0.0000  16 12     -    r    ADC        reg8, r/m8                     8086   oszapc
+         2789  0.0000  16 0F B6  -    m    MOVZX      reg16/32, r/m8                 80386  -
+         2758  0.0000  16 96     -    r    XCHG       reg(in-opcode)16/32, rAX       8086   -
+         2730  0.0000  32 0F AC  -    r    SHRD       r/m16/32, reg16/32, imm8       80386  oszapc
+         2694  0.0000  32 92     -    r    XCHG       reg(in-opcode)16/32, rAX       8086   -
+         2648  0.0000  16 FF     /4   r    JMP        r/m16/32                       8086   -
+         2494  0.0000  32 D0     /5   r    SHR        r/m8, 1                        8086   oszapc
+         2491  0.0000  16 F7     /6   m    DIV        r/m16/32                       8086   oszapc
+         2490  0.0000  16 81     /5   r    SUB        r/m16/32, imm16/32sx           8086   oszapc
+         2470  0.0000  32 EF     -    r    OUT        DX, eAX                        8086   -
+         2389  0.0000  16 19     -    r    SBB        r/m16/32, reg16/32             8086   oszapc
+         2320  0.0000  16 D2     /1   r    ROR        r/m8, CL                       8086   oszapc
+         2069  0.0000  32 35     -    r    XOR        rAX, imm16/32sx                8086   oszapc
+         2060  0.0000  16 09     -    r    OR         r/m16/32, reg16/32             8086   oszapc
+         1808  0.0000  32 D0     /4   m    SHL        r/m8, 1                        8086   oszapc
+         1719  0.0000  16 81     /1   m    OR         r/m16/32, imm16/32sx           8086   oszapc
+         1687  0.0000  32 C0     /7   r    SAR        r/m8, imm8                     8086   oszapc
+         1661  0.0000  16 6B     -    m    IMUL       reg16/32, r/m16/32, imm8sx     80186  oszapc
+         1524  0.0000  32 9F     -    r    LAHF                                      8086   -
+         1497  0.0000  32 0F B2  -    m    LSS        reg16/32, mem16:32/16:64       80386  -
+         1471  0.0000  16 32     -    m    XOR        reg8, r/m8                     8086   oszapc
+         1417  0.0000  32 12     -    r    ADC        reg8, r/m8                     8086   oszapc
+         1411  0.0000  32 81     /6   m    XOR        r/m16/32, imm16/32sx           8086   oszapc
+         1340  0.0000  16 0F BA  /6   m    BTR        r/m16/32, imm8                 80286  oszapc
+         1286  0.0000  16 0F 80  -    r    JO         rel16/32sx                     80386  -
+         1241  0.0000  32 16     -    r    PUSH       SS                             8086   -
+         1238  0.0000  16 13     -    m    ADC        reg16/32, r/m16/32             8086   oszapc
+         1223  0.0000  16 F7     /5   r    IMUL       r/m16/32                       8086   oszapc
+         1164  0.0000  16 D5     -    r    AAD                                       8086   oszapc
+         1110  0.0000  16 0F 20  -    r    MOV        r(mod=11)32, CRn32             80386  oszapc
+         1108  0.0000  32 E1     -    r    LOOPZ      rel8sx                         8086   -
+         1040  0.0000  16 B5     -    r    MOV        reg(in-opcode)8, imm8          8086   -
+         1027  0.0000  32 F6     /5   r    IMUL       r/m8                           8086   oszapc
+         1005  0.0000  16 D0     /0   r    ROL        r/m8, 1                        8086   oszapc
+          967  0.0000  16 0F 88  -    r    JS         rel16/32sx                     80386  -
+          963  0.0000  16 00     -    m    ADD        r/m8, reg8                     8086   oszapc
+          951  0.0000  16 9F     -    r    LAHF                                      8086   -
+          943  0.0000  32 0F B5  -    m    LGS        reg16/32, mem16:32/16:64       80386  -
+          920  0.0000  16 9E     -    r    SAHF                                      8086   szapc
+          865  0.0000  16 83     /6   r    XOR        r/m16/32, imm8sx               80386  oszapc
+          860  0.0000  16 D0     /3   r    RCR        r/m8, 1                        8086   oszapc
+          852  0.0000  32 F6     /6   r    DIV        r/m8                           8086   oszapc
+          805  0.0000  16 83     /3   m    SBB        r/m16/32, imm8sx               8086   oszapc
+          782  0.0000  32 D3     /1   r    ROR        r/m16/32, CL                   8086   oszapc
+          767  0.0000  16 0F 00  /0   m    SLDT       mem16                          80286  -
+          743  0.0000  16 0F 01  /3   m    LIDT       mem6/10                        80286  -
+          743  0.0000  16 0F 22  -    r    MOV        CRn32, r(mod=11)32             80386  oszapc
+          742  0.0000  32 9E     -    r    SAHF                                      8086   szapc
+          739  0.0000  16 0F 01  /0   m    SGDT       mem6/10                        80286  -
+          711  0.0000  16 F6     /6   r    DIV        r/m8                           8086   oszapc
+          689  0.0000  32 83     /3   m    SBB        r/m16/32, imm8sx               8086   oszapc
+          684  0.0000  32 D3     /4   m    SHL        r/m16/32, CL                   8086   oszapc
+          673  0.0000  16 C0     /0   r    ROL        r/m8, imm8                     8086   oszapc
+          647  0.0000  32 81     /6   r    XOR        r/m16/32, imm16/32sx           8086   oszapc
+          637  0.0000  16 0F 03  -    m    LSL        reg16/32, mem16                80286  z
+          626  0.0000  16 83     /3   r    SBB        r/m16/32, imm8sx               8086   oszapc
+          601  0.0000  32 F6     /3   r    NEG        r/m8                           8086   oszapc
+          599  0.0000  16 84     -    m    TEST       r/m8, reg8                     8086   oszapc
+          580  0.0000  16 D3     /0   r    ROL        r/m16/32, CL                   8086   oszapc
+          515  0.0000  16 D0     /7   r    SAR        r/m8, 1                        8086   oszapc
+          509  0.0000  32 0F 00  /5   r    VERW       r/m16                          80286  z
+          502  0.0000  16 F7     /7   r    IDIV       r/m16/32                       8086   oszapc
+          502  0.0000  32 C1     /4   m    SHL        r/m16/32, imm8                 8086   oszapc
+          492  0.0000  32 0F 06  -    r    CLTS                                      80286  -
+          470  0.0000  16 69     -    r    IMUL       reg16/32, r/m16/32, imm16/32sx 80186  oszapc
+          462  0.0000  32 F7     /7   m    IDIV       r/m16/32                       8086   oszapc
+          433  0.0000  16 D2     /5   r    SHR        r/m8, CL                       8086   oszapc
+          407  0.0000  16 81     /1   r    OR         r/m16/32, imm16/32sx           8086   oszapc
+          393  0.0000  16 80     /6   m    XOR        r/m8, imm8                     8086   oszapc
+          386  0.0000  32 D1     /5   m    SHR        r/m16/32, 1                    8086   oszapc
+          372  0.0000  32 EA     -    r    JMPF       far-ptr16:16/16:32             8086   -
+          371  0.0000  16 0F 01  /2   m    LGDT       mem6/10                        80286  -
+          369  0.0000  16 0F 95  /0   r    SETNZ      r/m8                           80386  -
+          329  0.0000  16 F7     /5   m    IMUL       r/m16/32                       8086   oszapc
+          325  0.0000  32 B7     -    r    MOV        reg(in-opcode)8, imm8          8086   -
+          320  0.0000  16 0F 8E  -    r    JLE        rel16/32sx                     80386  -
+          311  0.0000  16 0F A8  -    r    PUSH       GS                             80386  -
+          309  0.0000  16 0F B3  -    m    BTR        r/m16/32, reg16/32             80386  oszapc
+          307  0.0000  16 0F B4  -    m    LFS        reg16/32, mem16:32/16:64       80386  -
+          304  0.0000  16 30     -    r    XOR        r/m8, reg8                     8086   oszapc
+          293  0.0000  16 0F B5  -    m    LGS        reg16/32, mem16:32/16:64       80386  -
+          282  0.0000  32 0F B4  -    m    LFS        reg16/32, mem16:32/16:64       80386  -
+          280  0.0000  32 9B     -    r    FWAIT                                     8086   -
+          274  0.0000  32 B6     -    r    MOV        reg(in-opcode)8, imm8          8086   -
+          256  0.0000  32 C0     /5   m    SHR        r/m8, imm8                     8086   oszapc
+          237  0.0000  32 0F 89  -    r    JNS        rel16/32sx                     80386  -
+          229  0.0000  16 14     -    r    ADC        AL, imm8                       8086   oszapc
+          225  0.0000  16 69     -    m    IMUL       reg16/32, r/m16/32, imm16/32sx 80186  oszapc
+          217  0.0000  16 1A     -    m    SBB        reg8, r/m8                     8086   oszapc
+          210  0.0000  16 0F BA  /5   r    BTS        r/m16/32, imm8                 80286  oszapc
+          208  0.0000  16 0F 89  -    r    JNS        rel16/32sx                     80386  -
+          202  0.0000  16 80     /3   m    SBB        r/m8, imm8                     8086   oszapc
+          202  0.0000  32 0F BA  /0   m    (#UD)      reserved slot in opcode group         -
+          201  0.0000  32 C4     -    m    LES        reg16/32, mem16:16/16:32       8086   -
+          200  0.0000  16 C0     /4   r    SHL        r/m8, imm8                     8086   oszapc
+          198  0.0000  32 81     /5   m    SUB        r/m16/32, imm16/32sx           8086   oszapc
+          180  0.0000  32 C5     -    m    LDS        reg16/32, mem16:16/16:32       8086   -
+          165  0.0000  16 35     -    r    XOR        rAX, imm16/32sx                8086   oszapc
+          162  0.0000  16 D2     /7   r    SAR        r/m8, CL                       8086   oszapc
+          159  0.0000  16 C0     /2   r    RCL        r/m8, imm8                     8086   oszapc
+          158  0.0000  32 96     -    r    XCHG       reg(in-opcode)16/32, rAX       8086   -
+          155  0.0000  16 0F BA  /6   r    BTR        r/m16/32, imm8                 80286  oszapc
+          154  0.0000  32 CA     -    r    RETF       imm16                          8086   -
+          153  0.0000  16 0F 94  /0   r    SETZ       r/m8                           80386  -
+          140  0.0000  32 DD     /6   m    FNSAVE     memfpustate                    8086   -
+          139  0.0000  32 0F AE  /1   m    FXRSTOR    memfpu+simd-state              P2     -
+          139  0.0000  32 0F AE  /0   m    FXSAVE     memfpu+simd-state              P2     -
+          131  0.0000  16 20     -    m    AND        r/m8, reg8                     8086   oszapc
+          120  0.0000  32 80     /2   r    ADC        r/m8, imm8                     8086   oszapc
+          120  0.0000  16 D2     /1   m    ROR        r/m8, CL                       8086   oszapc
+          119  0.0000  16 F7     /7   m    IDIV       r/m16/32                       8086   oszapc
+          115  0.0000  32 C1     /5   m    SHR        r/m16/32, imm8                 8086   oszapc
+          110  0.0000  32 0F B3  -    r    BTR        r/m16/32, reg16/32             80386  oszapc
+           99  0.0000  16 F6     /4   m    MUL        r/m8                           8086   oszapc
+           99  0.0000  16 21     -    m    AND        r/m16/32, reg16/32             8086   oszapc
+           99  0.0000  32 81     /2   r    ADC        r/m16/32, imm16/32sx           8086   oszapc
+           98  0.0000  16 81     /6   m    XOR        r/m16/32, imm16/32sx           8086   oszapc
+           97  0.0000  32 80     /6   r    XOR        r/m8, imm8                     8086   oszapc
+           93  0.0000  32 0F BD  -    r    BSR        reg16/32, r/m16/32             80386  oszapc
+           85  0.0000  32 9A     -    r    CALLF      far-ptr16:16/16:32             8086   -
+           85  0.0000  32 11     -    m    ADC        r/m16/32, reg16/32             8086   oszapc
+           83  0.0000  16 71     -    r    JNO        rel8sx                         8086   -
+           80  0.0000  32 0F 98  /0   r    SETS       r/m8                           80386  -
+           76  0.0000  16 81     /0   m    ADD        r/m16/32, imm16/32sx           8086   oszapc
+           68  0.0000  32 80     /3   r    SBB        r/m8, imm8                     8086   oszapc
+           65  0.0000  16 C1     /2   r    RCL        r/m16/32, imm8                 8086   oszapc
+           59  0.0000  32 0F A3  -    r    BT         r/m16/32, reg16/32             80386  oszapc
+           55  0.0000  32 28     -    m    SUB        r/m8, reg8                     8086   oszapc
+           51  0.0000  32 5C     -    r    POP        reg(in-opcode)16/32            8086   -
+           50  0.0000  32 54     -    r    PUSH       reg(in-opcode)16/32            8086   -
+           44  0.0000  16 E1     -    r    LOOPZ      rel8sx                         8086   -
+           39  0.0000  32 0F 97  /0   r    SETNBE     r/m8                           80386  -
+           32  0.0000  16 D1     /4   m    SHL        r/m16/32, 1                    8086   oszapc
+           25  0.0000  16 0F AB  -    m    BTS        r/m16/32, reg16/32             80386  oszapc
+           17  0.0000  32 D0     /2   m    RCL        r/m8, 1                        8086   oszapc
+           15  0.0000  32 83     /6   m    XOR        r/m16/32, imm8sx               80386  oszapc
+           13  0.0000  16 F7     /3   m    NEG        r/m16/32                       8086   oszapc
+           13  0.0000  32 D1     /7   m    SAR        r/m16/32, 1                    8086   oszapc
+           13  0.0000  32 D3     /7   m    SAR        r/m16/32, CL                   8086   oszapc
+           13  0.0000  16 28     -    m    SUB        r/m8, reg8                     8086   oszapc
+           12  0.0000  16 0F A3  -    r    BT         r/m16/32, reg16/32             80386  oszapc
+           12  0.0000  16 6D     -    r    INS        ES:[DI], DX                    80186  -
+           12  0.0000  32 0F A2  -    r    CPUID                                     80486  -
+           12  0.0000  16 D3     /7   r    SAR        r/m16/32, CL                   8086   oszapc
+           11  0.0000  16 08     -    r    OR         r/m8, reg8                     8086   oszapc
+           11  0.0000  16 0F 92  /0   r    SETB       r/m8                           80386  -
+           11  0.0000  16 0F 93  /0   r    SETNB      r/m8                           80386  -
+           10  0.0000  16 ED     -    r    IN         eAX, DX                        8086   -
+            9  0.0000  16 0F BA  /4   r    BT         r/m16/32, imm8                 80286  oszapc
+            9  0.0000  32 0F BA  /5   r    BTS        r/m16/32, imm8                 80286  oszapc
+            6  0.0000  16 C1     /5   m    SHR        r/m16/32, imm8                 8086   oszapc
+            6  0.0000  32 F7     /2   m    NOT        r/m16/32                       8086   -
+            6  0.0000  32 0F 23  -    r    MOV        DRn32, r(mod=11)32             80386  oszapc
+            6  0.0000  16 D2     /4   r    SHL        r/m8, CL                       8086   oszapc
+            6  0.0000  16 15     -    r    ADC        rAX, imm16/32sx                8086   oszapc
+            6  0.0000  16 1C     -    r    SBB        AL, imm8                       8086   oszapc
+            6  0.0000  32 19     -    m    SBB        r/m16/32, reg16/32             8086   oszapc
+            5  0.0000  32 08     -    r    OR         r/m8, reg8                     8086   oszapc
+            5  0.0000  16 63     -    r    ARPL       r/m16, reg16                   80286  z
+            5  0.0000  32 30     -    r    XOR        r/m8, reg8                     8086   oszapc
+            5  0.0000  32 F7     /5   r    IMUL       r/m16/32                       8086   oszapc
+            5  0.0000  32 DB     /4   r    FNENI                                     8086   -
+            4  0.0000  16 D0     /1   m    ROR        r/m8, 1                        8086   oszapc
+            4  0.0000  16 DB     /4   r    FNENI                                     8086   -
+            4  0.0000  32 D1     /2   m    RCL        r/m16/32, 1                    8086   oszapc
+            4  0.0000  32 0F 00  /2   r    LLDT       r/m16                          80286  -
+            3  0.0000  16 21     -    r    AND        r/m16/32, reg16/32             8086   oszapc
+            3  0.0000  16 5C     -    r    POP        reg(in-opcode)16/32            8086   -
+            3  0.0000  32 6B     -    m    IMUL       reg16/32, r/m16/32, imm8sx     80186  oszapc
+            3  0.0000  32 0F 96  /0   r    SETBE      r/m8                           80386  -
+            3  0.0000  16 0F 00  /5   r    VERW       r/m16                          80286  z
+            3  0.0000  16 19     -    m    SBB        r/m16/32, reg16/32             8086   oszapc
+            3  0.0000  32 C0     /2   r    RCL        r/m8, imm8                     8086   oszapc
+            3  0.0000  32 D9     /7   m    FNSTCW     mem16                          8086   -
+            3  0.0000  32 DD     /0   m    FLD        memf64                         8086   -
+            2  0.0000  16 54     -    r    PUSH       reg(in-opcode)16/32            8086   -
+            2  0.0000  16 81     /5   m    SUB        r/m16/32, imm16/32sx           8086   oszapc
+            2  0.0000  16 F6     /7   r    IDIV       r/m8                           8086   oszapc
+            2  0.0000  16 0F BA  /5   m    BTS        r/m16/32, imm8                 80286  oszapc
+            2  0.0000  16 0F BC  -    m    BSF        reg16/32, r/m16/32             80386  oszapc
+            2  0.0000  32 C0     /0   r    ROL        r/m8, imm8                     8086   oszapc
+            2  0.0000  32 D5     -    r    AAD                                       8086   oszapc
+            2  0.0000  32 F6     /7   r    IDIV       r/m8                           8086   oszapc
+            2  0.0000  32 0F 01  /1   m    SIDT       mem6/10                        80286  -
+            2  0.0000  32 D9     /5   r    FLDCW      mem16                          8086   -
+            2  0.0000  32 D9     /5   m    FLDCW      mem16                          8086   -
+            2  0.0000  32 DC     /1   m    FMUL       memf64                         8086   -
+            2  0.0000  32 DC     /3   m    FCOMP      memf64                         8086   -
+            2  0.0000  32 DC     /5   m    FSUBR      memf64                         8086   -
+            2  0.0000  32 DC     /6   m    FDIV       memf64                         8086   -
+            2  0.0000  32 DD     /3   m    FSTP       memf64                         8086   -
+            2  0.0000  32 DF     /4   r    FBLD       membcd                         8086   -
+            1  0.0000  32 0F 09  -    r    WBINVD                                    80486  -
+            1  0.0000  32 0F C8  -    r    BSWAP      reg(in-opcode)16/32            80486  -
+            1  0.0000  16 1D     -    r    SBB        rAX, imm16/32sx                8086   oszapc
+            1  0.0000  16 D9     /5   r    FLDCW      mem16                          8086   -
+            1  0.0000  16 D9     /7   m    FNSTCW     mem16                          8086   -
+            1  0.0000  16 DC     /1   m    FMUL       memf64                         8086   -
+            1  0.0000  16 DC     /5   m    FSUBR      memf64                         8086   -
+            1  0.0000  16 DC     /6   m    FDIV       memf64                         8086   -
+            1  0.0000  16 DD     /0   m    FLD        memf64                         8086   -
+            1  0.0000  16 DD     /7   m    FNSTSW     mem16                          8086   -
+            1  0.0000  16 DE     /3   r    FICOMP     memi16                         8086   -
+            1  0.0000  16 DF     /4   r    FBLD       membcd                         8086   -
+            1  0.0000  16 F6     /3   m    NEG        r/m8                           8086   oszapc
+            1  0.0000  16 F6     /6   m    DIV        r/m8                           8086   oszapc
+            1  0.0000  16 0F BA  /0   m    (#UD)      reserved slot in opcode group         -
+            1  0.0000  16 0F FF  -    r    (#UD)      undocumented opcode (e.g. UD0)        -
+            1  0.0000  32 BC     -    r    MOV        reg(in-opcode)16/32, imm16/32  8086   -
+            1  0.0000  32 D4     -    r    AAM                                       8086   oszapc
+            1  0.0000  32 0F 00  /0   r    SLDT       mem16                          80286  -
+            1  0.0000  32 0F 00  /1   r    STR        mem16                          80286  -
+            1  0.0000  32 0F 00  /3   r    LTR        r/m16                          80286  -
+            1  0.0000  32 0F 21  -    r    MOV        r(mod=11)32, DRn32             80386  oszapc
+            1  0.0000  32 0F BB  -    m    BTC        r/m16/32, reg16/32             80386  oszapc
+            1  0.0000  32 81     /3   r    SBB        r/m16/32, imm16/32sx           8086   oszapc
+            1  0.0000  32 D3     /5   m    SHR        r/m16/32, CL                   8086   oszapc
+            1  0.0000  32 0F 9E  /0   r    SETLE      r/m8                           80386  -

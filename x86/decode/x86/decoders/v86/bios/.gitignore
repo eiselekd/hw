@@ -1,0 +1,6 @@
+*.gz
+
+# Upstream's root .gitignore has a blanket "*.bin" rule and force-adds these.
+# We vendor v86 as plain files, so re-allow the BIOS blobs explicitly: the
+# headless census boots with bios/seabios.bin + bios/vgabios.bin.
+!*.bin
