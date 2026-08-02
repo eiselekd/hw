@@ -17,7 +17,7 @@ independently from the same bytes.
 |---:|---:|---:|
 | 10212 | 10212 | 0 |
 
-**No disagreements.** Every `end` in §3 that NT exercises is
+**No disagreements.** Every `end` in §3 that Windows 98 exercises is
 correct, including the `@modrm8 + p.osz*8` forms where both
 terms vary.
 
