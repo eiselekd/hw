@@ -8,8 +8,9 @@
 #   make images        uncompress the bundled disk images
 #   make v86           build the instrumented emulator
 #   make win98         full census for Windows 98
-#   make winnt         full census for Windows NT 4.0
-#   make compare       regenerate x86/COMPARISON.md from existing censuses
+#   make winnt         full census for Windows NT 4.0#   make decodedb     encoding corpus + decoded database for both guests
+#   make decodedb-win98 / decodedb-winnt   just one
+#   make decodedb-report  rebuild the databases from corpora already on disk#   make compare       regenerate x86/COMPARISON.md from existing censuses
 #   make report        re-run aggregate+annotate only (no boot)
 #   make shots         boot screenshots
 #   make clean         remove uncompressed images and build output
@@ -109,6 +110,72 @@ $(TARGETS): %: images v86
 # The two censuses each drive a full emulator boot, so they cannot share a
 # process; keep them serial even under `make -j`.
 .NOTPARALLEL:
+
+# ---------------------------------------------------------------- decode db
+# A second, orthogonal product: not "which opcodes ran" but "what did the
+# instruction BYTES look like".  Needed to verify a decoder's operand
+# extraction, which a per-opcode histogram cannot check.
+#
+# The emulator deduplicates by encoding shape (mode + prefixes + 0F + opcode +
+# modrm + sib) and keeps two byte strings per shape, so a 10^8-instruction boot
+# yields under a megabyte.  `decode_db.py` then decodes every sample twice --
+# positionally, and with iced-x86 -- and requires the two to agree.
+#
+#   make decodedb                 capture + build, both guests
+#   make decodedb-winnt           just one
+#   make decodedb-report          rebuild from corpora already on disk (no boot)
+#
+# iced-x86 is not in the distro, and PEP 668 blocks a plain `pip install`, so
+# it goes in a venv the targets create on demand.
+VENV    := $(X86)/.venv
+VPYTHON := $(VENV)/bin/python
+
+$(VPYTHON):
+	@echo "== creating $(VENV) (iced-x86)"
+	python3 -m venv $(VENV)
+	$(VENV)/bin/pip install --quiet --upgrade pip
+	$(VENV)/bin/pip install --quiet iced-x86
+
+.PHONY: venv
+venv: $(VPYTHON)
+
+# The l8trace build carries BOTH features: the histogram also instruments the
+# JIT, and is the cross-check that the corpus (interpreter-only) missed no
+# encoding.
+.PHONY: v86-l8trace
+v86-l8trace:
+	@echo "== building wasm with l8trace"
+	@command -v clang >/dev/null || { \
+	    mkdir -p /tmp/shim; \
+	    ln -sf "$$(command -v clang-14 || command -v clang-15 || command -v clang-16)" /tmp/shim/clang; }
+	cd $(V86_DIR) && PATH=/tmp/shim:$$PATH $(MAKE) with-l8trace
+
+DECODEDB_TARGETS := $(addprefix decodedb-,$(TARGETS))
+
+.PHONY: decodedb $(DECODEDB_TARGETS)
+decodedb: $(DECODEDB_TARGETS)
+
+# Capture, then build.  The per-phase corpus files are cumulative, so `--clean`
+# folds their only unique content (the phase an encoding first appeared in) into
+# the database and removes them.
+$(DECODEDB_TARGETS): decodedb-%: images v86-l8trace $(V86_DIR)/build/libv86-debug.mjs $(VPYTHON)
+	@echo "== [$*] encoding corpus"
+	mkdir -p $(X86)/$*/instructions/decoded_database
+	timeout --foreground -k 30 $(TIMEOUT) \
+	    node $(TOOLS)/census_node.mjs --target $* --login $(RUNFLAGS) \
+	        --out $(X86)/$*/traces/$*.boot.tsv \
+	        --l8trace $(X86)/$*/instructions/decoded_database/$*.corpus.jsonl \
+	        </dev/null
+	@$(MAKE) --no-print-directory decodedb-build-$*
+
+.PHONY: decodedb-report
+decodedb-report: $(addprefix decodedb-build-,$(TARGETS))
+
+.PHONY: $(addprefix decodedb-build-,$(TARGETS))
+$(addprefix decodedb-build-,$(TARGETS)): decodedb-build-%: $(VPYTHON)
+	@echo "== [$*] decoded database"
+	$(VPYTHON) $(TOOLS)/decode_db.py --target $* --clean
+	$(VPYTHON) $(TOOLS)/l8_expect.py --target $*
 
 # ---------------------------------------------------------------- reports
 # Re-derive the artifacts from traces already on disk (no emulator needed).
