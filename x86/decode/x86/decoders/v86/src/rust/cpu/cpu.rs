@@ -3220,6 +3220,27 @@ unsafe fn jit_run_interpreted(mut phys_addr: u32) {
             }
             crate::win98stats::record_interpreted(instr, *is_32);
         }
+        #[cfg(feature = "l8trace")]
+        {
+            // The encoding corpus needs the *whole* instruction, not just the
+            // decode-steering head, because displacements and immediates are
+            // what a decoder gets wrong. 16 bytes covers the 15-byte maximum.
+            //
+            // Stop at the page boundary: the next page may not be mapped, and
+            // a straddling instruction is rare enough that l8trace would rather
+            // mark the sample truncated than fault or translate a second page.
+            let mut buf = [0u8; 16];
+            let mut n = 0usize;
+            while n < 16 {
+                let a = phys_addr + n as u32;
+                if (a & 0xFFF) < (phys_addr & 0xFFF) {
+                    break;
+                }
+                buf[n] = *memory::mem8.offset(a as isize);
+                n += 1;
+            }
+            crate::l8trace::record(&buf[..n], *is_32);
+        }
         *instruction_pointer += 1;
         dbg_assert!(*prefixes == 0);
         run_instruction(opcode | (*is_32 as i32) << 8);

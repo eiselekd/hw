@@ -244,6 +244,15 @@ with-win98stats: $(RUST_FILES) build/softfloat.o build/zstddeclib.o Cargo.toml
 	cp build/wasm32-unknown-unknown/release/v86.wasm build/v86.wasm || true
 	-$(WASM_OPT) && wasm-opt -O2 --strip-debug build/v86.wasm -o build/v86.wasm
 
+# Encoding-corpus build: win98stats histogram *plus* l8trace's deduplicated
+# instruction bytes.  Both features, because the histogram (which also sees the
+# JIT path) is the cross-check that the corpus missed no encoding.
+with-l8trace: $(RUST_FILES) build/softfloat.o build/zstddeclib.o Cargo.toml
+	mkdir -p build/
+	cargo rustc --release --features win98stats,l8trace $(CARGO_FLAGS)
+	cp build/wasm32-unknown-unknown/release/v86.wasm build/v86.wasm || true
+	-$(WASM_OPT) && wasm-opt -O2 --strip-debug build/v86.wasm -o build/v86.wasm
+
 watch:
 	cargo watch -x 'rustc $(CARGO_FLAGS)' -s 'cp build/wasm32-unknown-unknown/debug/v86.wasm build/v86-debug.wasm'
 

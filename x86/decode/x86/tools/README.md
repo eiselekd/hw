@@ -23,6 +23,43 @@ that counts **both** the interpreter path and the JIT path.
 | [annotate.py](annotate.py) | join the census against ref.x86asm.net → mnemonics + encoding layouts |
 | [bochs_instrument.cc](bochs_instrument.cc) | alternative collector: Bochs `--enable-instrumentation` |
 | [qemu_plugin_hist.c](qemu_plugin_hist.c) | alternative collector: QEMU TCG plugin, no emulator patching |
+| [l8_corpus.js](l8_corpus.js) | `L8Corpus` class — reads the `l8trace` encoding corpus (instruction *bytes*, not just opcode counts) |
+| [decode_db.py](decode_db.py) | corpus -> decoded instruction database, cross-checked against iced-x86 |
+
+## The encoding corpus (`l8trace`)
+
+The census answers *which* opcodes run. To verify a **decoder** we also need the
+bytes: modrm, SIB, displacement, immediate. A second v86 feature, `l8trace`,
+collects them, deduplicated in-emulator so a 10^8-instruction boot yields a
+~800 KB file instead of terabytes.
+
+The key is the **encoding shape** — mode + prefixes + `0F` + opcode + modrm +
+SIB, i.e. every byte that *steers* the decode and none that is merely a value.
+That fits in a u64. Displacements and immediates are deliberately excluded from
+the key (they are exactly what a decoder gets wrong); instead up to two distinct
+full byte strings are kept per shape, so each shape carries real operand values
+at bounded cost.
+
+```sh
+make -C ../decoders/v86 with-l8trace
+./census_node.mjs --target winnt --seconds 420 --phase-every 60 --login \
+    --out ../winnt/traces/winnt.boot.tsv \
+    --l8trace ../winnt/instructions/decoded_database/winnt.corpus.jsonl
+
+python3 -m venv ../.venv && ../.venv/bin/pip install iced-x86
+../.venv/bin/python decode_db.py --clean
+```
+
+`decode_db.py` decodes every sample **twice** — a positional decode written from
+the bytes alone (prefix run, opcode, modrm, SIB, displacement position and
+width) and iced-x86 — and requires them to agree on base/index/scale,
+displacement value and width, and length. Output:
+[../winnt/instructions/decoded_database/](../winnt/instructions/decoded_database/).
+
+Phase files are cumulative (the shape table is never cleared, so real-mode
+encodings survive the switch to protected mode); `--clean` folds their only
+unique content — the phase in which each encoding first appeared — into the
+database and deletes them.
 
 ## The v86 patch
 

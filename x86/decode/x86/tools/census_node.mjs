@@ -24,6 +24,9 @@
 //                         covers the pre-logon kernel, never the shell.
 //   --phase-every <n>     also snapshot every n seconds
 //   --out <file>          output TSV (default: <target>/traces/<id>.boot.tsv)
+//   --l8trace <file>      also dump the deduplicated *encoding* corpus (JSONL:
+//                         instruction bytes per encoding shape).  Needs a build
+//                         with `make -C ../decoders/v86 with-l8trace`.
 //   --screen              dump the text-mode screen with each snapshot
 //   --serial              echo serial output to stderr
 //   --verbose             don't suppress v86's debug log
@@ -55,6 +58,13 @@ const { V86 } = await import(path.join(V86_DIR, "build/libv86-debug.mjs"));
 // v86_census.js is a plain script, not a module; evaluate it into scope.
 const { Win98Census } = (() => {
     const src = fs.readFileSync(path.join(TOOLS_DIR, "v86_census.js"), "utf8");
+    const mod = { exports: {} };
+    new Function("module", "exports", "globalThis", src)(mod, mod.exports, globalThis);
+    return mod.exports;
+})();
+
+const { L8Corpus } = (() => {
+    const src = fs.readFileSync(path.join(TOOLS_DIR, "l8_corpus.js"), "utf8");
     const mod = { exports: {} };
     new Function("module", "exports", "globalThis", src)(mod, mod.exports, globalThis);
     return mod.exports;
@@ -149,12 +159,23 @@ function screenText()
 }
 
 let census = null;
+let corpus = null;
+const l8out = arg("l8trace", null);
 const attach = setInterval(() => {
     const cpu = emulator.v86 && emulator.v86.cpu;
     if(!cpu || !cpu.wm || !cpu.wm.exports) return;
     census = new Win98Census(cpu);
     census.clear();
     log("census attached, counters cleared");
+    if(l8out)
+    {
+        // Shapes are cumulative across the whole run on purpose: clearing them
+        // per phase would lose every real-mode encoding once the boot leaves
+        // real mode.  Only the counts are per-phase.
+        corpus = new L8Corpus(cpu);
+        corpus.clearAll();
+        log("l8trace corpus attached");
+    }
     clearInterval(attach);
 }, 100);
 
@@ -168,6 +189,16 @@ if(phaseEvery > 0)
         fs.writeFileSync(`${base}.phase${n}.tsv`, census.toTSV());
         log(`[phase ${n}] t=${((Date.now() - t0) / 1000).toFixed(0)}s` +
             ` -> ${base}.phase${n}.tsv`);
+        if(corpus)
+        {
+            const f = l8out.replace(/\.jsonl$/, "") + `.phase${n}.jsonl`;
+            fs.mkdirSync(path.dirname(f), { recursive: true });
+            fs.writeFileSync(f, corpus.toJSONL({ phase: n }));
+            log(`[phase ${n}] ${corpus.summary()} -> ${f}`);
+            // Counts are NOT cleared: each phase file is cumulative-so-far, so
+            // the final file is the whole boot and "new in phase n" is a diff
+            // against phase n-1.  Clearing would make the last file useless.
+        }
         if(flag("screen")) log(screenText());
     }, phaseEvery * 1000);
 }
@@ -186,6 +217,13 @@ function finish()
     fs.writeFileSync(out, tsv);
     log("[+] wrote " + out);
     log(census.summary());
+    if(corpus)
+    {
+        fs.mkdirSync(path.dirname(l8out), { recursive: true });
+        fs.writeFileSync(l8out, corpus.toJSONL());
+        log("[+] wrote " + l8out);
+        log(corpus.summary());
+    }
     if(flag("screen")) log("--- screen ---\n" + screenText());
     log(`elapsed ${((Date.now() - t0) / 1000).toFixed(1)}s`);
     process.exit(0);

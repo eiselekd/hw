@@ -1,13 +1,13 @@
 # win98 boot opcode coverage
 
-total executed instructions: 8,951,069,828
-distinct encodings: 868
+total executed instructions: 10,350,128,075
+distinct encodings: 886
 
 | coverage | #encodings needed |
 |---|---|
-| 50 % | 14 |
-| 90 % | 60 |
-| 99 % | 231 |
-| 99.9 % | 420 |
-| 99.99 % | 557 |
-| 100 % | 868 |
+| 50 % | 18 |
+| 90 % | 97 |
+| 99 % | 292 |
+| 99.9 % | 452 |
+| 99.99 % | 567 |
+| 100 % | 886 |

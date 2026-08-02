@@ -24,6 +24,7 @@ mod page;
 mod prefix;
 mod regs;
 pub mod win98stats;
+pub mod l8trace;
 mod softfloat;
 mod state_flags;
 mod wasmgen;
