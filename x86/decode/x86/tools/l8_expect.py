@@ -548,9 +548,9 @@ def write_gaps(path, n, covered, end_bad, bad, uncovered, dyn_cov, dyn_unc,
                 w("| `%s` | %s | `%s` | %d | %d |\n" % (b, k, e, got, want))
             w("\n")
         else:
-            w("**No disagreements.** Every `end` in §3 that NT exercises is\n"
+            w("**No disagreements.** Every `end` in §3 that %s exercises is\n"
               "correct, including the `@modrm8 + p.osz*8` forms where both\n"
-              "terms vary.\n\n")
+              "terms vary.\n\n" % guest)
         w("## Coverage\n\n")
         tot = dyn_cov + dyn_unc
         w("| | distinct encodings | executed |\n|---|---:|---:|\n")
