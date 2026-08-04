@@ -177,6 +177,33 @@ $(addprefix decodedb-build-,$(TARGETS)): decodedb-build-%: $(VPYTHON)
 	$(VPYTHON) $(TOOLS)/decode_db.py --target $* --clean
 	$(VPYTHON) $(TOOLS)/l8_expect.py --target $*
 
+# ---------------------------------------------------------------- l8 verify
+# Verify the l8 decoder (~/git/l8/test/decode_x86_limited.l8) against every
+# instruction the boot executed — M1 of ~/git/l8/test/decode_x86_verify.md.
+# Runs offline against the corpus already on disk (make decodedb-<target>
+# captures it); disagreements land in
+# $(X86)/<target>/instructions/decoded_database/<target>.l8_failures.jsonl
+# and per-failure repros in $(L8DIR)/repro/.
+#
+#   make l8verify L8I=~/git/l8/use/interpreter/l8i            # winnt
+#   make l8verify-win98 L8I=... L8DIR=~/git/l8/test           # other guest
+#   make l8verify L8I=... L8FLAGS='--no-synthetic --limit 100'
+L8I    ?=
+L8DIR  ?= $(HOME)/git/l8/test
+L8FLAGS ?=
+
+L8VERIFY_TARGETS := $(addprefix l8verify-,$(TARGETS))
+
+.PHONY: l8verify $(L8VERIFY_TARGETS)
+l8verify: l8verify-winnt
+
+$(L8VERIFY_TARGETS): l8verify-%: $(VPYTHON)
+	@test -n "$(L8I)" || { \
+	    echo "usage: make $@ L8I=~/git/l8/use/interpreter/l8i [L8DIR=~/git/l8/test]"; \
+	    exit 2; }
+	$(VPYTHON) $(TOOLS)/l8_verify.py --target $* \
+	    --l8i $(L8I) --l8dir $(L8DIR) $(L8FLAGS)
+
 # ---------------------------------------------------------------- reports
 # Re-derive the artifacts from traces already on disk (no emulator needed).
 .PHONY: report
